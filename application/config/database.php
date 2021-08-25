@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
+	'hostname' => 'onyx.cloudns.io',
+	'username' => 'skripsiku_dbsu',
+	'password' => 'Wzs&l29032!!#',
 	'database' => 'skripsiku_dbsu',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
