@@ -2,7 +2,7 @@
     <div class="swiper-container" style="height: 650px;">
         <div class="swiper-wrapper" style="height: 650px;">
             <?php foreach ($slider as $data) { ?>
-                <div class="swiper-slide" style="background: url('/<?= $data->file ?>') center center / cover no-repeat;height: 650px;"></div>
+                <div class="swiper-slide" style="background: url('<?= $data->file ?>') center center / cover no-repeat;height: 650px;"></div>
             <?php } ?>
         </div>
         <div class="swiper-pagination"></div>
