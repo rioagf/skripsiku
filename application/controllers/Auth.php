@@ -26,6 +26,7 @@ class Auth extends CI_Controller {
 		if($cek > 0 && $auth->status == 'aktif'){
 			if ($auth->user_role == 'admin') {
 				$data_session = array(
+					'id_user' => $auth->id_user,
 					'username' => $auth->username,
 					'role' => $auth->user_role,
 					'status' => "login"
@@ -34,6 +35,7 @@ class Auth extends CI_Controller {
 				redirect(base_url());
 			} else if ($auth->user_role == 'user') {
 				$data_session = array(
+					'id_user' => $auth->id_user,
 					'username' => $auth->username,
 					'role' => $auth->user_role,
 					'status' => "login"

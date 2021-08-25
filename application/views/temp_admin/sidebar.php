@@ -81,8 +81,8 @@
         <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Item:</h6>
-                <a class="collapse-item" href="#">List Artikel</a>
-                <a class="collapse-item" href="#">Tambah Artikel</a>
+                <a class="collapse-item" href="<?= base_url('adminarea/artikel') ?>">List Artikel</a>
+                <a class="collapse-item" href="<?= base_url('adminarea/tambah_artikel') ?>">Tambah Artikel</a>
             </div>
         </div>
     </li>

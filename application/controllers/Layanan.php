@@ -16,7 +16,7 @@ class Layanan extends CI_Controller {
 			'title' => 'Layanan - Skripsiku',
 			'content' => 'temp_front/layanan',
 			'layanan' => $layanan,
-	);
+		);
 		$this->load->view('temp_front/content', $data);
 	}
 

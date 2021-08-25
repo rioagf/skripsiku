@@ -3,8 +3,8 @@
 
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
-		<h1 class="h3 mb-0 text-gray-800">Karir</h1>
-		<a href="<?=base_url('adminarea/tambah_karir') ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Tambah Karir</a>
+		<h1 class="h3 mb-0 text-gray-800">Artikel</h1>
+		<a href="<?=base_url('adminarea/tambah_artikel') ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Tambah Artikel</a>
 	</div>
 
 	<?php if ($this->session->flashdata('success')): ?>
@@ -24,7 +24,7 @@
 		<div class="col-12">
 			<div class="card shadow">
 				<div class="card-header">
-					<h6 class="m-0 font-weight-bold text-primary">Karir</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Artikel</h6>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -32,23 +32,24 @@
 							<thead>
 								<tr>
 									<th>NO</th>
-									<th>JENIS KARIR</th>
-									<th>DESKRIPSI</th>
-									<th>TANGGAL</th>
+									<th>JUDUL ARTIKEL</th>
+									<th>ISI KONTEN</th>
+									<th>TANGGAL PUBLISH</th>
 									<th>ACTION</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php $no=1; ?>
-								<?php foreach ($karir as $data) { ?>
+								<?php foreach ($artikel as $data) { ?>
 									<tr>
 										<td><?= $no++ ?></td>
-										<td><?= $data->judul_karir ?></td>
-										<td><?= $data->deskripsi_karir ?></td>
+										<td><?= $data->judul_artikel ?></td>
+										<td><?= character_limiter($data->isi_konten, 120);  ?></td>
 										<td><?= date('d F Y', strtotime($data->date_created)) ?></td>
 										<td>
-											<a href="<?= base_url('adminarea/edit_karir/'.$data->id_karir) ?>" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
-											<a href="<?= base_url('adminarea/delete_karir/'.$data->id_karir) ?>" onclick="return confirm('Anda yakin untuk menghapus data ?')"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+											<a href="<?= base_url('adminarea/detail_artikel/'.$data->id_artikel) ?>" class="btn btn-sm btn-success"><i class="fa fa-book"></i></a>
+											<a href="<?= base_url('adminarea/edit_artikel/'.$data->id_artikel) ?>" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
+											<a href="<?= base_url('adminarea/delete_artikel/'.$data->id_artikel) ?>" onclick="return confirm('Anda yakin untuk menghapus data ?')"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
 										</td>
 									</tr>
 								<?php } ?>

@@ -13,6 +13,13 @@ class M_artikel extends CI_Model{
 		return $this->db->get('artikel');
 	}
 
+	function get_detail__by_id($id)
+	{
+		$this->db->join('users', 'artikel.id_user = users.id_user');
+		$this->db->where('id_artikel', $id);
+		return $this->db->get('artikel');
+	}
+
 	function create__artikel($data)
 	{
 		$this->db->insert('artikel', $data);
@@ -20,7 +27,7 @@ class M_artikel extends CI_Model{
 
 	function update__artikel($data, $id)
 	{
-		$this->db->where('id_arikel', $id);
+		$this->db->where('id_artikel', $id);
 		$this->db->update('artikel', $data);
 	}
 
