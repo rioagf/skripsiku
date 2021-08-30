@@ -54,6 +54,37 @@ class Adminarea extends CI_Controller {
 		$this->load->view('temp_admin/content', $data);
 	}
 
+	public function proses_tambah__slider() 
+	{
+		// $this->_rules();
+		$config['upload_path']          = './assets/img/';
+		$config['allowed_types']        = 'gif|jpg|png|jpeg';
+		$config['max_size']             = 5000;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+
+		$this->load->library('upload', $config);
+		// var_dump($upload_data);die();
+
+		if (!$this->upload->do_upload('images_slider') || $this->input->post('lokasi') == '') {
+			$this->session->set_flashdata('error', $this->upload->display_errors());
+			$this->add_slider();
+		} else {
+			$upload_data = $this->upload->data();
+			$data = array(
+				'file' => '/assets/img/'.$upload_data['file_name'],
+				'lokasi' => $this->input->post('lokasi',TRUE),
+				'date_created' => date('Y-m-d'),
+				'date_update' => date('Y-m-d'),
+				'id_user' => $this->session->userdata('id_user'),
+			);
+
+			$this->M_image->tambah_slider($data);
+			$this->session->set_flashdata('success', 'Berhasil Menambah Slider');
+			redirect(site_url('adminarea/slider'));
+		}
+	}
+
 	public function gallery()
 	{
 		$gallery = $this->M_image->gallery()->result();

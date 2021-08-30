@@ -18,7 +18,10 @@ class M_image extends CI_Model{
 	function slider()
 	{    
 		return $this->db->get('slider');
+	}
 
+	function tambah_slider($data){
+		$this->db->insert('slider', $data);
 	}
 
 	function gallery()
