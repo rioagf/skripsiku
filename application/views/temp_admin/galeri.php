@@ -1,6 +1,16 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
+	<?php if ($this->session->flashdata('error')): ?>
+		<div class="alert alert-danger" role="alert">
+			<?= $this->session->flashdata('error'); ?>
+		</div>
+	<?php elseif ($this->session->flashdata('success')): ?>
+		<div class="alert alert-success" role="success">
+			<?= $this->session->flashdata('success'); ?>
+		</div>
+	<?php endif ?>
+
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800">Data Galeri</h1>
@@ -33,8 +43,8 @@
 										<td><img src="<?= base_url($data->file); ?>" width="75"></td>
 										<td><?= date('d F Y', strtotime($data->date_created)) ?></td>
 										<td>
-											<a href="#" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
-											<a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+											<a href="<?= base_url('adminarea/edit_gallery/'.$data->id) ?>" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
+											<a href="<?= base_url('adminarea/delete_gallery/'.$data->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus slider?')"><i class="fa fa-trash"></i></a>
 										</td>
 									</tr>
 								<?php } ?>
