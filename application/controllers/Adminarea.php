@@ -45,7 +45,7 @@ class Adminarea extends CI_Controller {
 		$this->load->view('temp_admin/content', $data);
 	}
 
-	function add_slider()
+	public function add_slider()
 	{
 		$data = array(
 			'title' => 'Tambah Slider - Skripsiku',
@@ -54,14 +54,14 @@ class Adminarea extends CI_Controller {
 		$this->load->view('temp_admin/content', $data);
 	}
 
-	public function proses_tambah__slider() 
+	function proses_tambah__slider() 
 	{
 		// $this->_rules();
 		$config['upload_path']          = './assets/img/';
 		$config['allowed_types']        = 'gif|jpg|png|jpeg';
 		$config['max_size']             = 5000;
-		$config['max_width']            = 1024;
-		$config['max_height']           = 768;
+		$config['max_width']            = 1960;
+		$config['max_height']           = 1080;
 
 		$this->load->library('upload', $config);
 		// var_dump($upload_data);die();
@@ -85,6 +85,74 @@ class Adminarea extends CI_Controller {
 		}
 	}
 
+	public function edit_slider($id)
+	{
+		$slider = $this->M_image->get_slider__by($id)->row();
+		$data = array(
+			'title' => 'Edit Slider - Skripsiku',
+			'content' => 'temp_admin/slider_edit',
+			'id' => $slider->id,
+			'file' => $slider->file,
+			'lokasi' => $slider->lokasi,
+		);
+		$this->load->view('temp_admin/content', $data);
+	}
+
+	function proses_edit__slider()
+	{
+		$config['upload_path']          = './assets/img/';
+		$config['allowed_types']        = 'gif|jpg|png|jpeg';
+		$config['max_size']             = 5000;
+		$config['max_width']            = 1960;
+		$config['max_height']           = 1080;
+
+		$this->load->library('upload', $config);
+		// var_dump($upload_data);die();
+
+		if (!$this->upload->do_upload('images_slider')) {
+			// $this->session->set_flashdata('error', $this->upload->display_errors());
+			// $this->edit_slider($id);
+			$data = array(
+				'file' => $this->input->post('file_lama', TRUE),
+				'lokasi' => $this->input->post('lokasi',TRUE),
+				'date_update' => date('Y-m-d'),
+				'id_user' => $this->session->userdata('id_user'),
+			);
+
+			$this->M_image->edit_slider($data, $this->input->post('id'));
+			$this->session->set_flashdata('success', 'Berhasil Mengubah Data Slider');
+			redirect(site_url('adminarea/slider'));
+		} else {
+			$upload_data = $this->upload->data();
+			// var_dump($upload_data);die();
+			$data = array(
+				'file' => '/assets/img/'.$upload_data['file_name'],
+				'lokasi' => $this->input->post('lokasi',TRUE),
+				'date_update' => date('Y-m-d'),
+				'id_user' => $this->session->userdata('id_user'),
+			);
+
+			$this->M_image->edit_slider($data, $this->input->post('id'));
+			$this->session->set_flashdata('success', 'Berhasil Mengubah Slider');
+			redirect(site_url('adminarea/slider'));
+		}
+	}
+
+	public function delete_slider($id)
+	{
+		$row = $this->M_image->get_slider__by($id)->row();
+
+		if ($row) {
+			unlink($row->file);
+			$this->M_image->hapus_slider($id);
+			$this->session->set_flashdata('success', 'Berhasil Menghapus Slider');
+			redirect(site_url('adminarea/slider'));
+		} else {
+			$this->session->set_flashdata('error', 'Slider Tidak Ditemukan');
+			redirect(site_url('adminarea/slider'));
+		}
+	}
+
 	public function gallery()
 	{
 		$gallery = $this->M_image->gallery()->result();
@@ -100,9 +168,112 @@ class Adminarea extends CI_Controller {
 	{
 		$data = array(
 			'title' => 'Tambah Galeri - Skripsiku',
-			'content' => 'temp_admin/tambah_galeri',
+			'content' => 'temp_admin/galeri_tambah',
 		);
 		$this->load->view('temp_admin/content', $data);
+	}
+
+	function proses_tambah__gallery() 
+	{
+		// $this->_rules();
+		$config['upload_path']          = './assets/img/';
+		$config['allowed_types']        = 'gif|jpg|png|jpeg';
+		$config['max_size']             = 5000;
+		$config['max_width']            = 1960;
+		$config['max_height']           = 1080;
+
+		$this->load->library('upload', $config);
+		// var_dump($upload_data);die();
+
+		if (!$this->upload->do_upload('images_galeri') || $this->input->post('lokasi_galeri') == '' || $this->input->post('nama_galeri') == '') {
+			$this->session->set_flashdata('error', $this->upload->display_errors());
+			$this->add_gallery();
+		} else {
+			$upload_data = $this->upload->data();
+			$data = array(
+				'file' => '/assets/img/'.$upload_data['file_name'],
+				'nama_galeri' => $this->input->post('nama_galeri',TRUE),
+				'lokasi_galeri' => $this->input->post('lokasi_galeri',TRUE),
+				'date_created' => date('Y-m-d'),
+				'date_updated' => date('Y-m-d'),
+				'id_user' => $this->session->userdata('id_user'),
+			);
+
+			$this->M_image->tambah_galeri($data);
+			$this->session->set_flashdata('success', 'Berhasil Menambah Slider');
+			redirect(site_url('adminarea/gallery'));
+		}
+	}
+
+	public function edit_gallery($id)
+	{
+		$galeri = $this->M_image->get_gallery__by($id)->row();
+		$data = array(
+			'title' => 'Edit Galeri - Skripsiku',
+			'content' => 'temp_admin/galeri_edit',
+			'id' => $galeri->id,
+			'file' => $galeri->file,
+			'lokasi_galeri' => $galeri->lokasi_galeri,
+			'nama_galeri' => $galeri->nama_galeri,
+		);
+		$this->load->view('temp_admin/content', $data);
+	}
+
+	function proses_edit__gallery()
+	{
+		$config['upload_path']          = './assets/img/';
+		$config['allowed_types']        = 'gif|jpg|png|jpeg';
+		$config['max_size']             = 5000;
+		$config['max_width']            = 1960;
+		$config['max_height']           = 1080;
+
+		$this->load->library('upload', $config);
+		// var_dump($upload_data);die();
+
+		if (!$this->upload->do_upload('images_galeri')) {
+			// $this->session->set_flashdata('error', $this->upload->display_errors());
+			// $this->edit_slider($id);
+			$data = array(
+				'file' => $this->input->post('file_lama', TRUE),
+				'lokasi_galeri' => $this->input->post('lokasi_galeri',TRUE),
+				'nama_galeri' => $this->input->post('nama_galeri',TRUE),
+				'date_updated' => date('Y-m-d'),
+				'id_user' => $this->session->userdata('id_user'),
+			);
+
+			$this->M_image->edit_galeri($data, $this->input->post('id'));
+			$this->session->set_flashdata('success', 'Berhasil Mengubah Galeri');
+			redirect(site_url('adminarea/gallery'));
+		} else {
+			$upload_data = $this->upload->data();
+			// var_dump($upload_data);die();
+			$data = array(
+				'file' => '/assets/img/'.$upload_data['file_name'],
+				'nama_galeri' => $this->input->post('nama_galeri',TRUE),
+				'lokasi_galeri' => $this->input->post('lokasi_galeri',TRUE),
+				'date_updated' => date('Y-m-d'),
+				'id_user' => $this->session->userdata('id_user'),
+			);
+
+			$this->M_image->edit_galeri($data, $this->input->post('id'));
+			$this->session->set_flashdata('success', 'Berhasil Mengubah Galeri');
+			redirect(site_url('adminarea/gallery'));
+		}
+	}
+
+	public function delete_gallery($id)
+	{
+		$row = $this->M_image->get_gallery__by($id)->row();
+
+		if ($row) {
+			unlink($row->file);
+			$this->M_image->hapus_galeri($id);
+			$this->session->set_flashdata('success', 'Berhasil Menghapus Galeri');
+			redirect(site_url('adminarea/gallery'));
+		} else {
+			$this->session->set_flashdata('error', 'Galeri Tidak Ditemukan');
+			redirect(site_url('adminarea/gallery'));
+		}
 	}
 
 	public function karir()
