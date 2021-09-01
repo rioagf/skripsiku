@@ -25,7 +25,7 @@
 						</div>
 						<div class="form-group">
 							<label>Deskripsi Karir</label>
-							<textarea name="deskripsi_karir" id="deskripsi_karir" class="form-control" required></textarea>
+							<textarea name="deskripsi_karir" id="ckeditor" class="form-control" required></textarea>
 						</div>
 					</div>
 					<div class="card-footer">

@@ -25,7 +25,7 @@
 						</div>
 						<div class="form-group">
 							<label>Isi Konten</label>
-							<textarea name="isi_konten" id="isi_konten" class="form-control" required></textarea>
+							<textarea name="isi_konten" id="ckeditor" class="form-control" required></textarea>
 						</div>
 						<div class="form-group">
 							<label>Gambar Artikel</label>

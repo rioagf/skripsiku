@@ -62,6 +62,10 @@
 
 <!-- Page level custom scripts -->
 <script src="<?= base_url('sb')?>/js/demo/datatables-demo.js"></script>
+<script src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+<script type="text/javascript">
+    CKEDITOR.replace('ckeditor');
+</script>
 
 </body>
 
