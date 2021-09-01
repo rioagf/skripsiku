@@ -3,7 +3,7 @@
 
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
-		<h1 class="h3 mb-0 text-gray-800">Tambah Artikel</h1>
+		<h1 class="h3 mb-0 text-gray-800">Tambah Slider</h1>
 	</div>
 	<?php if ($this->session->flashdata('error')): ?>
 		<div class="alert alert-danger" role="alert">
@@ -16,7 +16,7 @@
 			<div class="card shadow">
 				<form action="<?= base_url('adminarea/proses_tambah__slider')?>" method="post" enctype="multipart/form-data">
 					<div class="card-header">
-						<h6 class="m-0 font-weight-bold text-primary">Tambah Artikel</h6>
+						<h6 class="m-0 font-weight-bold text-primary">Tambah Slider</h6>
 					</div>
 					<div class="card-body">
 						<div class="form-group">
