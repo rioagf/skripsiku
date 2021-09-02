@@ -511,7 +511,7 @@ class Adminarea extends CI_Controller {
 			$this->load->view('temp_admin/content', $data);
 		} else {
 			$this->session->set_flashdata('error', 'Data Tidak Ditemukan');
-			redirect(site_url('adminarea/karir'));
+			redirect(site_url('adminarea/artikel'));
 		}
 	}
 
@@ -576,6 +576,191 @@ class Adminarea extends CI_Controller {
 		} else {
 			$this->M_artikel->set_flashdata('error', 'Artikel Tidak Ditemukan');
 			redirect(site_url('adminarea/artikel'));
+		}
+	}
+
+	// TAMBAH PRODUK
+	public function produk()
+	{
+		$start = intval($this->input->get('start'));
+		$produk = $this->M_layanan->list_layanan()->result();
+		$data = array(
+			'title' => 'Produk - Skripsiku',
+			'content' => 'temp_admin/produk',
+			'produk' => $produk,
+			'start' => $start,
+		);
+		$this->load->view('temp_admin/content', $data);
+	}
+
+	public function detail_produk($slug) 
+	{
+		$row = $this->M_layanan->get_detail__slug($slug)->row();
+		if ($row) {
+			$data = array(
+				'title' => $row->nama_produk.' - Skripsiku',
+				'content' => 'temp_admin/produk_detail',
+				'id_produk' => $row->id_produk,
+				'nama_produk' => $row->nama_produk,
+				'deskripsi_produk' => $row->deskripsi_produk,
+				'slug' => $row->slug,
+				'harga' => $row->harga,
+				'image_cover' => $row->image_cover,
+				'date_created' => $row->date_created,
+			);
+			$this->load->view('temp_admin/content', $data);
+		} else {
+			$this->session->set_flashdata('message', 'Data Tidak Ditemukan');
+			redirect(site_url('adminarea/produk'));
+		}
+	}
+
+	public function tambah_produk() 
+	{
+		$data = array(
+			'title' => 'Tambah Produk - Skripsiku',
+			'content' => 'temp_admin/produk_tambah',
+			'button' => 'Tambah Produk',
+		);
+		$this->load->view('temp_admin/content', $data);
+	}
+
+	public function proses_tambah__produk() 
+	{
+		// $this->_rules();
+
+		if ($this->input->post('nama_produk') == '' || $this->input->post('deskripsi_produk') == '' || $this->input->post('harga') == '') {
+			$this->session->set_flashdata('error', 'Masih Ada Data yang Kosong');
+			redirect(base_url('adminarea/tambah_produk'));
+		} else {
+			$config['upload_path']          = './upload/image/';
+			$config['allowed_types']        = 'gif|jpg|png';
+			$config['max_size']             = 5000;
+			$config['max_width']            = 1960;
+			$config['max_height']           = 1080;
+
+			$this->load->library('upload', $config);
+
+			if (! $this->upload->do_upload('image_cover')) {
+				$judul = $this->input->post('nama_produk',TRUE);
+				$data = array(
+					'nama_produk' => $judul,
+					'deskripsi_produk' => $this->input->post('deskripsi_produk',TRUE),
+					'slug' => strtolower(str_replace(' ', '-', $judul)),
+					'harga' => $this->input->post('harga'),
+					'date_created' => date('Y-m-d'),
+					'date_updated' => date('Y-m-d'),
+					'image_cover' => '/assets/img/desk.jpg',
+					'id_user' => $this->session->userdata('id_user'),
+				);
+
+				$this->M_layanan->create__produk($data);
+				$this->session->set_flashdata('success', 'Data Gambar Tidak Sesuai atau Terlalu Besar, Data Ditambahkan Sebagian, Gambar dibuat Default');
+				redirect(site_url('adminarea/produk'));
+			} else {
+				$upload_data = $this->upload->data();
+				$judul = $this->input->post('nama_produk',TRUE);
+				$data = array(
+					'nama_produk' => $judul,
+					'deskripsi_produk' => $this->input->post('deskripsi_produk',TRUE),
+					'slug' => strtolower(str_replace(' ', '-', $judul)),
+					'harga' => $this->input->post('harga'),
+					'date_created' => date('Y-m-d'),
+					'date_updated' => date('Y-m-d'),
+					'image_cover' => '/upload/image/'.$upload_data['file_name'],
+					'id_user' => $this->session->userdata('id_user'),
+				);
+
+				$this->M_layanan->create__produk($data);
+				$this->session->set_flashdata('success', 'Berhasil Menambah Produk');
+				redirect(site_url('adminarea/produk'));
+			}
+		}
+	}
+
+	public function edit_produk($slug) 
+	{
+		$row = $this->M_layanan->get_detail__slug($slug)->row();
+		if ($row) {
+			$data = array(
+				'title' => 'Edit produk - Skripsiku',
+				'content' => 'temp_admin/produk_edit',
+				'id_produk' => $row->id_produk,
+				'nama_produk' => $row->nama_produk,
+				'deskripsi_produk' => $row->deskripsi_produk,
+				'harga' => $row->harga,
+				'image_cover' => $row->image_cover,
+			);
+			$this->load->view('temp_admin/content', $data);
+		} else {
+			$this->session->set_flashdata('error', 'Data Tidak Ditemukan');
+			redirect(site_url('adminarea/produk'));
+		}
+	}
+
+	public function proses_edit__produk() 
+	{
+		// $this->_rules();
+
+		if ($this->input->post('nama_produk') == '' || $this->input->post('deskripsi_produk') == '') {
+			$this->session->set_flashdata('error', 'Nama Produk atau Isi Konten Masih Kosong');
+			redirect(base_url('adminarea/produk'));
+		} else {
+			$config['upload_path']          = './upload/image/';
+			$config['allowed_types']        = 'gif|jpg|png|jpeg';
+			$config['max_size']             = 5000;
+			$config['max_width']            = 1960;
+			$config['max_height']           = 1080;
+
+			$this->load->library('upload', $config);
+
+			if (! $this->upload->do_upload('image_cover')) {
+				$judul = $this->input->post('nama_produk',TRUE);
+				$data = array(
+					'nama_produk' => $judul,
+					'deskripsi_produk' => $this->input->post('deskripsi_produk',TRUE),
+					'slug' => strtolower(str_replace(' ', '-', $judul)),
+					'harga' => $this->input->post('harga',TRUE),
+					'date_updated' => date('Y-m-d'),
+					'image_cover' => $this->input->post('gambar_produk_old', TRUE),
+					'id_user' => $this->session->userdata('id_user'),
+				);
+
+				$this->M_layanan->update__produk($data, $this->input->post('id_produk'));
+				// $this->session->set_flashdata('success', 'Gambar Terlalu Besar atau Tidak Sesuai Format, Data Berhasil Diubah Sebagian');
+				$this->session->set_flashdata('success', $this->upload->display_errors().' Data Diupdate Sebagian');
+				redirect(site_url('adminarea/produk'));
+			} else {
+				$upload_data = $this->upload->data();
+				$judul = $this->input->post('nama_produk',TRUE);
+				$data = array(
+					'nama_produk' => $judul,
+					'deskripsi_produk' => $this->input->post('deskripsi_produk',TRUE),
+					'slug' => strtolower(str_replace(' ', '-', $judul)),
+					'harga' => $this->input->post('harga',TRUE),
+					'date_updated' => date('Y-m-d'),
+					'image_cover' => '/upload/image/'.$upload_data['file_name'],
+					'id_user' => $this->session->userdata('id_user'),
+				);
+
+				$this->M_layanan->update__produk($data, $this->input->post('id_produk'));
+				$this->session->set_flashdata('success', 'Berhasil Mengubah Produk');
+				redirect(site_url('adminarea/Produk'));
+			}
+		}
+	}
+
+	public function delete_produk($slug)
+	{
+		$row = $this->M_layanan->get_detail__slug($slug);
+
+		if ($row) {
+			$this->M_layanan->delete__layanan($slug);
+			$this->session->set_flashdata('success', 'Berhasil Menghapus Produk');
+			redirect(site_url('adminarea/produk'));
+		} else {
+			$this->M_artikel->set_flashdata('error', 'Produk Tidak Ditemukan');
+			redirect(site_url('adminarea/produk'));
 		}
 	}
 
