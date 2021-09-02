@@ -37,7 +37,7 @@
 								<div class="form-group">
 									<label>Gambar Sebelumnya</label><br>
 									<img src="<?= base_url($file); ?>" width="50%" style="border: solid 1px #eaeaea;">
-									<input type="hidden" name="file_lama" value="$file">
+									<input type="hidden" name="file_lama" value="<?= $file ?>">
 								</div>
 							</div>
 						</div>
