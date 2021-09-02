@@ -49,13 +49,13 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle nav-link <?php if($this->uri->segment(1) == 'layanan') { echo 'active'; } ?>" aria-expanded="false" data-toggle="dropdown" href="#" style="color: rgb(0,0,0);font-family: Montserrat, sans-serif;font-size: 11pt;">Produk Kami</a>
+                            <?php
+                            $menus = $this->db->get('produk')->result();
+                            ?>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item <?php if($this->uri->segment(3) == 'penyusunan-proposal') { echo 'active'; } ?>" href="<?= base_url('layanan/detail/penyusunan-proposal') ?>">Penyusunan Proposal</a>
-                                <a class="dropdown-item <?php if($this->uri->segment(3) == 'penyusunan-skripsi') { echo 'active'; } ?>" href="<?= base_url('layanan/detail/penyusunan-skripsi') ?>">Penyusunan Skripsi</a>
-                                <a class="dropdown-item <?php if($this->uri->segment(3) == 'pengolahan-data') { echo 'active'; } ?>" href="<?= base_url('layanan/detail/pengolahan-data') ?>">Pengolahan Data</a>
-                                <a class="dropdown-item <?php if($this->uri->segment(3) == 'data-sekunder') { echo 'active'; } ?>" href="<?= base_url('layanan/detail/data-sekunder') ?>">Data Sekunder</a>
-                                <a class="dropdown-item <?php if($this->uri->segment(3) == 'cek-plagiarisme') { echo 'active'; } ?>" href="<?= base_url('layanan/detail/cek-plagiarisme') ?>">Cek Plagiarisme</a>
-                                <a class="dropdown-item <?php if($this->uri->segment(3) == 'pharaphase') { echo 'active'; } ?>" href="<?= base_url('layanan/detail/pharaphase') ?>">Pharaphase</a>
+                                <?php foreach ($menus as $data) { ?>    
+                                    <a class="dropdown-item <?php if($this->uri->segment(3) == $data->slug) { echo 'active'; } ?>" href="<?= base_url('layanan/detail/'.$data->slug) ?>"><?= $data->nama_produk ?></a>
+                                <?php } ?>
                             </div>
                         </li>
                         <li class="nav-item <?php if($this->uri->segment(1) == 'artikel') { echo 'active'; } ?>">
@@ -69,9 +69,9 @@
                         <?php } else { ?>
                             <a class="btn btn-primary text-center border rounded-pill" type="button" style="margin: 5px;font-size: 10pt;font-family: Montserrat, sans-serif;width: 125px;" href="<?= base_url('auth/logout') ?>">LOGOUT</a>
                             <?php if ($this->session->userdata('role') == 'user') { ?>
-                            <a class="btn btn-primary text-center border rounded-pill" type="button" style="margin: 5px;font-size: 10pt;font-family: Montserrat, sans-serif;background: rgb(159,159,159);width: 125px;text-align: center;" href="<?= base_url('userarea') ?>">CLIENT AREA</a>
+                                <a class="btn btn-primary text-center border rounded-pill" type="button" style="margin: 5px;font-size: 10pt;font-family: Montserrat, sans-serif;background: rgb(159,159,159);width: 125px;text-align: center;" href="<?= base_url('userarea') ?>">CLIENT AREA</a>
                             <?php } else if ($this->session->userdata('role') == 'admin') { ?>
-                            <a class="btn btn-primary text-center border rounded-pill" type="button" style="margin: 5px;font-size: 10pt;font-family: Montserrat, sans-serif;background: rgb(159,159,159);width: 125px;text-align: center;" href="<?= base_url('adminarea') ?>">ADMIN AREA</a>
+                                <a class="btn btn-primary text-center border rounded-pill" type="button" style="margin: 5px;font-size: 10pt;font-family: Montserrat, sans-serif;background: rgb(159,159,159);width: 125px;text-align: center;" href="<?= base_url('adminarea') ?>">ADMIN AREA</a>
                             <?php } ?>
                         <?php } ?>
                     </div>

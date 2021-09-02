@@ -26,8 +26,12 @@
                 </div>
                 <div class="col-4">
                     <div class="row d-flex d-lg-flex align-items-center align-items-lg-center">
-                        <div class="col-6"><button class="btn btn-success btn-block" type="button" style="padding: 2px 5px;">Catatan<br></button></div>
-                        <div class="col"><button class="btn btn-primary btn-block" type="button" style="padding: 2px 5px;">Download<br></button></div>
+                        <div class="col-6">
+                            <button class="btn btn-success btn-block" type="button" style="padding: 2px 5px;">Catatan<br></button>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-primary btn-block" type="button" style="padding: 2px 5px;">Download<br></button>
+                        </div>
                     </div>
                 </div>
             </div>

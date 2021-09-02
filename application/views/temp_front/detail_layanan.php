@@ -13,7 +13,7 @@
                     <h1>Rp. <?= number_format($layanan->harga, 0, ",", "."); ?></h1>
                     <h2></h2>
                 </div>
-                <a href="#" class="btn btn-primary" type="button" style="padding-top: 5px;padding-bottom: 5px;"><i class="fa fa-book"></i> Pesan Sekarang</a>
+                <a href="<?= base_url('layanan/pesan/'.$layanan->slug) ?>" class="btn btn-primary" type="button" style="padding-top: 5px;padding-bottom: 5px;"><i class="fa fa-book"></i> Pesan Sekarang</a>
             </div>
         </div>
     </div>
