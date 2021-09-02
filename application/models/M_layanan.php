@@ -18,15 +18,15 @@ class M_layanan extends CI_Model{
 		$this->db->insert('produk', $data);
 	}
 
-	function update__artikel($data, $id)
+	function update__produk($data, $id)
 	{
 		$this->db->where('id_produk', $id);
 		$this->db->update('produk', $data);
 	}
 
-	function delete__artikel($id)
+	function delete__layanan($slug)
 	{
-		$this->db->where('id_produk', $id);
+		$this->db->where('slug', $slug);
 		$this->db->delete('produk');
 	}
 }
