@@ -41,8 +41,79 @@ class Layanan extends CI_Controller {
 			$data = array(
 				'title' => 'Pesan Penyusunan Proposal',
 				'content' => 'temp_user/penyusunan_proposal',
+				'nama_lengkap' => $datauser->nama_depan.' '.$datauser->nama_belakang,
+				'asal_univ' => $datauser->asal_univ,
+				'fakultas' => $datauser->fakultas,
+				'jurusan' => $datauser->jurusan,
+				'npm_nim' => $datauser->npm_nim,
 			);
 			$this->load->view('temp_user/content', $data);
+		} else if ($layanan->slug == 'penyusunan-skripsi') {
+			$data = array(
+				'title' => 'Pesan Penyusunan Skripsi',
+				'content' => 'temp_user/penyusunan_skripsi',
+				'nama_lengkap' => $datauser->nama_depan.' '.$datauser->nama_belakang,
+				'asal_univ' => $datauser->asal_univ,
+				'fakultas' => $datauser->fakultas,
+				'jurusan' => $datauser->jurusan,
+				'npm_nim' => $datauser->npm_nim,
+			);
+			$this->load->view('temp_user/content', $data);
+		} else if ($layanan->slug == 'pengolahan-data') {
+			$data = array(
+				'title' => 'Pesan Pengolahan Data',
+				'content' => 'temp_user/pengolahan_data',
+				'nama_lengkap' => $datauser->nama_depan.' '.$datauser->nama_belakang,
+				'asal_univ' => $datauser->asal_univ,
+				'fakultas' => $datauser->fakultas,
+				'jurusan' => $datauser->jurusan,
+				'npm_nim' => $datauser->npm_nim,
+			);
+			$this->load->view('temp_user/content', $data);
+		} else if ($layanan->slug == 'data-sekunder') {
+			$data = array(
+				'title' => 'Pesan Data Sekunder',
+				'content' => 'temp_user/data_sekunder',
+				'nama_lengkap' => $datauser->nama_depan.' '.$datauser->nama_belakang,
+				'asal_univ' => $datauser->asal_univ,
+				'fakultas' => $datauser->fakultas,
+				'jurusan' => $datauser->jurusan,
+				'npm_nim' => $datauser->npm_nim,
+			);
+			$this->load->view('temp_user/content', $data);
+		} else if ($layanan->slug == 'cek-plagiarisme') {
+			$data = array(
+				'title' => 'Pesan Cek Plagiarisme',
+				'content' => 'temp_user/cek_plagiarisme',
+				'nama_lengkap' => $datauser->nama_depan.' '.$datauser->nama_belakang,
+				'asal_univ' => $datauser->asal_univ,
+				'fakultas' => $datauser->fakultas,
+				'jurusan' => $datauser->jurusan,
+				'npm_nim' => $datauser->npm_nim,
+			);
+			$this->load->view('temp_user/content', $data);
+		} else if ($layanan->slug == 'pharaphase') {
+			$data = array(
+				'title' => 'Pesan Cek Plagiarisme',
+				'content' => 'temp_user/pharaphase',
+				'nama_lengkap' => $datauser->nama_depan.' '.$datauser->nama_belakang,
+				'asal_univ' => $datauser->asal_univ,
+				'fakultas' => $datauser->fakultas,
+				'jurusan' => $datauser->jurusan,
+				'npm_nim' => $datauser->npm_nim,
+			);
+			$this->load->view('temp_user/content', $data);
+		} else {
+			$data = array(
+				'title' => 'Pesan Layanan',
+				'content' => 'temp_user/pesan_layanan',
+				'nama_lengkap' => $datauser->nama_depan.' '.$datauser->nama_belakang,
+				'asal_univ' => $datauser->asal_univ,
+				'fakultas' => $datauser->fakultas,
+				'jurusan' => $datauser->jurusan,
+				'npm_nim' => $datauser->npm_nim,
+			);
+			$this->load->view('temp_user/content');
 		}
 	}
 }

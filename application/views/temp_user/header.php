@@ -41,12 +41,11 @@
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="" style="color: rgb(0,0,0);font-family: Montserrat, sans-serif;font-size: 11pt;background: rgb(255,255,255);">Produk Kami</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?= base_url('userarea/layanan/penyusunan-proposal') ?>">Penyusunan Proposal</a>
-                                <a class="dropdown-item" href="<?= base_url('userarea/layanan/penyusunan-skripsi') ?>">Penyusunan Skripsi</a>
-                                <a class="dropdown-item" href="<?= base_url('userarea/layanan/pengolahan-data') ?>">Pengolahan Data</a>
-                                <a class="dropdown-item" href="<?= base_url('userarea/layanan/data-sekunder') ?>">Data Sekunder</a>
-                                <a class="dropdown-item" href="<?= base_url('userarea/layanan/cek-plagiarisme') ?>">Cek Plagiarisme</a>
-                                <a class="dropdown-item" href="<?= base_url('userarea/layanan/pharaphase') ?>">Pharaphase</a>
+                                <?php
+                                $produk = $this->db->get('produk')->result();
+                                foreach ($produk as $menu) { ?>
+                                    <a class="dropdown-item" href="<?= base_url('userarea/layanan/'.$menu->slug) ?>"><?= $menu->nama_produk ?></a>
+                                <?php } ?>
                             </div>
                         </li>
                         <li class="nav-item">
