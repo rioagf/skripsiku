@@ -7,6 +7,10 @@ class Layanan extends CI_Controller {
 		parent::__construct();		
 		$this->load->model('M_layanan');
 		$this->load->model('M_userarea');
+		if ($this->session->userdata('status') != 'login') {
+			$this->session->set_flashdata('error', 'Maaf! Anda harus login terlebih dahulu');
+			redirect(base_url('auth/login'));
+		}
 
 	}
 
@@ -115,5 +119,22 @@ class Layanan extends CI_Controller {
 			);
 			$this->load->view('temp_user/content');
 		}
+	}
+
+	function proses_penyusunan_proposal()
+	{
+		$config['upload_path']          = './assets/file/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']             = 500000;
+		$config['max_width']            = 1960;
+		$config['max_height']           = 1080;
+
+		$this->load->library('upload', $config);
+		$data = array(
+			'id_user' => $this->input->post('id_user'),
+			'nama_dospemsatu' => $this->input->post('dospemsatu'),
+			'nama_dospemdua' => $this->input->post('dospemdua'),
+			'judul_proposal' => $this->input->post('judulproposal'),
+		);
 	}
 }

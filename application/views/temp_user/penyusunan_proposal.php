@@ -5,7 +5,7 @@
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label>Nama Lengkap</label>
-                    <input class="form-control" type="text" name="name" placeholder="Deo Leo" value="<?= $nama_lengkap; ?>">
+                    <input class="form-control" type="text" name="nama" placeholder="Deo Leo" value="<?= $nama_lengkap; ?>">
                 </div>
                 <div class="form-group">
                     <label>Asal Universitas</label>
@@ -27,6 +27,7 @@
                     <label>Judul Proposal</label>
                     <input class="form-control" type="text" name="judulproposal" placeholder="Pengaruh ....">
                 </div>
+                <input type="hidden" name="id_user" value="<?= $this->session->userdata('id_user'); ?>">
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
