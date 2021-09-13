@@ -1,10 +1,12 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Adminarea extends CI_Controller {
+class Adminarea extends CI_Controller
+{
 
-	function __construct(){
-		parent::__construct();		
+	function __construct()
+	{
+		parent::__construct();
 		$this->load->model('M_artikel');
 		$this->load->model('M_auth');
 		$this->load->model('M_layanan');
@@ -14,13 +16,11 @@ class Adminarea extends CI_Controller {
 			redirect(base_url('auth'));
 			$this->session->set_flashdata('error', 'Maaf Anda Harus Login Terlebih Dahulu');
 		} else {
-			if($this->session->userdata('role') != 'admin'){
+			if ($this->session->userdata('role') != 'admin') {
 				redirect(base_url('userarea'));
 				$this->session->set_flashdata('error', 'Maaf Anda Tidak Diizinkan Mengakses Halaman Admin');
 			}
 		}
-		
-
 	}
 
 	public function index()
@@ -54,7 +54,7 @@ class Adminarea extends CI_Controller {
 		$this->load->view('temp_admin/content', $data);
 	}
 
-	function proses_tambah__slider() 
+	function proses_tambah__slider()
 	{
 		// $this->_rules();
 		$config['upload_path']          = './assets/img/';
@@ -72,8 +72,8 @@ class Adminarea extends CI_Controller {
 		} else {
 			$upload_data = $this->upload->data();
 			$data = array(
-				'file' => '/assets/img/'.$upload_data['file_name'],
-				'lokasi' => $this->input->post('lokasi',TRUE),
+				'file' => '/assets/img/' . $upload_data['file_name'],
+				'lokasi' => $this->input->post('lokasi', TRUE),
 				'date_created' => date('Y-m-d'),
 				'date_update' => date('Y-m-d'),
 				'id_user' => $this->session->userdata('id_user'),
@@ -114,7 +114,7 @@ class Adminarea extends CI_Controller {
 			// $this->edit_slider($id);
 			$data = array(
 				'file' => $this->input->post('file_lama', TRUE),
-				'lokasi' => $this->input->post('lokasi',TRUE),
+				'lokasi' => $this->input->post('lokasi', TRUE),
 				'date_update' => date('Y-m-d'),
 				'id_user' => $this->session->userdata('id_user'),
 			);
@@ -126,8 +126,8 @@ class Adminarea extends CI_Controller {
 			$upload_data = $this->upload->data();
 			// var_dump($upload_data);die();
 			$data = array(
-				'file' => '/assets/img/'.$upload_data['file_name'],
-				'lokasi' => $this->input->post('lokasi',TRUE),
+				'file' => '/assets/img/' . $upload_data['file_name'],
+				'lokasi' => $this->input->post('lokasi', TRUE),
 				'date_update' => date('Y-m-d'),
 				'id_user' => $this->session->userdata('id_user'),
 			);
@@ -173,7 +173,7 @@ class Adminarea extends CI_Controller {
 		$this->load->view('temp_admin/content', $data);
 	}
 
-	function proses_tambah__gallery() 
+	function proses_tambah__gallery()
 	{
 		// $this->_rules();
 		$config['upload_path']          = './assets/img/';
@@ -191,9 +191,9 @@ class Adminarea extends CI_Controller {
 		} else {
 			$upload_data = $this->upload->data();
 			$data = array(
-				'file' => '/assets/img/'.$upload_data['file_name'],
-				'nama_galeri' => $this->input->post('nama_galeri',TRUE),
-				'lokasi_galeri' => $this->input->post('lokasi_galeri',TRUE),
+				'file' => '/assets/img/' . $upload_data['file_name'],
+				'nama_galeri' => $this->input->post('nama_galeri', TRUE),
+				'lokasi_galeri' => $this->input->post('lokasi_galeri', TRUE),
 				'date_created' => date('Y-m-d'),
 				'date_updated' => date('Y-m-d'),
 				'id_user' => $this->session->userdata('id_user'),
@@ -235,8 +235,8 @@ class Adminarea extends CI_Controller {
 			// $this->edit_slider($id);
 			$data = array(
 				'file' => $this->input->post('file_lama', TRUE),
-				'lokasi_galeri' => $this->input->post('lokasi_galeri',TRUE),
-				'nama_galeri' => $this->input->post('nama_galeri',TRUE),
+				'lokasi_galeri' => $this->input->post('lokasi_galeri', TRUE),
+				'nama_galeri' => $this->input->post('nama_galeri', TRUE),
 				'date_updated' => date('Y-m-d'),
 				'id_user' => $this->session->userdata('id_user'),
 			);
@@ -248,9 +248,9 @@ class Adminarea extends CI_Controller {
 			$upload_data = $this->upload->data();
 			// var_dump($upload_data);die();
 			$data = array(
-				'file' => '/assets/img/'.$upload_data['file_name'],
-				'nama_galeri' => $this->input->post('nama_galeri',TRUE),
-				'lokasi_galeri' => $this->input->post('lokasi_galeri',TRUE),
+				'file' => '/assets/img/' . $upload_data['file_name'],
+				'nama_galeri' => $this->input->post('nama_galeri', TRUE),
+				'lokasi_galeri' => $this->input->post('lokasi_galeri', TRUE),
 				'date_updated' => date('Y-m-d'),
 				'id_user' => $this->session->userdata('id_user'),
 			);
@@ -289,7 +289,7 @@ class Adminarea extends CI_Controller {
 		$this->load->view('temp_admin/content', $data);
 	}
 
-	public function detail_karir($id) 
+	public function detail_karir($id)
 	{
 		$row = $this->Karir_model->get_by_id($id);
 		if ($row) {
@@ -311,7 +311,7 @@ class Adminarea extends CI_Controller {
 		}
 	}
 
-	public function tambah_karir() 
+	public function tambah_karir()
 	{
 		$data = array(
 			'title' => 'Karir - Skripsiku',
@@ -324,7 +324,7 @@ class Adminarea extends CI_Controller {
 		$this->load->view('temp_admin/content', $data);
 	}
 
-	public function proses_tambah__karir() 
+	public function proses_tambah__karir()
 	{
 		// $this->_rules();
 
@@ -333,8 +333,8 @@ class Adminarea extends CI_Controller {
 			$this->tambah_karir();
 		} else {
 			$data = array(
-				'judul_karir' => $this->input->post('judul_karir',TRUE),
-				'deskripsi_karir' => $this->input->post('deskripsi_karir',TRUE),
+				'judul_karir' => $this->input->post('judul_karir', TRUE),
+				'deskripsi_karir' => $this->input->post('deskripsi_karir', TRUE),
 				'date_created' => date('Y-m-d'),
 				'date_updated' => date('Y-m-d'),
 				'id_user' => $this->session->userdata('id_user'),
@@ -346,7 +346,7 @@ class Adminarea extends CI_Controller {
 		}
 	}
 
-	public function edit_karir($id) 
+	public function edit_karir($id)
 	{
 		$row = $this->Karir_model->get_by_id($id);
 		if ($row) {
@@ -364,7 +364,7 @@ class Adminarea extends CI_Controller {
 		}
 	}
 
-	public function proses_edit__karir() 
+	public function proses_edit__karir()
 	{
 		// $this->_rules();
 
@@ -373,8 +373,8 @@ class Adminarea extends CI_Controller {
 			$this->edit_karir();
 		} else {
 			$data = array(
-				'judul_karir' => $this->input->post('judul_karir',TRUE),
-				'deskripsi_karir' => $this->input->post('deskripsi_karir',TRUE),
+				'judul_karir' => $this->input->post('judul_karir', TRUE),
+				'deskripsi_karir' => $this->input->post('deskripsi_karir', TRUE),
 				'date_updated' => date('Y-m-d'),
 				'id_user' => $this->session->userdata('id_user'),
 			);
@@ -412,12 +412,12 @@ class Adminarea extends CI_Controller {
 		$this->load->view('temp_admin/content', $data);
 	}
 
-	public function detail_artikel($id) 
+	public function detail_artikel($id)
 	{
 		$row = $this->M_artikel->get_detail__by_id($id)->row();
 		if ($row) {
 			$data = array(
-				'title' => $row->judul_artikel.' - Skripsiku',
+				'title' => $row->judul_artikel . ' - Skripsiku',
 				'content' => 'temp_admin/artikel_detail',
 				'id_artikel' => $row->id_artikel,
 				'judul_artikel' => $row->judul_artikel,
@@ -433,7 +433,7 @@ class Adminarea extends CI_Controller {
 		}
 	}
 
-	public function tambah_artikel() 
+	public function tambah_artikel()
 	{
 		$data = array(
 			'title' => 'Tambah Artikel - Skripsiku',
@@ -445,7 +445,7 @@ class Adminarea extends CI_Controller {
 		$this->load->view('temp_admin/content', $data);
 	}
 
-	public function proses_tambah__artikel() 
+	public function proses_tambah__artikel()
 	{
 		// $this->_rules();
 
@@ -462,10 +462,10 @@ class Adminarea extends CI_Controller {
 			$this->load->library('upload', $config);
 
 			if ($this->input->post('gambar_artikel') == '') {
-				$judul = $this->input->post('judul_artikel',TRUE);
+				$judul = $this->input->post('judul_artikel', TRUE);
 				$data = array(
 					'judul_artikel' => $judul,
-					'isi_konten' => $this->input->post('isi_konten',TRUE),
+					'isi_konten' => $this->input->post('isi_konten', TRUE),
 					'slug' => strtolower(str_replace(' ', '-', $judul)),
 					'date_created' => date('Y-m-d'),
 					'date_updated' => date('Y-m-d'),
@@ -478,14 +478,14 @@ class Adminarea extends CI_Controller {
 				redirect(site_url('adminarea/artikel'));
 			} else {
 				$upload_data = $this->upload->data();
-				$judul = $this->input->post('judul_artikel',TRUE);
+				$judul = $this->input->post('judul_artikel', TRUE);
 				$data = array(
 					'judul_artikel' => $judul,
-					'isi_konten' => $this->input->post('isi_konten',TRUE),
+					'isi_konten' => $this->input->post('isi_konten', TRUE),
 					'slug' => strtolower(str_replace(' ', '-', $judul)),
 					'date_created' => date('Y-m-d'),
 					'date_updated' => date('Y-m-d'),
-					'gambar_artikel' => '/'.$config['upload_path'].$upload_data['file_name'],
+					'gambar_artikel' => '/' . $config['upload_path'] . $upload_data['file_name'],
 					'id_user' => $this->session->userdata('id_user'),
 				);
 
@@ -496,7 +496,7 @@ class Adminarea extends CI_Controller {
 		}
 	}
 
-	public function edit_artikel($id) 
+	public function edit_artikel($id)
 	{
 		$row = $this->M_artikel->get_detail__by_id($id)->row();
 		if ($row) {
@@ -515,7 +515,7 @@ class Adminarea extends CI_Controller {
 		}
 	}
 
-	public function proses_edit__artikel() 
+	public function proses_edit__artikel()
 	{
 		// $this->_rules();
 
@@ -532,10 +532,10 @@ class Adminarea extends CI_Controller {
 			$this->load->library('upload', $config);
 
 			if ($this->input->post('gambar_artikel') == '') {
-				$judul = $this->input->post('judul_artikel',TRUE);
+				$judul = $this->input->post('judul_artikel', TRUE);
 				$data = array(
 					'judul_artikel' => $judul,
-					'isi_konten' => $this->input->post('isi_konten',TRUE),
+					'isi_konten' => $this->input->post('isi_konten', TRUE),
 					'slug' => strtolower(str_replace(' ', '-', $judul)),
 					'date_updated' => date('Y-m-d'),
 					'gambar_artikel' => $this->input->post('gambar_artikel_old', TRUE),
@@ -547,14 +547,14 @@ class Adminarea extends CI_Controller {
 				redirect(site_url('adminarea/artikel'));
 			} else {
 				$upload_data = $this->upload->data();
-				$judul = $this->input->post('judul_artikel',TRUE);
+				$judul = $this->input->post('judul_artikel', TRUE);
 				$data = array(
 					'judul_artikel' => $judul,
-					'isi_konten' => $this->input->post('isi_konten',TRUE),
+					'isi_konten' => $this->input->post('isi_konten', TRUE),
 					'slug' => strtolower(str_replace(' ', '-', $judul)),
 					'date_created' => date('Y-m-d'),
 					'date_updated' => date('Y-m-d'),
-					'gambar_artikel' => '/'.$config['upload_path'].$upload_data['file_name'],
+					'gambar_artikel' => '/' . $config['upload_path'] . $upload_data['file_name'],
 					'id_user' => $this->session->userdata('id_user'),
 				);
 
@@ -593,12 +593,12 @@ class Adminarea extends CI_Controller {
 		$this->load->view('temp_admin/content', $data);
 	}
 
-	public function detail_produk($slug) 
+	public function detail_produk($slug)
 	{
 		$row = $this->M_layanan->get_detail__slug($slug)->row();
 		if ($row) {
 			$data = array(
-				'title' => $row->nama_produk.' - Skripsiku',
+				'title' => $row->nama_produk . ' - Skripsiku',
 				'content' => 'temp_admin/produk_detail',
 				'id_produk' => $row->id_produk,
 				'nama_produk' => $row->nama_produk,
@@ -615,7 +615,7 @@ class Adminarea extends CI_Controller {
 		}
 	}
 
-	public function tambah_produk() 
+	public function tambah_produk()
 	{
 		$data = array(
 			'title' => 'Tambah Produk - Skripsiku',
@@ -625,7 +625,7 @@ class Adminarea extends CI_Controller {
 		$this->load->view('temp_admin/content', $data);
 	}
 
-	public function proses_tambah__produk() 
+	public function proses_tambah__produk()
 	{
 		// $this->_rules();
 
@@ -641,11 +641,11 @@ class Adminarea extends CI_Controller {
 
 			$this->load->library('upload', $config);
 
-			if (! $this->upload->do_upload('image_cover')) {
-				$judul = $this->input->post('nama_produk',TRUE);
+			if (!$this->upload->do_upload('image_cover')) {
+				$judul = $this->input->post('nama_produk', TRUE);
 				$data = array(
 					'nama_produk' => $judul,
-					'deskripsi_produk' => $this->input->post('deskripsi_produk',TRUE),
+					'deskripsi_produk' => $this->input->post('deskripsi_produk', TRUE),
 					'slug' => strtolower(str_replace(' ', '-', $judul)),
 					'harga' => $this->input->post('harga'),
 					'date_created' => date('Y-m-d'),
@@ -659,15 +659,15 @@ class Adminarea extends CI_Controller {
 				redirect(site_url('adminarea/produk'));
 			} else {
 				$upload_data = $this->upload->data();
-				$judul = $this->input->post('nama_produk',TRUE);
+				$judul = $this->input->post('nama_produk', TRUE);
 				$data = array(
 					'nama_produk' => $judul,
-					'deskripsi_produk' => $this->input->post('deskripsi_produk',TRUE),
+					'deskripsi_produk' => $this->input->post('deskripsi_produk', TRUE),
 					'slug' => strtolower(str_replace(' ', '-', $judul)),
 					'harga' => $this->input->post('harga'),
 					'date_created' => date('Y-m-d'),
 					'date_updated' => date('Y-m-d'),
-					'image_cover' => '/upload/image/'.$upload_data['file_name'],
+					'image_cover' => '/upload/image/' . $upload_data['file_name'],
 					'id_user' => $this->session->userdata('id_user'),
 				);
 
@@ -678,7 +678,7 @@ class Adminarea extends CI_Controller {
 		}
 	}
 
-	public function edit_produk($slug) 
+	public function edit_produk($slug)
 	{
 		$row = $this->M_layanan->get_detail__slug($slug)->row();
 		if ($row) {
@@ -698,7 +698,7 @@ class Adminarea extends CI_Controller {
 		}
 	}
 
-	public function proses_edit__produk() 
+	public function proses_edit__produk()
 	{
 		// $this->_rules();
 
@@ -714,13 +714,13 @@ class Adminarea extends CI_Controller {
 
 			$this->load->library('upload', $config);
 
-			if (! $this->upload->do_upload('image_cover')) {
-				$judul = $this->input->post('nama_produk',TRUE);
+			if (!$this->upload->do_upload('image_cover')) {
+				$judul = $this->input->post('nama_produk', TRUE);
 				$data = array(
 					'nama_produk' => $judul,
-					'deskripsi_produk' => $this->input->post('deskripsi_produk',TRUE),
+					'deskripsi_produk' => $this->input->post('deskripsi_produk', TRUE),
 					'slug' => strtolower(str_replace(' ', '-', $judul)),
-					'harga' => $this->input->post('harga',TRUE),
+					'harga' => $this->input->post('harga', TRUE),
 					'date_updated' => date('Y-m-d'),
 					'image_cover' => $this->input->post('gambar_produk_old', TRUE),
 					'id_user' => $this->session->userdata('id_user'),
@@ -728,18 +728,18 @@ class Adminarea extends CI_Controller {
 
 				$this->M_layanan->update__produk($data, $this->input->post('id_produk'));
 				// $this->session->set_flashdata('success', 'Gambar Terlalu Besar atau Tidak Sesuai Format, Data Berhasil Diubah Sebagian');
-				$this->session->set_flashdata('success', $this->upload->display_errors().' Data Diupdate Sebagian');
+				$this->session->set_flashdata('success', $this->upload->display_errors() . ' Data Diupdate Sebagian');
 				redirect(site_url('adminarea/produk'));
 			} else {
 				$upload_data = $this->upload->data();
-				$judul = $this->input->post('nama_produk',TRUE);
+				$judul = $this->input->post('nama_produk', TRUE);
 				$data = array(
 					'nama_produk' => $judul,
-					'deskripsi_produk' => $this->input->post('deskripsi_produk',TRUE),
+					'deskripsi_produk' => $this->input->post('deskripsi_produk', TRUE),
 					'slug' => strtolower(str_replace(' ', '-', $judul)),
-					'harga' => $this->input->post('harga',TRUE),
+					'harga' => $this->input->post('harga', TRUE),
 					'date_updated' => date('Y-m-d'),
-					'image_cover' => '/upload/image/'.$upload_data['file_name'],
+					'image_cover' => '/upload/image/' . $upload_data['file_name'],
 					'id_user' => $this->session->userdata('id_user'),
 				);
 
@@ -763,5 +763,4 @@ class Adminarea extends CI_Controller {
 			redirect(site_url('adminarea/produk'));
 		}
 	}
-
 }

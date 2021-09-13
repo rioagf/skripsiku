@@ -13,6 +13,12 @@ class M_layanan extends CI_Model{
 		return $this->db->get('produk');
 	}
 
+	    function add_layanan($data)
+    {
+        $this->db->insert('pemesanan',$data);
+        return $this->db->insert_id();
+    }
+
 	function create__produk($data)
 	{
 		$this->db->insert('produk', $data);
