@@ -34,6 +34,15 @@ class Adminarea extends CI_Controller
 		$this->load->view('temp_admin/content', $data);
 	}
 
+	public function list_pemesanan()
+	{
+		$data = array(
+			'title' => 'Daftar Pesanan Customer',
+			'content' => 'temp_admin/list_pesanan',
+		);
+		$this->load->view('temp_admin/content', $data);
+	}
+
 	public function slider()
 	{
 		$slider = $this->M_image->slider()->result();

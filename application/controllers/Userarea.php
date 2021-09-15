@@ -7,6 +7,9 @@ class Userarea extends CI_Controller {
 		parent::__construct();
 		if($this->session->userdata('status') != 'login'){
 			redirect(base_url('auth/login'));
+		} elseif ($this->session->userdata('role') != 'user') {
+			$this->session->set_flashdata('error', 'Maaf userarea hanya untuk user');
+			redirect(base_url());
 		}
 		$this->load->model('M_userarea');
 		$this->load->model('M_layanan');
@@ -68,7 +71,7 @@ class Userarea extends CI_Controller {
 					'jurusan' => $this->input->post('jurusan'),
 					'npm_nim' => $this->input->post('npm_nim'),
 					'alamat' => $this->input->post('alamat'),
-					'ktp' => $config['upload_path'].$upload_data['file_name'],
+					'ktp' => '/upload/image/'.$upload_data['file_name'],
 				);
 				$this->M_userarea->update__profile($this->input->post('id_profile'), $data1);
 				$data2 = array(
@@ -87,7 +90,7 @@ class Userarea extends CI_Controller {
 					'jurusan' => $this->input->post('jurusan'),
 					'npm_nim' => $this->input->post('npm_nim'),
 					'alamat' => $this->input->post('alamat'),
-					'ktp' => $config['upload_path'].$upload_data['file_name'],
+					'ktp' => '/upload/image/'.$upload_data['file_name'],
 				);
 				$this->M_userarea->update__profile($this->input->post('id_profile'), $data1);
 				$data2 = array(

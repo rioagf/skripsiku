@@ -131,7 +131,7 @@ class Layanan extends CI_Controller
 
 	function proses_pesan_layanan()
 	{
-		$config['upload_path']          = './assets/file/';
+		$config['upload_path']          = './upload/file/';
 		$config['allowed_types']        = 'pdf';
 		$config['max_size']             = 500000;
 		$config['max_width']            = 1960;
@@ -145,6 +145,27 @@ class Layanan extends CI_Controller
 				'title' => 'Proses Pesan Layanan',
 				'content' => 'temp_user/upload_layanan_sukses',
 			);
+
+			if ($this->upload->do_upload('pedomanskripsi')) {
+				$datapedoman = $this->upload->data();
+			}
+
+			if ($this->upload->do_upload('datapenelitian')) {
+				$datapenelitian = $this->upload->data();
+			}
+			
+			if ($this->upload->do_upload('skripsiacc')) {
+				$skripsiacc = $this->upload->data();
+			}
+			
+			if ($this->upload->do_upload('proposalskripsi')) {
+				$proposalskripsi = $this->upload->data();
+			}
+			
+			if ($this->upload->do_upload('dokumen')) {
+				$dokumen = $this->upload->data();
+			}
+			
 			$data = array(
 				'id_user' => $this->input->post('id_user'),
 				'id_produk' => $this->input->post('id_produk'),
@@ -156,12 +177,14 @@ class Layanan extends CI_Controller
 				'judul_proposal' => $this->input->post('judulproposal'),
 				'nama_dospemsatu' => $this->input->post('dospemsatu'),
 				'nama_dospemdua' => $this->input->post('dospemdua'),
-				'file_pedomanskripsi' => $this->input->post('pedomanskripsi'),
-				'file_datapenelitian' => $this->input->post('datapenelitian'),
-				'file_skripsiacc' => $this->input->post('skripsiacc'),
-				'file_proposalskripsi' => $this->input->post('proposalskripsi'),
+				
+				'file_pedomanskripsi' => '/upload/file/'.$datapedoman['file_name'],
+				'file_datapenelitian' => '/upload/file/'.$datapenelitian['file_name'],
+				'file_skripsiacc' => '/upload/file/'.$skripsiacc['file_name'],
+				'file_proposalskripsi' => '/upload/file/'.$proposalskripsi['file_name'],
+				'dokumen' => '/upload/file/'.$dokumen['file_name'],
+
 				'aplikasi_pengolahdata' => $this->input->post('pengolahdata'),
-				'dokumen' => $this->input->post('dokumen'),
 				'penurunan_plagiarisme' => $this->input->post('penurunan_plagiarisme'),
 				'date_created' => date('y-m-d'),
 				'date_updated' => date('y-m-d'),
