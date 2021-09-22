@@ -53,58 +53,62 @@ $user = $this->db->get('users')->row();
     <h2 class="text-center">Riwayat Pembayaran</h2>
     <div class="container">
         <?php
-
-        foreach ($pembayaran as $data_bayar):
-            $timestamp = strtotime($data_bayar->date_created);
-            $day = date('l', $timestamp);
-            switch ($day) {
-                case 'Sunday':
+        if (!empty($pembayaran)) {
+            foreach ($pembayaran as $data_bayar):
+                $timestamp = strtotime($data_bayar->date_created);
+                $day = date('l', $timestamp);
+                switch ($day) {
+                    case 'Sunday':
                     $day = 'Minggu';
                     break;
-                case 'Monday':
+                    case 'Monday':
                     $day = 'Senin';
                     break;
-                case 'Tuesday':
+                    case 'Tuesday':
                     $day = 'Selasa';
                     break;
-                case 'Wednesday':
+                    case 'Wednesday':
                     $day = 'Rabu';
                     break;
-                case 'Thursday':
+                    case 'Thursday':
                     $day = 'Kamis';
                     break;
-                case 'Friday':
+                    case 'Friday':
                     $day = 'Jumat';
                     break;
-                case 'Saturday':
+                    case 'Saturday':
                     $day = 'Sabtu';
                     break;
 
-                default:
+                    default:
                     $day = 'Senin';
                     break;
-            }
-        ?>
-            <div class="row d-flex d-lg-flex align-items-center align-items-lg-center">
-                <div class="col-md-12">
-                    <strong><?= $day.', '.date("d F y", strtotime($data_bayar->date_created)) ?></strong>
+                }
+                ?>
+                <div class="row d-flex d-lg-flex align-items-center align-items-lg-center">
+                    <div class="col-md-12">
+                        <strong><?= $day.', '.date("d F y", strtotime($data_bayar->date_created)) ?></strong>
+                    </div>
                 </div>
-            </div>
-            <div class="row d-lg-flex" style="background: #ffffff;padding: 10px 0px; margin-bottom: 10px;">
-                <div class="col-8">
-                    <p><?= $data_bayar->perihal ?><br></p>
-                </div>
-                <div class="col-4">
-                    <div class="row d-flex d-lg-flex align-items-center align-items-lg-center">
-                        <div class="col-6">
-                            <button class="btn btn-success btn-block" type="button" style="padding: 2px 5px;">Lihat</button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-primary btn-block" type="button" style="padding: 2px 5px;">Download</button>
+                <div class="row d-lg-flex" style="background: #ffffff;padding: 10px 0px; margin-bottom: 10px;">
+                    <div class="col-8">
+                        <p><?= $data_bayar->perihal ?><br></p>
+                    </div>
+                    <div class="col-4">
+                        <div class="row d-flex d-lg-flex align-items-center align-items-lg-center">
+                            <div class="col-6">
+                                <button class="btn btn-success btn-block" type="button" style="padding: 2px 5px;">Lihat</button>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-primary btn-block" type="button" style="padding: 2px 5px;">Download</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php endforeach ?>
+            <?php endforeach 
+
+        } else {
+            echo "<h3>Mohon Maaf Belum ada Pembayaran</h3>";
+        }?>
     </div>
 </section>
