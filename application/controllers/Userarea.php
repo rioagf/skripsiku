@@ -183,10 +183,42 @@ class Userarea extends CI_Controller {
 	public function pembayaran($username)
 	{
 
+		$pembayaran = $this->M_userarea->list_pembayaran($username);
 		$data = array(
 			'title' => 'Pembayaran - Skripsiku',
 			'content' => 'temp_user/pembayaran',
+			'pembayaran' => $pembayaran,
 		);
 		$this->load->view('temp_user/content', $data);
+	}
+
+	public function proses_pembayaran($username)
+	{
+		$config['upload_path']          = './upload/image/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 100;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('bukti_transfer')){
+			$this->session->set_flashdata('error', $this->upload->display_errors());
+			redirect(base_url('userarea/pembayaran'));
+		}else{
+			$upload_data = $this->upload->data();
+			$data = array(
+				'id_user' => $this->session->userdata('id_user'),
+				'nama_lengkap' => $this->input->post('nama_lengkap'),
+				'perihal' => $this->input->post('perihal'),
+				'jumlah_transfer' => $this->input->post('jumlah_transfer'),
+				'bukti_transfer' => 'upload/image/'.$upload_data['file_name'],
+				'date_created' => date("Y-m-d"),
+				'date_updated' => date("Y-m-d"),
+			);
+
+			$this->M_userarea->add_pembayaran($data);
+			redirect(base_url('userarea/pembayaran/'.$this->session->userdata('username')));
+		}
 	}
 }

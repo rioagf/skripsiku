@@ -728,7 +728,6 @@ class Adminarea extends CI_Controller
 				$data = array(
 					'nama_produk' => $judul,
 					'deskripsi_produk' => $this->input->post('deskripsi_produk', TRUE),
-					'slug' => strtolower(str_replace(' ', '-', $judul)),
 					'harga' => $this->input->post('harga', TRUE),
 					'date_updated' => date('Y-m-d'),
 					'image_cover' => $this->input->post('gambar_produk_old', TRUE),

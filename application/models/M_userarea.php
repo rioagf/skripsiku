@@ -22,4 +22,16 @@ class M_userarea extends CI_Model{
 		$this->db->update('users', $data2);
 	}
 
+	function add_pembayaran($data)
+	{
+		$this->db->insert('pembayaran', $data);
+	}
+
+	function list_pembayaran($username)
+	{
+		$id_user = $this->session->userdata('id_user');
+		$this->db->where('id_user', $id_user);
+		return $this->db->get('pembayaran')->result();
+	}
+
 }

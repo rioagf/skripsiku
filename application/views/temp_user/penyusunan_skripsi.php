@@ -7,37 +7,37 @@
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label>Nama Lengkap</label>
-                    <input class="form-control" type="text" name="nama" placeholder="Deo Leo" value="<?= $nama_lengkap; ?>">
+                    <input class="form-control" type="text" name="nama" placeholder="Deo Leo" value="<?= $nama_lengkap; ?>" required>
                 </div>
                 <div class="form-group">
                     <label>Asal Universitas</label>
-                    <input class="form-control" type="text" name="univ" placeholder="Universitas Gadjah Mada" value="<?= $asal_univ; ?>">
+                    <input class="form-control" type="text" name="univ" placeholder="Universitas Gadjah Mada" value="<?= $asal_univ; ?>" required>
                 </div>
                 <div class="form-group">
                     <label>Fakultas</label>
-                    <input class="form-control" type="text" name="fakultas" placeholder="Informatika" value="<?= $fakultas; ?>">
+                    <input class="form-control" type="text" name="fakultas" placeholder="Informatika" value="<?= $fakultas; ?>" required>
                 </div>
                 <div class="form-group">
                     <label>Jurusan</label>
-                    <input class="form-control" type="text" name="jurusan" placeholder="Teknik Informatika" value="<?= $jurusan; ?>">
+                    <input class="form-control" type="text" name="jurusan" placeholder="Teknik Informatika" value="<?= $jurusan; ?>" required>
                 </div>
                 <div class="form-group">
                     <label>NPM / NIM</label>
-                    <input class="form-control" type="text" name="npm" placeholder="1823512133" value="<?= $npm_nim; ?>">
+                    <input class="form-control" type="text" name="npm" placeholder="1823512133" value="<?= $npm_nim; ?>" required>
                 </div>
                 <div class="form-group">
                     <label>Judul Proposal</label>
-                    <input class="form-control" type="text" name="judulproposal" placeholder="Pengaruh ....">
+                    <input class="form-control" type="text" name="judulproposal" placeholder="Pengaruh ...." required>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label>Nama Dosen Pembimbing 1</label>
-                    <input class="form-control" type="text" name="dospemsatu" placeholder="Dosen Pembimbing, S.H, M.Kom">
+                    <input class="form-control" type="text" name="dospemsatu" placeholder="Dosen Pembimbing, S.H, M.Kom" required>
                 </div>
                 <div class="form-group">
                     <label>Nama Dosen Pembimbing 2</label>
-                    <input class="form-control" type="text" name="dospemdua" placeholder="Dosen Pembimbing, M.Kom.">
+                    <input class="form-control" type="text" name="dospemdua" placeholder="Dosen Pembimbing, M.Kom." required>
                 </div>
                 <div class="form-group">
                     <label>Upload Pedoman Skripsi</label>
