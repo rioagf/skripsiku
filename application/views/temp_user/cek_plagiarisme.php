@@ -1,6 +1,8 @@
 <section class="d-lg-flex justify-content-lg-center contact-clean" style="padding: 50px 0px;">
-    <form method="post" style="margin: 25px;max-width: none;padding-right: 30px;padding-left: 30px;margin-right: 15px;margin-left: 15px;">
+    <form method="post" action="<?= base_url('layanan/proses_pesan_layanan/') ?>" style="margin: 25px;max-width: none;padding-right: 30px;padding-left: 30px;margin-right: 15px;margin-left: 15px;">
         <h2 class="text-center">Cek Plagiarisme</h2>
+        <input type="hidden" name="id_produk" value="<?= $id_produk ?>">
+        <input type="hidden" name="id_user" value="<?= $this->session->userdata('id_user'); ?>">
         <div class="form-row">
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
@@ -31,12 +33,12 @@
                 </div>
                 <div class="form-group">
                     <label>Pesan Singkat</label>
-                    <textarea class="form-control" id="ckeditor" name="progress" placeholder="Pak, minta tolong dibuat lebih aman"></textarea>
+                    <textarea class="form-control" id="ckeditor" name="pesan_singkat" placeholder="Pak, minta tolong dibuat lebih aman"></textarea>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary" type="submit">SUBMIT</button>
+            <button class="btn btn-primary" type="submit">PESAN SEKARANG</button>
         </div>
     </form>
 </section>
