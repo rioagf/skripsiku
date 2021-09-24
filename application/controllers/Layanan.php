@@ -117,6 +117,7 @@ class Layanan extends CI_Controller
 		} else {
 			$data = array(
 				'title' => 'Pesan Layanan',
+				'jenis_layanan' => ucwords(str_replace('-', ' ', $slug)),
 				'content' => 'temp_user/pesan_layanan',
 				'id_produk' => $layanan->id_produk,
 				'nama_lengkap' => $datauser->nama_depan . ' ' . $datauser->nama_belakang,
@@ -125,7 +126,7 @@ class Layanan extends CI_Controller
 				'jurusan' => $datauser->jurusan,
 				'npm_nim' => $datauser->npm_nim,
 			);
-			$this->load->view('temp_user/content');
+			$this->load->view('temp_user/content', $data);
 		}
 	}
 
@@ -134,66 +135,84 @@ class Layanan extends CI_Controller
 		$config['upload_path']          = './upload/file/';
 		$config['allowed_types']        = 'pdf';
 		$config['max_size']             = 500000;
-		$config['max_width']            = 1960;
-		$config['max_height']           = 1080;
 
 
 		$this->load->library('upload', $config);
-		if (isset($_POST) && count($_POST) > 0) {
-			$upload_data = $this->upload->data();
-			$page = array(
-				'title' => 'Proses Pesan Layanan',
-				'content' => 'temp_user/upload_layanan_sukses',
-			);
-
-			if ($this->upload->do_upload('pedomanskripsi')) {
-				$datapedoman = $this->upload->data();
-			}
-
-			if ($this->upload->do_upload('datapenelitian')) {
-				$datapenelitian = $this->upload->data();
-			}
-			
-			if ($this->upload->do_upload('skripsiacc')) {
-				$skripsiacc = $this->upload->data();
-			}
-			
-			if ($this->upload->do_upload('proposalskripsi')) {
-				$proposalskripsi = $this->upload->data();
-			}
-			
-			if ($this->upload->do_upload('dokumen')) {
-				$dokumen = $this->upload->data();
-			}
-			
-			$data = array(
-				'id_user' => $this->input->post('id_user'),
-				'id_produk' => $this->input->post('id_produk'),
-				'nama_lengkap' => $this->input->post('nama'),
-				'universitas' => $this->input->post('univ'),
-				'fakultas' => $this->input->post('fakultas'),
-				'jurusan' => $this->input->post('jurusan'),
-				'npm' => $this->input->post('npm'),
-				'judul_proposal' => $this->input->post('judulproposal'),
-				'nama_dospemsatu' => $this->input->post('dospemsatu'),
-				'nama_dospemdua' => $this->input->post('dospemdua'),
-				
-				'file_pedomanskripsi' => '/upload/file/'.$datapedoman['file_name'],
-				'file_datapenelitian' => '/upload/file/'.$datapenelitian['file_name'],
-				'file_skripsiacc' => '/upload/file/'.$skripsiacc['file_name'],
-				'file_proposalskripsi' => '/upload/file/'.$proposalskripsi['file_name'],
-				'dokumen' => '/upload/file/'.$dokumen['file_name'],
-
-				'aplikasi_pengolahdata' => $this->input->post('pengolahdata'),
-				'penurunan_plagiarisme' => $this->input->post('penurunan_plagiarisme'),
-				'date_created' => date('y-m-d'),
-				'date_updated' => date('y-m-d'),
-				'status' => 'Baru',
-				'progress' => $this->input->post('progress'),
-			);
-
-			$this->M_layanan->add_layanan($data);
-			$this->load->view('temp_user/content', $page);
+		if ($this->upload->do_upload('pedomanskripsi')) {
+			$datapedoman = $this->upload->data();
+			$datapedoman_path = '/upload/file/'.$datapedoman['file_name'];
+		} else {
+			$datapedoman_path = '';
 		}
+
+		if ($this->upload->do_upload('datapenelitian')) {
+			$datapenelitian = $this->upload->data();
+			$datapenelitian_path = '/upload/file/'.$datapenelitian['file_name'];
+		} else {
+			$datapenelitian_path = '';
+		}
+
+
+		if ($this->upload->do_upload('skripsiacc')) {
+			$skripsiacc = $this->upload->data();
+			$skripsiacc_path = '/upload/file/'.$skripsiacc['file_name'];
+		} else {
+			$skripsiacc_path = '';
+		}
+
+
+		if ($this->upload->do_upload('proposalskripsi')) {
+			$proposalskripsi = $this->upload->data();
+			$proposalskripsi_path = '/upload/file/'.$proposalskripsi['file_name'];
+		} else {
+			$proposalskripsi_path = '';
+		}
+
+
+		if ($this->upload->do_upload('dokumen')) {
+			$dokumen = $this->upload->data();
+			$dokumen_path = '/upload/file/'.$dokumen['file_name'];
+		} else {
+			$dokumen_path = '';
+		}
+
+
+		if ($this->upload->do_upload('dokumen_pharaphase')) {
+			$dokumen_pharaphase = $this->upload->data();
+			$dokumen_pharaphase_path = '/upload/file/'.$dokumen['file_name'];
+		} else {
+			$dokumen_pharaphase_path = '';
+		}
+
+
+		$data = array(
+			'id_user' => $this->input->post('id_user'),
+			'id_produk' => $this->input->post('id_produk'),
+			'nama_lengkap' => $this->input->post('nama'),
+			'universitas' => $this->input->post('univ'),
+			'fakultas' => $this->input->post('fakultas'),
+			'jurusan' => $this->input->post('jurusan'),
+			'npm' => $this->input->post('npm'),
+			'judul_proposal' => $this->input->post('judulproposal'),
+			'nama_dospemsatu' => $this->input->post('dospemsatu'),
+			'nama_dospemdua' => $this->input->post('dospemdua'),
+
+			'file_pedomanskripsi' => $datapedoman_path,
+			'file_datapenelitian' => $datapenelitian_path,
+			'file_skripsiacc' => $skripsiacc_path,
+			'file_proposalskripsi' => $proposalskripsi_path,
+			'dokumen' => $dokumen_path,
+			'file_pharaphase' => $dokumen_pharaphase_path,
+
+			'aplikasi_pengolahdata' => $this->input->post('pengolahdata'),
+			'penurunan_plagiarisme' => $this->input->post('penurunan_plagiarisme'),
+			'date_created' => date('y-m-d'),
+			'date_updated' => date('y-m-d'),
+			'status' => 'Baru',
+			'progress' => $this->input->post('progress'),
+		);
+
+		$this->M_layanan->add_layanan($data);
+		redirect(base_url('userarea/berkas_keluar/'.$this->session->userdata('username')));
 	}
 }

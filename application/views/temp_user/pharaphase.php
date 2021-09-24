@@ -1,5 +1,5 @@
 <section class="d-lg-flex justify-content-lg-center contact-clean" style="padding: 50px 0px;">
-    <form method="post" action="<?= base_url('layanan/proses_pesan_layanan/') ?>" style="margin: 25px;max-width: none;padding-right: 30px;padding-left: 30px;margin-right: 15px;margin-left: 15px;">
+    <form method="post" action="<?= base_url('layanan/proses_pesan_layanan/') ?>" style="margin: 25px;max-width: none;padding-right: 30px;padding-left: 30px;margin-right: 15px;margin-left: 15px;" enctype="multipart/form-data">
         <h2 class="text-center">Pharaphase</h2>
         <input type="hidden" name="id_produk" value="<?= $id_produk ?>">
         <input type="hidden" name="id_user" value="<?= $this->session->userdata('id_user'); ?>">
@@ -29,11 +29,11 @@
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label>Upload Dokumen</label>
-                    <input class="border rounded-0 form-control-file" type="file" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;border-width: 2px;" name="dokumen_pharaphase">
+                    <input class="border rounded-0 form-control-file" type="file" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;border-width: 2px;" name="dokumen_pharaphase" accept="application/pdf">
                 </div>
                 <div class="form-group">
                     <label>Berapa Persen Penurunan</label>
-                    <select name="persentase" class="form-control">
+                    <select name="penurunan_plagiarisme" class="form-control">
                         <option value="0" disabled selected>Pilih Persentase</option>
                         <option value="10%">10%</option>
                         <option value="20%">20%</option>

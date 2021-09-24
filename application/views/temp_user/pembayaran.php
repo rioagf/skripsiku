@@ -54,7 +54,7 @@ $user = $this->db->get('users')->row();
     <div class="container">
         <?php
         if (!empty($pembayaran)) {
-            foreach ($pembayaran as $data_bayar):
+            foreach ($pembayaran as $data_bayar) {
                 $timestamp = strtotime($data_bayar->date_created);
                 $day = date('l', $timestamp);
                 switch ($day) {
@@ -97,15 +97,63 @@ $user = $this->db->get('users')->row();
                     <div class="col-4">
                         <div class="row d-flex d-lg-flex align-items-center align-items-lg-center">
                             <div class="col-6">
-                                <button class="btn btn-success btn-block" type="button" style="padding: 2px 5px;">Lihat</button>
+                                <button href="#" class="btn btn-success btn-block" type="button" data-toggle="modal" data-target="#ModalDetail-<?= $data_bayar->id_pembayaran ?>" style="padding: 2px 5px;">Lihat</button>
                             </div>
                             <div class="col">
-                                <button class="btn btn-primary btn-block" type="button" style="padding: 2px 5px;">Download</button>
+                                <a href="<?= base_url($data_bayar->bukti_transfer) ?>" class="btn btn-primary btn-block" target="_blank" download="Bukti Pembayaran-<?= $data_bayar->nama_lengkap.'-'.$data_bayar->perihal.'-'.date('d F y', strtotime($data_bayar->date_created)) ?>" type="button" style="padding: 2px 5px;">Download</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            <?php endforeach 
+                <div class="modal fade" id="ModalDetail-<?= $data_bayar->id_pembayaran ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel ?>" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Detail Pembayaran</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="functions/proses-booking" method="post">
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            <h5>Informasi Pembayaran</h5>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Nama Lengkap</label>
+                                                <input type="text" value="<?= $data_bayar->nama_lengkap ?>" disabled class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Perihal</label>
+                                                <input type="text" value="<?= $data_bayar->perihal ?>" disabled class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Jumlah Transfer</label>
+                                                <input type="text" value="<?= $data_bayar->jumlah_transfer ?>" disabled class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Bukti Pembayaran</label>
+                                                <img src="<?= base_url($data_bayar->bukti_transfer) ?>" width="100%">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <button type="submit" data-dismiss="modal" aria-label="Close" class="btn btn-primary close">Tutup</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php }
 
         } else {
             echo "<h3>Mohon Maaf Belum ada Pembayaran</h3>";

@@ -1,5 +1,5 @@
 <section class="d-lg-flex justify-content-lg-center contact-clean" style="padding: 50px 0px;">
-    <form method="post" action="<?= base_url('layanan/proses_pesan_layanan/') ?>" style="margin: 25px;max-width: none;padding-right: 30px;padding-left: 30px;margin-right: 15px;margin-left: 15px;">
+    <form method="post" action="<?= base_url('layanan/proses_pesan_layanan/') ?>" style="margin: 25px;max-width: none;padding-right: 30px;padding-left: 30px;margin-right: 15px;margin-left: 15px;" enctype="multipart/form-data">
         <h2 class="text-center">Cek Plagiarisme</h2>
         <input type="hidden" name="id_produk" value="<?= $id_produk ?>">
         <input type="hidden" name="id_user" value="<?= $this->session->userdata('id_user'); ?>">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label>Upload Dokumen</label>
-                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="dokumen">
+                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="dokumen" accept="application/pdf">
                 </div>
                 <div class="form-group">
                     <label>Pesan Singkat</label>

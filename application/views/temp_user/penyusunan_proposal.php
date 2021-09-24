@@ -1,5 +1,5 @@
 <section class="d-lg-flex justify-content-lg-center contact-clean" style="padding: 50px 0px;">
-    <form method="post" action="<?= base_url('layanan/proses_pesan_layanan/') ?>" style="margin: 25px;max-width: none;padding-right: 30px;padding-left: 30px;margin-right: 15px;margin-left: 15px;">
+    <form method="post" action="<?= base_url('layanan/proses_pesan_layanan/') ?>" style="margin: 25px;max-width: none;padding-right: 30px;padding-left: 30px;margin-right: 15px;margin-left: 15px;" enctype="multipart/form-data">
         <h2 class="text-center">Penyusunan Proposal</h2>
         <input type="hidden" name="id_produk" value="<?= $id_produk ?>">
         <input type="hidden" name="id_user" value="<?= $this->session->userdata('id_user'); ?>">
@@ -41,15 +41,15 @@
                 </div>
                 <div class="form-group">
                     <label>Upload Pedoman Skripsi</label>
-                    <input class="border rounded-0 form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;border-width: 2px;" name="pedomanskripsi">
+                    <input class="border rounded-0 form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;border-width: 2px;" name="pedomanskripsi" accept="application/pdf">
                 </div>
                 <div class="form-group">
                     <label>Upload Data Penelitian</label>
-                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="datapenelitian">
+                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="datapenelitian" accept="application/pdf">
                 </div>
                 <div class="form-group">
                     <label>Upload Skripsi ACC</label>
-                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="skripsiacc">
+                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="skripsiacc" accept="application/pdf">
                 </div>
             </div>
         </div>

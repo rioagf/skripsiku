@@ -34,4 +34,11 @@ class M_userarea extends CI_Model{
 		return $this->db->get('pembayaran')->result();
 	}
 
+	function get_berkas_keluar($username)
+	{
+		$id_user = $this->session->userdata('id_user');
+		$this->db->where('id_user', $id_user);
+		return $this->db->get('berkas_keluar')->result();
+	}
+
 }
