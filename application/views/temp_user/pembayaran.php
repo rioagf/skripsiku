@@ -144,7 +144,7 @@ $user = $this->db->get('users')->row();
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
-                                        <button data-dismiss="modal" aria-label="Close" class="btn btn-primary close">Tutup</button>
+                                        <button data-dismiss="modal" aria-label="Close" class="btn btn-primary">Tutup</button>
                                     </div>
                                 </div>
                             </div>

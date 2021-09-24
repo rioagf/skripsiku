@@ -142,6 +142,7 @@ class Userarea extends CI_Controller {
 	public function berkas_masuk($username)
 	{
 		$profile = $this->M_userarea->data_profile__user()->row();
+		$berkas_masuk = $this->M_userarea->get_berkas_masuk($this->session->userdata('username'));
 		if ($username != $this->session->userdata('username')) {
 			redirect(base_url('userarea/profile'));
 		} else {
@@ -149,6 +150,7 @@ class Userarea extends CI_Controller {
 				'title' => 'Berkas Masuk'.$profile->nama_depan.' '.$profile->nama_belakang.' - Skripsiku',
 				'content' => 'temp_user/berkas_masuk',
 				'profile' => $profile,
+				'berkas_masuk' => $berkas_masuk,
 			);
 			$this->load->view('temp_user/content', $data);
 		}

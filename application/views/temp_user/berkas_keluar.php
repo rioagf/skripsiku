@@ -89,42 +89,29 @@
                     <div class="modal-dialog modal-md">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Detail Pembayaran</h5>
+                                <h5 class="modal-title">Catatan File <?= str_replace('/upload/file/', '',$databerkas_keluar->dokumen) ?></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-12 mb-3">
-                                        <h5>Informasi Pembayaran</h5>
-                                    </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>Nama Lengkap</label>
-                                            <input type="text" value="" disabled class="form-control">
+                                            <label style="font-weight: 600">Catatan</label>
+                                            <div>
+                                                <?php if (!empty($databerkas_keluar->catatan)): ?>    
+                                                    <?= $databerkas_keluar->catatan ?>
+                                                <?php else: ?>
+                                                    Berkas tidak memiliki catatan khusus
+                                                <?php endif ?>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>Perihal</label>
-                                            <input type="text" value="" disabled class="form-control">
+                                            <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary btn-sm">Tutup</button>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>Jumlah Transfer</label>
-                                            <input type="text" value="" disabled class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>Bukti Pembayaran</label>
-                                            <img src="" width="100%">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary close">Tutup</button>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +120,7 @@
                 </div>
             <?php }
         } else {
-            echo "<h3>Mohon Maaf Belum ada Pembayaran</h3>";
+            echo "Mohon Maaf, anda belum mengirim berkas";
         }?>
     </div>
 </section>

@@ -37,7 +37,14 @@ class M_userarea extends CI_Model{
 	function get_berkas_keluar($username)
 	{
 		$id_user = $this->session->userdata('id_user');
-		$this->db->where('id_user', $id_user);
+		$this->db->where(array('id_user' => $id_user, 'status_dokumen' => 'Dokumen Keluar Pemesan'));
+		return $this->db->get('berkas_keluar')->result();
+	}
+
+	function get_berkas_masuk($username)
+	{
+		$id_user = $this->session->userdata('id_user');
+		$this->db->where(array('id_user' => $id_user, 'status_dokumen' => 'Dokumen Masuk Pemesan'));
 		return $this->db->get('berkas_keluar')->result();
 	}
 
