@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label>Progress Pengerjaan</label>
-                    <textarea class="form-control" name="progress_pengerjaan" placeholder="Tulis progress anda disini"></textarea>
+                    <textarea class="form-control" id="ckeditor" name="progress_pengerjaan" placeholder="Tulis progress anda disini"></textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary" type="button">Kirim</button>
@@ -76,8 +76,58 @@
                     </div>
                     <div class="col-4">
                         <div class="row d-flex d-lg-flex align-items-center align-items-lg-center">
-                            <div class="col-6"><button class="btn btn-success btn-block" type="button" style="padding: 2px 5px;">Catatan</button></div>
-                            <div class="col"><button class="btn btn-primary btn-block" type="button" style="padding: 2px 5px;">Download</button></div>
+                            <div class="col-6">
+                                <button href="#" class="btn btn-success btn-block" type="button" data-toggle="modal" data-target="#ModalCatatan-<?= $databerkas_keluar->id_berkas ?>" style="padding: 2px 5px;">Catatan</button>
+                            </div>
+                            <div class="col">
+                                <a href="<?= base_url($databerkas_keluar->dokumen) ?>" download="<?= str_replace('/upload/file/', '',$databerkas_keluar->dokumen) ?>" class="btn btn-primary btn-block" type="button" style="padding: 2px 5px;">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="ModalCatatan-<?= $databerkas_keluar->id_berkas ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel ?>" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Detail Pembayaran</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <h5>Informasi Pembayaran</h5>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Nama Lengkap</label>
+                                            <input type="text" value="" disabled class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Perihal</label>
+                                            <input type="text" value="" disabled class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Jumlah Transfer</label>
+                                            <input type="text" value="" disabled class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Bukti Pembayaran</label>
+                                            <img src="" width="100%">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary close">Tutup</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

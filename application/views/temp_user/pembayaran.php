@@ -115,40 +115,38 @@ $user = $this->db->get('users')->row();
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="functions/proses-booking" method="post">
-                                    <div class="row">
-                                        <div class="col-12 mb-3">
-                                            <h5>Informasi Pembayaran</h5>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>Nama Lengkap</label>
-                                                <input type="text" value="<?= $data_bayar->nama_lengkap ?>" disabled class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>Perihal</label>
-                                                <input type="text" value="<?= $data_bayar->perihal ?>" disabled class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>Jumlah Transfer</label>
-                                                <input type="text" value="<?= $data_bayar->jumlah_transfer ?>" disabled class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>Bukti Pembayaran</label>
-                                                <img src="<?= base_url($data_bayar->bukti_transfer) ?>" width="100%">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <button type="submit" data-dismiss="modal" aria-label="Close" class="btn btn-primary close">Tutup</button>
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <h5>Informasi Pembayaran</h5>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Nama Lengkap</label>
+                                            <input type="text" value="<?= $data_bayar->nama_lengkap ?>" disabled class="form-control">
                                         </div>
                                     </div>
-                                </form>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Perihal</label>
+                                            <input type="text" value="<?= $data_bayar->perihal ?>" disabled class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Jumlah Transfer</label>
+                                            <input type="text" value="<?= $data_bayar->jumlah_transfer ?>" disabled class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Bukti Pembayaran</label>
+                                            <img src="<?= base_url($data_bayar->bukti_transfer) ?>" width="100%">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <button data-dismiss="modal" aria-label="Close" class="btn btn-primary close">Tutup</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

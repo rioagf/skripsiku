@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label>Pesan</label>
-                    <textarea class="form-control" name="pesan" placeholder="Contoh: Judulnya : Sistem Informasi Kependudukan, ingin dibuat jadi lebih baik"></textarea>
+                    <textarea class="form-control" name="pesan" id="ckeditor" placeholder="Contoh: Judulnya : Sistem Informasi Kependudukan, ingin dibuat jadi lebih baik"></textarea>
                 </div>
             </div>
         </div>

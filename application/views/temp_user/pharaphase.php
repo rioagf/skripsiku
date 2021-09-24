@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group">
                     <label>Pesan</label>
-                    <textarea class="form-control" name="pesan" placeholder="Contoh: Saya ingin dioptimalkan dibagian pharaphase"></textarea>
+                    <textarea class="form-control" name="pesan" placeholder="Contoh: Saya ingin dioptimalkan dibagian pharaphase" id="ckeditor"></textarea>
                 </div>
             </div>
         </div>
