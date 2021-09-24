@@ -1,11 +1,19 @@
+<?php
+    $this->db->select('pemesanan.*, produk.id_produk, produk.nama_produk, berkas_keluar.*');
+    $this->db->join('berkas_keluar', 'berkas_keluar.id_pemesanan = pemesanan.id_pemesanan');
+    $this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+    $this->db->where('pemesanan.id_user', $this->session->userdata('id_user'));
+    $this->db->group_by('pemesanan.id_pemesanan');
+    $data_pesanan = $this->db->get('pemesanan')->result();
+?>
 <section class="contact-clean" style="padding: 50px 0px;" >
     <h2 class="text-center">Berkas Keluar</h2>
     <div class="row">
         <div class="col-12">
-            <form style="max-width: none;">
+            <form style="max-width: none;" action="<?= base_url('') ?>" enctype="multipart/form-data" method="post">
                 <div class="form-group">
                     <label>Nama Lengkap</label>
-                    <input class="form-control" type="text" name="nama_lengka" placeholder="Rani Rahmawati" value="<?= $profile->nama_depan.' '.$profile->nama_belakang; ?>">
+                    <input class="form-control" type="text" name="nama_lengkap" placeholder="Rani Rahmawati" value="<?= $profile->nama_depan.' '.$profile->nama_belakang; ?>">
                 </div>
                 <div class="form-group">
                     <label>Perihal</label>
@@ -17,8 +25,18 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Untuk Pesanan</label>
+                    <select class="form-control">
+                        <optgroup label="Pilih Salah Satu">
+                            <?php foreach ($data_pesanan as $pesanan): ?>
+                            <option value="<?= $pesanan->id_pemesanan ?>" selected=""><?= $pesanan->nama_produk.' - '.date("d F Y", strtotime($pesanan->date_created)) ?></option>
+                            <?php endforeach ?>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Upload File</label>
-                    <input class="form-control-file" type="file" name="file" style="border-radius: 2px;border: 1px solid rgb(210,210,210);box-shadow: 0px 0px 0px 0px;padding: 3px 10px;">
+                    <input class="form-control-file" type="file" name="dokumen" style="border-radius: 2px;border: 1px solid rgb(210,210,210);box-shadow: 0px 0px 0px 0px;padding: 3px 10px;">
                 </div>
                 <div class="form-group">
                     <label>Progress Pengerjaan</label>
@@ -68,7 +86,7 @@
                 }
                 ?>
                 <div class="row d-flex d-lg-flex align-items-center align-items-lg-center">
-                    <div class="col-md-12"><strong><?= $day.', '.date("d F y", strtotime($databerkas_keluar->date_created)) ?></strong></div>
+                    <div class="col-md-12"><strong><?= $day.', '.date("d F Y", strtotime($databerkas_keluar->date_created)) ?></strong></div>
                 </div>
                 <div class="row d-lg-flex" style="background: #ffffff;padding: 10px 0px;">
                     <div class="col-8">
