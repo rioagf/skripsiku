@@ -255,4 +255,15 @@ class Userarea extends CI_Controller {
 			redirect(base_url('userarea/pembayaran/'.$this->session->userdata('username')));
 		}
 	}
+
+	public function progress($username)
+	{
+		$progress = $this->M_userarea->progress_pesanan($username);
+		$data = array(
+			'title' => 'Progress Pesanan - Skripsiku',
+			'content' => 'temp_user/progress',
+			'progress' => $progress,
+		);
+		$this->load->view('temp_user/content', $data);
+	}
 }

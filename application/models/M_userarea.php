@@ -48,4 +48,11 @@ class M_userarea extends CI_Model{
 		return $this->db->get('berkas_keluar')->result();
 	}
 
+	function progress_pesanan($username)
+	{
+		$id_user = $this->session->userdata('id_user');
+		$this->db->where(array('id_user' => $id_user, 'status_dokumen' => 'Dokumen Masuk Pemesan'));
+		return $this->db->get('berkas_keluar')->result();
+	}
+
 }
