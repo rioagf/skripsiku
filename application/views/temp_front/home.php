@@ -1,3 +1,7 @@
+<?php
+$this->db->where('id_setting', '1');
+$setting = $this->db->get('setting')->row();
+?>
 <div class="simple-slider" style="height: 650px;">
     <div class="swiper-container" style="height: 650px;">
         <div class="swiper-wrapper" style="height: 650px;">
@@ -13,8 +17,8 @@
 <section class="features-boxed">
     <div class="container">
         <div class="intro">
-            <h2 class="text-center">Layanan Kami</h2>
-            <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae.</p>
+            <h2 class="text-center"><?= $setting->judulsection_layanan ?></h2>
+            <p class="text-center"><?= $setting->desk_layanan ?></p>
         </div>
         <div class="row justify-content-center features">
             <div class="col-sm-6 col-md-5 col-lg-4 item">
@@ -47,8 +51,8 @@
 <section class="photo-gallery">
     <div class="container">
         <div class="intro">
-            <h2 class="text-center">Moment Bersama Kami</h2>
-            <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
+            <h2 class="text-center"><?= $setting->judulsection_testimonial ?></h2>
+            <p class="text-center"><?= $setting->desk_testimoni ?></p>
         </div>
         <div class="row photos">
             <?php foreach ($gallery as $data) { ?>

@@ -1,8 +1,12 @@
+<?php
+$this->db->where('id_setting', '1');
+$setting = $this->db->get('setting')->row();
+?>
 <section class="features-boxed">
     <div class="container" style="padding-top: 65px;padding-bottom: 65px;">
         <div class="intro">
-            <h2 class="text-center">Laporan Keuangan Tahunan</h2>
-            <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae.</p>
+            <h2 class="text-center"><?= $setting->judulsection_laporankeuangan ?></h2>
+            <p class="text-center"><?= $setting->desk_laporankeuangan ?></p>
         </div>
         <div class="row justify-content-center features">
             <div class="col-sm-6 col-md-5 col-lg-4 item">
