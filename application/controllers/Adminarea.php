@@ -836,4 +836,85 @@ class Adminarea extends CI_Controller
 		);
 		$this->load->view('temp_admin/content', $data);
 	}
+
+	public function setting()
+	{
+		$setting = $this->M_layanan->get_setting()->row();
+		$data = array(
+			'title' => 'Setting Site - Skripsiku',
+			'content' => 'temp_admin/setting',
+			'id_setting' => $setting->id_setting,
+			'judulsection_layanan' => $setting->judulsection_layanan,
+			'desk_layanan' => $setting->desk_layanan,
+			'judulsection_testimonial' => $setting->judulsection_testimonial,
+			'desk_testimoni' => $setting->desk_testimoni,
+			'gambar_profile' => $setting->gambar_profile,
+			'desk_profile' => $setting->desk_profile,
+			'visi' => $setting->visi,
+			'misi' => $setting->misi,
+			'judulsection_laporankeuangan' => $setting->judulsection_laporankeuangan,
+			'desk_laporankeuangan' => $setting->desk_laporankeuangan,
+			'judulsection_karir' => $setting->judulsection_karir,
+			'desk_karir' => $setting->desk_karir,
+			'judulsection_artikel' => $setting->judulsection_artikel,
+			'desk_artikel' => $setting->desk_artikel,
+		);
+		$this->load->view('temp_admin/content', $data);
+	}
+
+	function proses_setting()
+	{
+		$config['upload_path']          = './assets/img/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']             = 5000;
+		$config['max_width']            = 1960;
+		$config['max_height']           = 1080;
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('gambar_profile')){
+			$data = array(
+				'judulsection_layanan' => $this->input->post('judulsection_layanan'),
+				'desk_layanan' => $this->input->post('desk_layanan'),
+				'judulsection_testimonial' => $this->input->post('judulsection_testimonial'),
+				'desk_testimoni' => $this->input->post('desk_testimoni'),
+				'gambar_profile' => $this->input->post('gambar_profile_lama'),
+				'desk_profile' => $this->input->post('desk_profile'),
+				'visi' => $this->input->post('visi'),
+				'misi' => $this->input->post('misi'),
+				'judulsection_laporankeuangan' => $this->input->post('judulsection_laporankeuangan'),
+				'desk_laporankeuangan' => $this->input->post('desk_laporankeuangan'),
+				'judulsection_karir' => $this->input->post('judulsection_karir'),
+				'desk_karir' => $this->input->post('desk_karir'),
+				'judulsection_artikel' => $this->input->post('judulsection_artikel'),
+				'desk_artikel' => $this->input->post('desk_artikel'),
+				'date_updated' => date('Y-m-d'),
+			);
+			$this->M_layanan->update_setting($data, $this->input->post('id_setting'));
+			$this->session->set_flashdata('success', 'Berhasil mengupdate setting');
+			redirect(base_url('adminarea/setting'));
+		} else {
+			$upload_data = $this->upload->data();
+			$data = array(
+				'judulsection_layanan' => $this->input->post('judulsection_layanan'),
+				'desk_layanan' => $this->input->post('desk_layanan'),
+				'judulsection_testimonial' => $this->input->post('judulsection_testimonial'),
+				'desk_testimoni' => $this->input->post('desk_testimoni'),
+				'gambar_profile' => '/assets/img/'.$upload_data['file_name'],
+				'desk_profile' => $this->input->post('desk_profile'),
+				'visi' => $this->input->post('visi'),
+				'misi' => $this->input->post('misi'),
+				'judulsection_laporankeuangan' => $this->input->post('judulsection_laporankeuangan'),
+				'desk_laporankeuangan' => $this->input->post('desk_laporankeuangan'),
+				'judulsection_karir' => $this->input->post('judulsection_karir'),
+				'desk_karir' => $this->input->post('desk_karir'),
+				'judulsection_artikel' => $$this->input->post('judulsection_artikel'),
+				'desk_artikel' => $this->input->post('desk_artikel'),
+				'date_updated' => date('Y-m-d'),
+			);
+			$this->M_layanan->update_setting($data, $this->input->post('id_setting'));
+			$this->session->set_flashdata('success', 'Berhasil mengupdate setting');
+			redirect(base_url('adminarea/setting'));
+		}
+	}
 }

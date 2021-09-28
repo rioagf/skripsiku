@@ -65,6 +65,14 @@
 <script src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
 <script type="text/javascript">
     CKEDITOR.replace('ckeditor');
+    CKEDITOR.replace('desk_layanan');
+    CKEDITOR.replace('desk_testimoni');
+    CKEDITOR.replace('desk_profile');
+    CKEDITOR.replace('visi');
+    CKEDITOR.replace('misi');
+    CKEDITOR.replace('desk_laporankeuangan');
+    CKEDITOR.replace('desk_karir');
+    CKEDITOR.replace('desk_artikel');
 </script>
 
 </body>

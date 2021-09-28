@@ -155,4 +155,17 @@ class M_layanan extends CI_Model{
 	{
 		return $this->db->get('pembayaran');
 	}
+
+	function get_setting()
+	{
+		$this->db->where('id_setting', '1');
+		return $this->db->get('setting');
+	}
+
+	function update_setting($data, $id)
+	{
+		$this->db->where('id_setting', $id);
+		$this->db->update('setting', $data);
+	}
+
 }

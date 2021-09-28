@@ -141,6 +141,22 @@
         </div>
     </li>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Site Setting
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item <?php if ($this->uri->segment('2') == 'setting'){echo 'active';} ?>">
+        <a class="nav-link" href="<?= base_url('adminarea/setting') ?>">
+            <i class="fas fa-fw fa-sliders-h"></i>
+            <span>Setting</span>
+        </a>
+    </li>
+
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
