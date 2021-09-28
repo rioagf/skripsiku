@@ -10,14 +10,14 @@
     <h2 class="text-center">Berkas Keluar</h2>
     <div class="row">
         <div class="col-12">
-            <form style="max-width: none;" action="<?= base_url('') ?>" enctype="multipart/form-data" method="post">
+            <form style="max-width: none;" action="<?= base_url('userarea/kirim_berkas_keluar/'.$this->session->userdata('username')) ?>" enctype="multipart/form-data" method="post">
                 <div class="form-group">
                     <label>Nama Lengkap</label>
                     <input class="form-control" type="text" name="nama_lengkap" placeholder="Rani Rahmawati" value="<?= $profile->nama_depan.' '.$profile->nama_belakang; ?>">
                 </div>
                 <div class="form-group">
                     <label>Perihal</label>
-                    <select class="form-control">
+                    <select class="form-control" name="perihal">
                         <optgroup label="Pilih Salah Satu">
                             <option value="Revisi" selected="">Revisi</option>
                             <option value="Pengiriman Berkas">Pengiriman Berkas</option>
@@ -26,10 +26,10 @@
                 </div>
                 <div class="form-group">
                     <label>Untuk Pesanan</label>
-                    <select class="form-control">
+                    <select class="form-control" name="id_pemesanan">
                         <optgroup label="Pilih Salah Satu">
                             <?php foreach ($data_pesanan as $pesanan): ?>
-                            <option value="<?= $pesanan->id_pemesanan ?>" selected=""><?= $pesanan->nama_produk.' - '.date("d F Y", strtotime($pesanan->date_created)) ?></option>
+                            <option value="<?= $pesanan->id_pemesanan ?>"><?= $pesanan->nama_produk.' - '.date("d F Y", strtotime($pesanan->date_created)) ?></option>
                             <?php endforeach ?>
                         </optgroup>
                     </select>
@@ -40,10 +40,10 @@
                 </div>
                 <div class="form-group">
                     <label>Progress Pengerjaan</label>
-                    <textarea class="form-control" id="ckeditor" name="progress_pengerjaan" placeholder="Tulis progress anda disini"></textarea>
+                    <textarea class="form-control" id="ckeditor" name="catatan" placeholder="Tulis progress anda disini"></textarea>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary" type="button">Kirim</button>
+                    <button class="btn btn-primary" type="submit">Kirim</button>
                 </div>
             </form>
         </div>

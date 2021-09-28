@@ -57,4 +57,9 @@ class M_userarea extends CI_Model{
 		return $this->db->get('pemesanan')->result();
 	}
 
+	function kirim_berkas($data)
+	{
+		$this->db->insert('berkas_keluar', $data);
+	}
+
 }

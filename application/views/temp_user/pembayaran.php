@@ -40,7 +40,7 @@ $user = $this->db->get('users')->row();
                 </div>
                 <div class="form-group">
                     <label>Upload Bukti Transfer</label>
-                    <input class="form-control-file" type="file" name="bukti_transfer" style="border-radius: 2px;border: 1px solid rgb(210,210,210);box-shadow: 0px 0px 0px 0px;padding: 3px 10px;">
+                    <input class="form-control-file" type="file" name="bukti_transfer" accept="image/gif, image/jpeg, image/png" style="border-radius: 2px;border: 1px solid rgb(210,210,210);box-shadow: 0px 0px 0px 0px;padding: 3px 10px;">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit">Lakukan Pembayaran</button>

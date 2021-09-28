@@ -150,4 +150,9 @@ class M_layanan extends CI_Model{
 	{
 		$this->db->insert('berkas_keluar', $data);
 	}
+
+	function get_pembayaran()
+	{
+		return $this->db->get('pembayaran');
+	}
 }

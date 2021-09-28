@@ -825,4 +825,15 @@ class Adminarea extends CI_Controller
 			redirect(base_url('adminarea/berkas_keluar'));
 		}
 	}
+
+	public function pembayaran()
+	{
+		$pembayaran = $this->M_layanan->get_pembayaran()->result();
+		$data = array(
+			'title' => 'Pembayaran - Skripsiku',
+			'content' => 'temp_admin/pembayaran',
+			'pembayaran' => $pembayaran,
+		);
+		$this->load->view('temp_admin/content', $data);
+	}
 }
