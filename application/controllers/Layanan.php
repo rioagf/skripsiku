@@ -179,7 +179,7 @@ class Layanan extends CI_Controller
 
 		if ($this->upload->do_upload('dokumen_pharaphase')) {
 			$dokumen_pharaphase = $this->upload->data();
-			$dokumen_pharaphase_path = '/upload/file/'.$dokumen['file_name'];
+			$dokumen_pharaphase_path = '/upload/file/'.$dokumen_pharaphase['file_name'];
 		} else {
 			$dokumen_pharaphase_path = '';
 		}

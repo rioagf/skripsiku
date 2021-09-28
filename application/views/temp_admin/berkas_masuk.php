@@ -3,7 +3,7 @@
 
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
-		<h1 class="h3 mb-0 text-gray-800">Daftar Pesanan</h1>
+		<h1 class="h3 mb-0 text-gray-800">Berkas Masuk</h1>
 	</div>
 
 	<?php if ($this->session->flashdata('success')): ?>
@@ -23,7 +23,7 @@
 		<div class="col-12">
 			<div class="card shadow">
 				<div class="card-header">
-					<h6 class="m-0 font-weight-bold text-primary">Daftar Pesanan</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Daftar Berkas Masuk</h6>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -31,25 +31,28 @@
 							<thead>
 								<tr>
 									<th>NO</th>
+									<th>BERKAS</th>
+									<th>ID PEMESANAN</th>
 									<th>JENIS PESANAN</th>
 									<th>NAMA PEMESAN</th>
 									<th>NPM</th>
-									<th>TANGGAL PESANAN</th>
+									<th>TANGGAL MASUK BERKAS</th>
 									<th>ACTION</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php $no=1; ?>
-								<?php foreach ($pesanan as $data) { ?>
+								<?php foreach ($berkas_masuk as $data) { ?>
 									<tr>
 										<td><?= $no++ ?></td>
+										<td><?= str_replace('/upload/file/', '',$data->dokumen) ?></td>
+										<td><?= $data->id_pemesanan ?></td>
 										<td><?= $data->nama_produk ?></td>
 										<td><?= $data->nama_lengkap ?></td>
 										<td><?= $data->npm ?></td>
 										<td><?= date('d F Y', strtotime($data->date_created)) ?></td>
 										<td>
-											<a href="<?= base_url('adminarea/detail_pemesanan/'.$data->id_pemesanan) ?>" class="btn btn-sm btn-primary"><i class="fa fa-book"></i></a>
-											<a href="<?= base_url('adminarea/delete_pemesanan/'.$data->id_pemesanan) ?>" onclick="return confirm('Anda yakin untuk menghapus pesanan ?')"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+											<a href="<?= base_url($data->dokumen) ?>" class="btn btn-sm btn-primary" download="<?= str_replace('/upload/file/', '',$data->dokumen) ?>"><i class="fa fa-download"></i> Download</a>
 										</td>
 									</tr>
 								<?php } ?>

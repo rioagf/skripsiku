@@ -43,8 +43,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Jenis Berkas:</h6>
-                <a class="collapse-item <?php if ($this->uri->segment('2') == 'berkas_masuk'){echo 'active';} ?>" href="#">Berkas Masuk</a>
-                <a class="collapse-item <?php if ($this->uri->segment('2') == 'berkas_keluar'){echo 'active';} ?>" href="#">Berkas Keluar</a>
+                <a class="collapse-item <?php if ($this->uri->segment('2') == 'berkas_masuk'){echo 'active';} ?>" href="<?= base_url('adminarea/berkas_masuk') ?>">Berkas Masuk</a>
+                <a class="collapse-item <?php if ($this->uri->segment('2') == 'berkas_keluar'){echo 'active';} ?>" href="<?= base_url('adminarea/berkas_keluar') ?>">Berkas Keluar</a>
             </div>
         </div>
     </li>

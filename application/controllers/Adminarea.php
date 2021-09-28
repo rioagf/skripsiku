@@ -36,9 +36,11 @@ class Adminarea extends CI_Controller
 
 	public function list_pemesanan()
 	{
+		$pesanan = $this->M_layanan->list_pemesanan()->result();
 		$data = array(
 			'title' => 'Daftar Pesanan Customer',
 			'content' => 'temp_admin/list_pesanan',
+			'pesanan' => $pesanan,
 		);
 		$this->load->view('temp_admin/content', $data);
 	}
@@ -769,6 +771,58 @@ class Adminarea extends CI_Controller
 		} else {
 			$this->M_artikel->set_flashdata('error', 'Produk Tidak Ditemukan');
 			redirect(site_url('adminarea/produk'));
+		}
+	}
+
+	public function berkas_masuk()
+	{
+		$berkas_masuk = $this->M_layanan->get_berkas_masuk()->result();
+		$data = array(
+			'title' => 'Berkas Masuk - Skripsiku',
+			'content' => 'temp_admin/berkas_masuk',
+			'berkas_masuk' => $berkas_masuk,
+		);
+		$this->load->view('temp_admin/content', $data);
+	}
+
+	public function berkas_keluar()
+	{
+		$berkas_keluar = $this->M_layanan->get_berkas_keluar()->result();
+		$data = array(
+			'title' => 'Berkas Keluar - Skripsiku',
+			'content' => 'temp_admin/berkas_keluar',
+			'berkas_keluar' => $berkas_keluar,
+		);
+		$this->load->view('temp_admin/content', $data);
+	}
+
+	function proses_berkas_keluar()
+	{
+		$config['upload_path']          = './upload/file/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']             = 5000;
+		$config['max_width']            = 1960;
+		$config['max_height']           = 1080;
+
+		$this->load->library('upload', $config);
+		if ( ! $this->upload->do_upload('dokumen')){
+			$this->session->set_flashdata('error', $this->upload->display_errors());
+			redirect(base_url('adminarea/berkas_keluar'));
+		} else {
+			$upload_data = $this->upload->data();
+			$data = array(
+				'id_pemesanan' => $this->input->post('id_pemesanan'),
+				'id_user' => $this->input->post('id_user'),
+				'dokumen' => '/upload/file/'.$upload_data['file_name'],
+				'status_dokumen' => 'Dokumen Masuk Pemesan',
+				'perihal' => $this->input->post('perihal'),
+				'date_created' => date('Y-m-d'),
+				'date_updated' => date('Y-m-d'),
+				'catatan' => $this->input->post('catatan'),
+			);
+			$this->M_layanan->input_berkas_keluar($data);
+			$this->session->set_flashdata('sukses', 'Berhasil mengirim file');
+			redirect(base_url('adminarea/berkas_keluar'));
 		}
 	}
 }

@@ -116,4 +116,38 @@ class M_layanan extends CI_Model{
 		$this->db->where('slug', $slug);
 		$this->db->delete('produk');
 	}
+
+	function list_pemesanan()
+	{
+		$this->db->select('nama_produk, pemesanan.*');
+		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+		return $this->db->get('pemesanan');
+	}
+
+	function get_berkas_masuk()
+	{
+		$this->db->select('pemesanan.id_pemesanan, pemesanan.nama_lengkap, pemesanan.id_pemesanan, pemesanan.npm, pemesanan.id_produk, produk.nama_produk, berkas_keluar.*');
+		$this->db->join('pemesanan', 'pemesanan.id_pemesanan = berkas_keluar.id_pemesanan');
+		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+		$this->db->join('users', 'users.id_user = berkas_keluar.id_user');
+		$this->db->join('profile', 'berkas_keluar.id_user = profile.id_users');
+		$this->db->where(array('status_dokumen' => 'Dokumen Keluar Pemesan'));
+		return $this->db->get('berkas_keluar');
+	}
+
+	function get_berkas_keluar()
+	{
+		$this->db->select('pemesanan.id_pemesanan, pemesanan.nama_lengkap, pemesanan.id_pemesanan, pemesanan.npm, pemesanan.id_produk, produk.nama_produk, berkas_keluar.*');
+		$this->db->join('pemesanan', 'pemesanan.id_pemesanan = berkas_keluar.id_pemesanan');
+		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+		$this->db->join('users', 'users.id_user = berkas_keluar.id_user');
+		$this->db->join('profile', 'berkas_keluar.id_user = profile.id_users');
+		$this->db->where(array('status_dokumen' => 'Dokumen Masuk Pemesan'));
+		return $this->db->get('berkas_keluar');
+	}
+
+	function input_berkas_keluar($data)
+	{
+		$this->db->insert('berkas_keluar', $data);
+	}
 }

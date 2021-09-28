@@ -51,8 +51,10 @@ class M_userarea extends CI_Model{
 	function progress_pesanan($username)
 	{
 		$id_user = $this->session->userdata('id_user');
-		$this->db->where(array('id_user' => $id_user, 'status_dokumen' => 'Dokumen Masuk Pemesan'));
-		return $this->db->get('berkas_keluar')->result();
+		$this->db->select('nama_produk, pemesanan.*');
+		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+		$this->db->where(array('pemesanan.id_user' => $id_user));
+		return $this->db->get('pemesanan')->result();
 	}
 
 }
