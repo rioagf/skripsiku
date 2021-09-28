@@ -44,7 +44,7 @@
 								<?php foreach ($pembayaran as $data) { ?>
 									<tr>
 										<td><?= $no++ ?></td>
-										<td><img src="<?= $data->bukti_transfer ?>"></td>
+										<td><img src="<?= base_url($data->bukti_transfer) ?>" width="75"></td>
 										<td><?= $data->perihal ?></td>
 										<td><?= $data->nama_lengkap ?></td>
 										<td>Rp. <?= number_format($data->jumlah_transfer,0,',','.') ?></td>
