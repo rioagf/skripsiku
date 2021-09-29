@@ -14,9 +14,9 @@ class M_layanan extends CI_Model{
 	}
 
 	function add_layanan($data)
-    {
-        $this->db->insert('pemesanan',$data);
-        $id_pesanan = $this->db->insert_id();
+	{
+		$this->db->insert('pemesanan',$data);
+		$id_pesanan = $this->db->insert_id();
 
 		if (!empty($data['file_pedomanskripsi'])) {
 			$data_berkas = array(
@@ -97,8 +97,8 @@ class M_layanan extends CI_Model{
 			);
 			$this->db->insert('berkas_keluar',$data_berkas);
 		}
-        
-    }
+
+	}
 
 	function create__produk($data)
 	{
@@ -172,6 +172,62 @@ class M_layanan extends CI_Model{
 	{
 		$this->db->where('id_pemesanan', $id);
 		$this->db->update('pemesanan', $data);
+	}
+
+	function get_staff()
+	{
+		$this->db->join('profile', 'profile.id_users = users.id_user');
+		$this->db->where('user_role', 'staff');
+		return $this->db->get('users');
+	}
+
+	function add_staff($data)
+	{
+		$this->db->insert('users', $data);
+		$id_user = $this->db->insert_id();
+
+		$config['upload_path']          = './assets/img/';
+		$config['allowed_types']        = 'gif|png|jpg|jpeg';
+		$config['max_size']             = 5000;
+		$config['max_width']            = 1960;
+		$config['max_height']           = 1080;
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('ktp')){
+			$data2 = array(
+				'nama_depan' => $this->input->post('nama_depan'),
+				'nama_belakang' => $this->input->post('nama_depan'),
+				'alamat' => $this->input->post('alamat'),
+				'asal_univ' => 'Skripsiku',
+				'fakultas' => 'Manajemen',
+				'jurusan' => $this->input->post('posisi'),
+				'npm_nim' => $this->input->post('nip'),
+				'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+				'ktp' => '',
+				'id_users' => $id_user,
+				'date_created' => date('Y-m-d'),
+				'date_updated' => date('Y-m-d'),
+			);
+			$this->db->insert('profile', $data2);
+		} else {
+			$upload_data = $this->upload->data();
+			$data2 = array(
+				'nama_depan' => $this->input->post('nama_depan'),
+				'nama_belakang' => $this->input->post('nama_depan'),
+				'alamat' => $this->input->post('alamat'),
+				'asal_univ' => 'Skripsiku',
+				'fakultas' => 'Manajemen',
+				'jurusan' => $this->input->post('posisi'),
+				'npm_nim' => $this->input->post('nip'),
+				'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+				'ktp' => '/upload/image/'.$upload_data['file_name'],
+				'id_users' => $id_user,
+				'date_created' => date('Y-m-d'),
+				'date_updated' => date('Y-m-d'),
+			);
+			$this->db->insert('profile', $data2);
+		}
 	}
 
 }

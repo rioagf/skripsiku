@@ -1040,7 +1040,7 @@ class Adminarea extends CI_Controller
 	{
 		if ($this->session->userdata('role') == 'admin') {
 			$config['upload_path']          = './assets/img/';
-			$config['allowed_types']        = 'pdf';
+			$config['allowed_types']        = 'gif|png|jpg|jpeg';
 			$config['max_size']             = 5000;
 			$config['max_width']            = 1960;
 			$config['max_height']           = 1080;
@@ -1121,6 +1121,25 @@ class Adminarea extends CI_Controller
 		} else {
 			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
 			redirect(base_url('adminarea'));
+		}
+	}
+
+	function add_staff()
+	{
+		if ($this->session->userdata('role') == 'admin') {
+			$data = array(
+				'username' => $this->input->post('username'),
+				'password' => sha1(md5($this->input->post('password'))),
+				'email' => $this->input->post('email'),
+				'phone' => $this->input->post('phone'),
+				'user_role' => 'staff',
+				'status' => 'aktif',
+				'date_created' => date('Y-m-d'),
+				'date_updated' => date('Y-m-d'),
+			);
+			$this->M_layanan->add_staff($data);
+			$this->session->set_flashdata('success', 'Staff berhasil ditambahkan');
+			redirect(base_url('adminarea/staff'));
 		}
 	}
 }

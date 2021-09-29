@@ -171,7 +171,7 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item <?php if ($this->uri->segment('2') == 'staff'){echo 'active';} ?>">
         <a class="nav-link" href="<?= base_url('adminarea/staff') ?>">
-            <i class="fas fa-fw fa-sliders-h"></i>
+            <i class="fas fa-fw fa-users"></i>
             <span>Data Staff</span>
         </a>
     </li>
