@@ -39,7 +39,7 @@
 							</thead>
 							<tbody>
 								<?php $no=1; ?>
-								<?php foreach ($staff as $data) { ?>
+								<?php foreach ($customer as $data) { ?>
 									<tr>
 										<td><?= $no++ ?></td>
 										<td><?= $data->nama_depan.' '.$data->nama_belakang; ?></td>
@@ -52,7 +52,7 @@
 									</tr>
 
 									<!-- MODAL DETAIL -->
-									<div class="modal fade" id="ModalCustomer-Staff<?= $data->id_user?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+									<div class="modal fade" id="ModalDetail-Customer<?= $data->id_user?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 										<div class="modal-dialog modal-md">
 											<div class="modal-content">
 												<div class="modal-header">
