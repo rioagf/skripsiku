@@ -16,7 +16,7 @@ class Adminarea extends CI_Controller
 			redirect(base_url('auth'));
 			$this->session->set_flashdata('error', 'Maaf Anda Harus Login Terlebih Dahulu');
 		} else {
-			if ($this->session->userdata('role') != 'admin') {
+			if ($this->session->userdata('role') == 'user') {
 				redirect(base_url('userarea'));
 				$this->session->set_flashdata('error', 'Maaf Anda Tidak Diizinkan Mengakses Halaman Admin');
 			}
@@ -47,6 +47,7 @@ class Adminarea extends CI_Controller
 
 	public function slider()
 	{
+		if ($this->session->userdata('role') == 'admin') {
 		$slider = $this->M_image->slider()->result();
 		$data = array(
 			'title' => 'Slider - Skripsiku',
@@ -54,20 +55,29 @@ class Adminarea extends CI_Controller
 			'slider' => $slider,
 		);
 		$this->load->view('temp_admin/content', $data);
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
+		}
 	}
 
 	public function add_slider()
 	{
+		if ($this->session->userdata('role') == 'admin') {
 		$data = array(
 			'title' => 'Tambah Slider - Skripsiku',
 			'content' => 'temp_admin/tambah_slider',
 		);
 		$this->load->view('temp_admin/content', $data);
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
+		}
 	}
 
 	function proses_tambah__slider()
 	{
-		// $this->_rules();
+		if ($this->session->userdata('role') == 'admin') {
 		$config['upload_path']          = './assets/img/';
 		$config['allowed_types']        = 'gif|jpg|png|jpeg';
 		$config['max_size']             = 5000;
@@ -94,10 +104,15 @@ class Adminarea extends CI_Controller
 			$this->session->set_flashdata('success', 'Berhasil Menambah Slider');
 			redirect(site_url('adminarea/slider'));
 		}
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
+		}
 	}
 
 	public function edit_slider($id)
 	{
+		if ($this->session->userdata('role') == 'admin') {
 		$slider = $this->M_image->get_slider__by($id)->row();
 		$data = array(
 			'title' => 'Edit Slider - Skripsiku',
@@ -107,10 +122,15 @@ class Adminarea extends CI_Controller
 			'lokasi' => $slider->lokasi,
 		);
 		$this->load->view('temp_admin/content', $data);
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
+		}
 	}
 
 	function proses_edit__slider()
 	{
+		if ($this->session->userdata('role') == 'admin') {
 		$config['upload_path']          = './assets/img/';
 		$config['allowed_types']        = 'gif|jpg|png|jpeg';
 		$config['max_size']             = 5000;
@@ -147,10 +167,15 @@ class Adminarea extends CI_Controller
 			$this->session->set_flashdata('success', 'Berhasil Mengubah Slider');
 			redirect(site_url('adminarea/slider'));
 		}
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
+		}
 	}
 
 	public function delete_slider($id)
 	{
+		if ($this->session->userdata('role') == 'admin') {
 		$row = $this->M_image->get_slider__by($id)->row();
 
 		if ($row) {
@@ -161,6 +186,10 @@ class Adminarea extends CI_Controller
 		} else {
 			$this->session->set_flashdata('error', 'Slider Tidak Ditemukan');
 			redirect(site_url('adminarea/slider'));
+		}
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
 		}
 	}
 
@@ -916,5 +945,16 @@ class Adminarea extends CI_Controller
 			$this->session->set_flashdata('success', 'Berhasil mengupdate setting');
 			redirect(base_url('adminarea/setting'));
 		}
+	}
+
+	public function update_progress($id)
+	{
+		$data = array(
+			'progress' => $this->input->post('progress'),
+			'date_updated' => date('Y-m-d'),
+		);
+		$this->M_layanan->update_progress($data, $this->input->post('id_pemesanan'));
+		$this->session->set_flashdata('success', 'Progress berhasil di update');
+		redirect(base_url('adminarea/list_pemesanan'));
 	}
 }

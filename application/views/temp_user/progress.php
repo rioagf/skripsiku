@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-12">
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: <?= $data->progress ?>" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><?= $data->progress ?></div>
+                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: <?= $data->progress ?>%" aria-valuenow="<?= $data->progress ?>" aria-valuemin="0" aria-valuemax="100"><?= $data->progress ?>%</div>
                         </div>
                     </div>
                 </div>

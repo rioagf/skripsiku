@@ -70,7 +70,7 @@
                             <a class="btn btn-primary text-center border rounded-pill" type="button" style="margin: 5px;font-size: 10pt;font-family: Montserrat, sans-serif;width: 125px;" href="<?= base_url('auth/logout') ?>">LOGOUT</a>
                             <?php if ($this->session->userdata('role') == 'user') { ?>
                                 <a class="btn btn-primary text-center border rounded-pill" type="button" style="margin: 5px;font-size: 10pt;font-family: Montserrat, sans-serif;background: rgb(159,159,159);width: 125px;text-align: center;" href="<?= base_url('userarea') ?>">CLIENT AREA</a>
-                            <?php } else if ($this->session->userdata('role') == 'admin') { ?>
+                            <?php } else if ($this->session->userdata('role') != 'user') { ?>
                                 <a class="btn btn-primary text-center border rounded-pill" type="button" style="margin: 5px;font-size: 10pt;font-family: Montserrat, sans-serif;background: rgb(159,159,159);width: 125px;text-align: center;" href="<?= base_url('adminarea') ?>">ADMIN AREA</a>
                             <?php } ?>
                         <?php } ?>

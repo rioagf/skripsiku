@@ -48,13 +48,16 @@
             </div>
         </div>
     </li>
+    <?php if ($this->session->userdata('role') == "admin"): ?>
     <li class="nav-item <?php if ($this->uri->segment('2') == 'pembayaran'){echo 'active';} ?>">
         <a class="nav-link" href="<?= base_url('adminarea/pembayaran') ?>">
             <i class="fas fa-fw fa-money-check-alt"></i>
-            <span>Pesanan</span>
+            <span>Pembayaran</span>
         </a>
     </li>
+    <?php endif ?>
 
+    <?php if ($this->session->userdata('role') == "admin"): ?>
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -156,6 +159,7 @@
             <span>Setting</span>
         </a>
     </li>
+    <?php endif ?>
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

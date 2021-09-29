@@ -32,7 +32,7 @@ class Auth extends CI_Controller {
 					'status' => "login"
 				);
 				$this->session->set_userdata($data_session);
-				redirect(base_url());
+				redirect(base_url('adminarea'));
 			} else if ($auth->user_role == 'user') {
 				$data_session = array(
 					'id_user' => $auth->id_user,
@@ -42,6 +42,15 @@ class Auth extends CI_Controller {
 				);
 				$this->session->set_userdata($data_session);
 				redirect(base_url('userarea/profile'));
+			} else if ($auth->user_role == 'staff') {
+				$data_session = array(
+					'id_user' => $auth->id_user,
+					'username' => $auth->username,
+					'role' => $auth->user_role,
+					'status' => "login"
+				);
+				$this->session->set_userdata($data_session);
+				redirect(base_url('adminarea'));
 			}
 
 		} else if($cek > 0 && $auth->status == 'Belum Verifikasi') {

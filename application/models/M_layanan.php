@@ -168,4 +168,10 @@ class M_layanan extends CI_Model{
 		$this->db->update('setting', $data);
 	}
 
+	function update_progress($data, $id)
+	{
+		$this->db->where('id_pemesanan', $id);
+		$this->db->update('pemesanan', $data);
+	}
+
 }
