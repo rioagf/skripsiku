@@ -1107,4 +1107,20 @@ class Adminarea extends CI_Controller
 		$this->session->set_flashdata('success', 'Progress berhasil di update');
 		redirect(base_url('adminarea/list_pemesanan'));
 	}
+
+	public function staff()
+	{
+		if ($this->session->userdata('role') == 'admin') {
+			$staff = $this->M_layanan->get_staff()->result();
+			$data = array(
+				'title' => 'Staff - Skripsiku',
+				'content' => 'temp_admin/staff',
+				'staff' => $staff,
+			);
+			$this->load->view('temp_admin/content', $data);
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
+		}
+	}
 }

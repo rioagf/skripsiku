@@ -159,6 +159,22 @@
             <span>Setting</span>
         </a>
     </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Staff
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item <?php if ($this->uri->segment('2') == 'staff'){echo 'active';} ?>">
+        <a class="nav-link" href="<?= base_url('adminarea/staff') ?>">
+            <i class="fas fa-fw fa-sliders-h"></i>
+            <span>Data Staff</span>
+        </a>
+    </li>
     <?php endif ?>
 
     <!-- Sidebar Toggler (Sidebar) -->
