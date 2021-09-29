@@ -2,7 +2,7 @@
 $this->db->where('id_setting', '1');
 $setting = $this->db->get('setting')->row();
 ?>
-<section class="d-lg-flex align-items-lg-center features-boxed" style="height: 650px;">
+<section class="d-lg-flex align-items-lg-center features-boxed" style="min-height: 650px;">
     <div class="container">
         <div class="intro" style="max-width: none;">
             <h2 class="text-center"><?= $setting->judulsection_karir ?></h2>
