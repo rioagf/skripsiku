@@ -58,6 +58,23 @@
     <?php endif ?>
 
     <?php if ($this->session->userdata('role') == "admin"): ?>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Customer
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item <?php if ($this->uri->segment('2') == 'customer'){echo 'active';} ?>">
+        <a class="nav-link" href="<?= base_url('adminarea/customer') ?>">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Data Customer</span>
+        </a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 

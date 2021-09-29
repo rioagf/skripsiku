@@ -69,15 +69,15 @@
 															</div>
 															<div class="col-sm-12">
 																<form action="<?= base_url('adminarea/update_progress/'.$data->id_pemesanan)?>" method="post">
-																<div class="form-group">
-																	<label>Sudah Berapa Persen Pengerjaan?</label>
-																	<input type="number" value="<?= $data->progress ?>" name="progress" class="form-control">
-																	<span class="form-text">Hanya inputkan angka</span>
-																	<input type="hidden" name="id_pemesanan" value="<?= $data->id_pemesanan ?>">
-																</div>
-																<div class="form-group">
-																	<button type="submit" class="btn btn-sm btn-primary">Submit</button>
-																</div>
+																	<div class="form-group">
+																		<label>Sudah Berapa Persen Pengerjaan?</label>
+																		<input type="number" value="<?= $data->progress ?>" name="progress" class="form-control">
+																		<span class="form-text">Hanya inputkan angka</span>
+																		<input type="hidden" name="id_pemesanan" value="<?= $data->id_pemesanan ?>">
+																	</div>
+																	<div class="form-group">
+																		<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+																	</div>
 																</form>
 															</div>
 														</div>

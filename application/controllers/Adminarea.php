@@ -1140,6 +1140,66 @@ class Adminarea extends CI_Controller
 			$this->M_layanan->add_staff($data);
 			$this->session->set_flashdata('success', 'Staff berhasil ditambahkan');
 			redirect(base_url('adminarea/staff'));
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
 		}
+	}
+
+	function update_staff()
+	{
+		if ($this->session->userdata('role') == 'admin') {
+			// var_dump($this->input->post('password'));die();
+			if (!empty($this->input->post('password'))) {
+				$password = sha1(md5($this->input->post('password')));
+			} else {
+				$password = $this->input->post('password_lama');
+			}
+			$data = array(
+				'username' => $this->input->post('username'),
+				'password' => $password,
+				'email' => $this->input->post('email'),
+				'phone' => $this->input->post('phone'),
+				'user_role' => 'staff',
+				'status' => 'aktif',
+				'date_updated' => date('Y-m-d'),
+			);
+			$this->M_layanan->update_staff($data, $this->input->post('id_user'));
+			$this->session->set_flashdata('success', 'Staff berhasil diupdate');
+			redirect(base_url('adminarea/staff'));
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
+		}
+	}
+
+	function delete_staff($id)
+	{
+		$this->M_layanan->delete_staff($id);
+		$this->session->set_flashdata('success', 'Staff berhasil dihapus');
+		redirect(base_url('adminarea/staff'));
+	}
+
+	public function customer()
+	{
+		if ($this->session->userdata('role') == 'admin') {
+			$customer = $this->M_layanan->get_customer()->result();
+			$data = array(
+				'title' => 'Customer - Skripsiku',
+				'content' => 'temp_admin/customer',
+				'customer' => $customer,
+			);
+			$this->load->view('temp_admin/content', $data);
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
+		}
+	}
+
+	function delete_customer($id)
+	{
+		$this->M_layanan->delete_customer($id);
+		$this->session->set_flashdata('success', 'Customer berhasil dihapus');
+		redirect(base_url('adminarea/staff'));
 	}
 }

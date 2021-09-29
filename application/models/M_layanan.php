@@ -230,4 +230,88 @@ class M_layanan extends CI_Model{
 		}
 	}
 
+	function update_staff($data, $id)
+	{
+		$this->db->where('id_user', $id);
+		$this->db->update('users', $data);
+
+		$config['upload_path']          = './assets/img/';
+		$config['allowed_types']        = 'gif|png|jpg|jpeg';
+		$config['max_size']             = 5000;
+		$config['max_width']            = 1960;
+		$config['max_height']           = 1080;
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('ktp')){
+			$data2 = array(
+				'nama_depan' => $this->input->post('nama_depan'),
+				'nama_belakang' => $this->input->post('nama_depan'),
+				'alamat' => $this->input->post('alamat'),
+				'asal_univ' => 'Skripsiku',
+				'fakultas' => 'Manajemen',
+				'jurusan' => $this->input->post('posisi'),
+				'npm_nim' => $this->input->post('nip'),
+				'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+				'ktp' => $this->input->post('ktp_lama'),
+				'date_updated' => date('Y-m-d'),
+			);
+			$this->db->where('id_users', $id);
+			$this->db->update('profile', $data2);
+		} else {
+			$upload_data = $this->upload->data();
+			$data2 = array(
+				'nama_depan' => $this->input->post('nama_depan'),
+				'nama_belakang' => $this->input->post('nama_depan'),
+				'alamat' => $this->input->post('alamat'),
+				'asal_univ' => 'Skripsiku',
+				'fakultas' => 'Manajemen',
+				'jurusan' => $this->input->post('posisi'),
+				'npm_nim' => $this->input->post('nip'),
+				'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+				'ktp' => '/upload/image/'.$upload_data['file_name'],
+				'date_updated' => date('Y-m-d'),
+			);
+			$this->db->where('id_users', $id);
+			$this->db->update('profile', $data2);
+		}
+	}
+
+	function delete_staff($id)
+	{
+		// delete user
+		$this->db->where('id_user', $id);
+		$this->db->delete('users');
+
+		// delete profile
+		$this->db->where('id_users', $id);
+		$this->db->delete('profile');
+	}
+
+	function get_customer()
+	{
+		$this->db->join('profile', 'profile.id_users = users.id_user');
+		$this->db->where('user_role', 'user');
+		return $this->db->get('users');
+	}
+
+	function delete_customer($id)
+	{
+		// delete user
+		$this->db->where('id_user', $id);
+		$this->db->delete('users');
+
+		// delete pemesanan
+		$this->db->where('id_user', $id);
+		$this->db->delete('pemesanan');
+
+		// delete database berkas keluar
+		$this->db->where('id_user', $id);
+		$this->db->delete('berkas_keluar');
+
+		// delete profile
+		$this->db->where('id_users', $id);
+		$this->db->delete('profile');
+	}
+
 }
