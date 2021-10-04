@@ -59,6 +59,17 @@
 											<input type="text" name="posisi" class="form-control" required>
 										</div>
 										<div class="form-group">
+											<label>Bidang Pekerjaan</label>
+											<select name="bidang_kerja" class="form-control">
+												<option value="Penyusunan Proposal">Penyusunan Proposal</option>
+												<option value="Skripsi">Skripsi</option>
+												<option value="Pengolahan Data">Pengolahan Data</option>
+												<option value="Data Sekunder">Data Sekunder</option>
+												<option value="Cek Plagiarisme">Cek Plagiarisme</option>
+												<option value="Pharaphase">Pharaphase</option>
+											</select>
+										</div>
+										<div class="form-group">
 											<label>NIP</label>
 											<input type="text" name="nip" class="form-control" required>
 										</div>
@@ -185,6 +196,17 @@
 																			<input type="text" name="posisi" class="form-control" required value="<?=$data->jurusan?>">
 																		</div>
 																		<div class="form-group">
+																			<label>Bidang Kerja</label>
+																			<select name="bidang_kerja" class="form-control">
+																				<option value="Penyusunan Proposal" <?php if ($data->bidang_kerja == "Penyusunan Proposal") { echo "selected"; } ?>>Penyusunan Proposal</option>
+																				<option value="Skripsi" <?php if ($data->bidang_kerja == "Penyusunan Proposal") { echo "selected"; } ?>>Skripsi</option>
+																				<option value="Pengolahan Data" <?php if ($data->bidang_kerja == "Pengolahan Data") { echo "selected"; } ?>>Pengolahan Data</option>
+																				<option value="Data Sekunder" <?php if ($data->bidang_kerja == "Data Sekunder") { echo "selected"; } ?>>Data Sekunder</option>
+																				<option value="Cek Plagiarisme" <?php if ($data->bidang_kerja == "Cek Plagiarisme") { echo "selected"; } ?>>Cek Plagiarisme</option>
+																				<option value="Pharaphase" <?php if ($data->bidang_kerja == "Pharaphase") { echo "selected"; } ?>>Pharaphase</option>
+																			</select>
+																		</div>
+																		<div class="form-group">
 																			<label>NIP</label>
 																			<input type="text" name="nip" class="form-control" required value="<?=$data->npm_nim?>">
 																		</div>
@@ -250,6 +272,10 @@
 																	<div class="form-group">
 																		<label><b>Posisi/Jabatan</b></label><br>
 																		<?=$data->jurusan?>
+																	</div>
+																	<div class="form-group">
+																		<label><b>Bidang Kerja</b></label><br>
+																		<?=$data->bidang_kerja?>
 																	</div>
 																	<div class="form-group">
 																		<label><b>NIP</b></label><br>

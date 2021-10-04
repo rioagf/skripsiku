@@ -8,7 +8,7 @@ $data_pesanan = $this->db->get('pemesanan')->result();
 
 <?php
 $this->db->join('profile', 'profile.id_users = users.id_user');
-$this->db->where('users.id_user != 1');
+$this->db->where('users.user_role', 'user');
 $id_user = $this->db->get('users')->result();
 ?>
 <!-- Begin Page Content -->

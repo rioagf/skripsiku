@@ -119,31 +119,72 @@ class M_layanan extends CI_Model{
 
 	function list_pemesanan()
 	{
-		$this->db->select('nama_produk, pemesanan.*');
-		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
-		return $this->db->get('pemesanan');
+
+		$this->db->where('id_users', $this->session->userdata('id_user'));
+		$profile = $this->db->get('profile')->row();
+		$bidang_kerja = strtolower(str_replace(' ', '-', $profile->bidang_kerja));
+
+		if ($this->session->userdata('role') == 'admin') {
+			$this->db->select('nama_produk, pemesanan.*');
+			$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+			return $this->db->get('pemesanan');
+		}else if ($this->session->userdata('role') == 'staff') {
+			$this->db->select('nama_produk, pemesanan.*');
+			$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+			$this->db->where('produk.slug', $bidang_kerja);
+			return $this->db->get('pemesanan');
+		}
 	}
 
 	function get_berkas_masuk()
 	{
-		$this->db->select('pemesanan.id_pemesanan, pemesanan.nama_lengkap, pemesanan.id_pemesanan, pemesanan.npm, pemesanan.id_produk, produk.nama_produk, berkas_keluar.*');
-		$this->db->join('pemesanan', 'pemesanan.id_pemesanan = berkas_keluar.id_pemesanan');
-		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
-		$this->db->join('users', 'users.id_user = berkas_keluar.id_user');
-		$this->db->join('profile', 'berkas_keluar.id_user = profile.id_users');
-		$this->db->where(array('status_dokumen' => 'Dokumen Keluar Pemesan'));
-		return $this->db->get('berkas_keluar');
+		$this->db->where('id_users', $this->session->userdata('id_user'));
+		$profile = $this->db->get('profile')->row();
+		$bidang_kerja = strtolower(str_replace(' ', '-', $profile->bidang_kerja));
+
+		if ($this->session->userdata('role') == 'admin') {
+			$this->db->select('pemesanan.id_pemesanan, pemesanan.nama_lengkap, pemesanan.id_pemesanan, pemesanan.npm, pemesanan.id_produk, produk.nama_produk, berkas_keluar.*');
+			$this->db->join('pemesanan', 'pemesanan.id_pemesanan = berkas_keluar.id_pemesanan');
+			$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+			$this->db->join('users', 'users.id_user = berkas_keluar.id_user');
+			$this->db->join('profile', 'berkas_keluar.id_user = profile.id_users');
+			$this->db->where(array('status_dokumen' => 'Dokumen Keluar Pemesan'));
+			return $this->db->get('berkas_keluar');
+		}else if ($this->session->userdata('role') == 'staff') {
+			$this->db->select('pemesanan.id_pemesanan, pemesanan.nama_lengkap, pemesanan.id_pemesanan, pemesanan.npm, pemesanan.id_produk, produk.nama_produk, berkas_keluar.*');
+			$this->db->join('pemesanan', 'pemesanan.id_pemesanan = berkas_keluar.id_pemesanan');
+			$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+			$this->db->join('users', 'users.id_user = berkas_keluar.id_user');
+			$this->db->join('profile', 'berkas_keluar.id_user = profile.id_users');
+			$this->db->where(array('status_dokumen' => 'Dokumen Keluar Pemesan', 'produk.slug' => $bidang_kerja));
+			return $this->db->get('berkas_keluar');
+		}
 	}
 
 	function get_berkas_keluar()
 	{
-		$this->db->select('pemesanan.id_pemesanan, pemesanan.nama_lengkap, pemesanan.id_pemesanan, pemesanan.npm, pemesanan.id_produk, produk.nama_produk, berkas_keluar.*');
-		$this->db->join('pemesanan', 'pemesanan.id_pemesanan = berkas_keluar.id_pemesanan');
-		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
-		$this->db->join('users', 'users.id_user = berkas_keluar.id_user');
-		$this->db->join('profile', 'berkas_keluar.id_user = profile.id_users');
-		$this->db->where(array('status_dokumen' => 'Dokumen Masuk Pemesan'));
-		return $this->db->get('berkas_keluar');
+		$this->db->where('id_users', $this->session->userdata('id_user'));
+		$profile = $this->db->get('profile')->row();
+		$bidang_kerja = strtolower(str_replace(' ', '-', $profile->bidang_kerja));
+		// $row = $this->db->get('produk')->row();
+
+		if ($this->session->userdata('role') == 'admin') {
+			$this->db->select('pemesanan.id_pemesanan, pemesanan.nama_lengkap, pemesanan.id_pemesanan, pemesanan.npm, pemesanan.id_produk, produk.nama_produk, berkas_keluar.*');
+			$this->db->join('pemesanan', 'pemesanan.id_pemesanan = berkas_keluar.id_pemesanan');
+			$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+			$this->db->join('users', 'users.id_user = berkas_keluar.id_user');
+			$this->db->join('profile', 'berkas_keluar.id_user = profile.id_users');
+			$this->db->where(array('status_dokumen' => 'Dokumen Masuk Pemesan'));
+			return $this->db->get('berkas_keluar');
+		}else if ($this->session->userdata('role') == 'staff') {
+			$this->db->select('pemesanan.id_pemesanan, pemesanan.nama_lengkap, pemesanan.id_pemesanan, pemesanan.npm, pemesanan.id_produk, produk.nama_produk, berkas_keluar.*');
+			$this->db->join('pemesanan', 'pemesanan.id_pemesanan = berkas_keluar.id_pemesanan');
+			$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+			$this->db->join('users', 'users.id_user = berkas_keluar.id_user');
+			$this->db->join('profile', 'berkas_keluar.id_user = profile.id_users');
+			$this->db->where(array('status_dokumen' => 'Dokumen Masuk Pemesan', 'produk.slug' => $bidang_kerja));
+			return $this->db->get('berkas_keluar');
+		}
 	}
 
 	function input_berkas_keluar($data)
@@ -202,6 +243,7 @@ class M_layanan extends CI_Model{
 				'asal_univ' => 'Skripsiku',
 				'fakultas' => 'Manajemen',
 				'jurusan' => $this->input->post('posisi'),
+				'bidang_kerja' => $this->input->post('bidang_kerja'),
 				'npm_nim' => $this->input->post('nip'),
 				'tanggal_lahir' => $this->input->post('tanggal_lahir'),
 				'ktp' => '',
@@ -219,6 +261,7 @@ class M_layanan extends CI_Model{
 				'asal_univ' => 'Skripsiku',
 				'fakultas' => 'Manajemen',
 				'jurusan' => $this->input->post('posisi'),
+				'bidang_kerja' => $this->input->post('bidang_kerja'),
 				'npm_nim' => $this->input->post('nip'),
 				'tanggal_lahir' => $this->input->post('tanggal_lahir'),
 				'ktp' => '/upload/image/'.$upload_data['file_name'],
@@ -251,6 +294,7 @@ class M_layanan extends CI_Model{
 				'asal_univ' => 'Skripsiku',
 				'fakultas' => 'Manajemen',
 				'jurusan' => $this->input->post('posisi'),
+				'bidang_kerja' => $this->input->post('bidang_kerja'),
 				'npm_nim' => $this->input->post('nip'),
 				'tanggal_lahir' => $this->input->post('tanggal_lahir'),
 				'ktp' => $this->input->post('ktp_lama'),
@@ -267,6 +311,7 @@ class M_layanan extends CI_Model{
 				'asal_univ' => 'Skripsiku',
 				'fakultas' => 'Manajemen',
 				'jurusan' => $this->input->post('posisi'),
+				'bidang_kerja' => $this->input->post('bidang_kerja'),
 				'npm_nim' => $this->input->post('nip'),
 				'tanggal_lahir' => $this->input->post('tanggal_lahir'),
 				'ktp' => '/upload/image/'.$upload_data['file_name'],

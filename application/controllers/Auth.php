@@ -30,7 +30,7 @@ class Auth extends CI_Controller {
 					'username' => $auth->username,
 					'role' => $auth->user_role,
 					'status' => "login",
-					'jabatan' => $auth->jurusan,
+					'bidang_kerja' => $auth->bidang_kerja,
 				);
 				$this->session->set_userdata($data_session);
 				redirect(base_url('adminarea'));
@@ -40,7 +40,7 @@ class Auth extends CI_Controller {
 					'username' => $auth->username,
 					'role' => $auth->user_role,
 					'status' => "login",
-					'jabatan' => $auth->jurusan,
+					'bidang_kerja' => $auth->bidang_kerja,
 				);
 				$this->session->set_userdata($data_session);
 				redirect(base_url('userarea/profile'));
@@ -50,7 +50,7 @@ class Auth extends CI_Controller {
 					'username' => $auth->username,
 					'role' => $auth->user_role,
 					'status' => "login",
-					'jabatan' => $auth->jurusan,
+					'bidang_kerja' => $auth->bidang_kerja,
 				);
 				$this->session->set_userdata($data_session);
 				redirect(base_url('adminarea'));
