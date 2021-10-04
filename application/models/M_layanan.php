@@ -119,10 +119,7 @@ class M_layanan extends CI_Model{
 
 	function list_pemesanan()
 	{
-
-		$this->db->where('id_users', $this->session->userdata('id_user'));
-		$profile = $this->db->get('profile')->row();
-		$bidang_kerja = strtolower(str_replace(' ', '-', $profile->bidang_kerja));
+		$bidang_kerja = strtolower(str_replace(' ', '-', $this->session->userdata('bidang_kerja')));
 
 		if ($this->session->userdata('role') == 'admin') {
 			$this->db->select('nama_produk, pemesanan.*');
@@ -138,9 +135,7 @@ class M_layanan extends CI_Model{
 
 	function get_berkas_masuk()
 	{
-		$this->db->where('id_users', $this->session->userdata('id_user'));
-		$profile = $this->db->get('profile')->row();
-		$bidang_kerja = strtolower(str_replace(' ', '-', $profile->bidang_kerja));
+		$bidang_kerja = strtolower(str_replace(' ', '-', $this->session->userdata('bidang_kerja')));
 
 		if ($this->session->userdata('role') == 'admin') {
 			$this->db->select('pemesanan.id_pemesanan, pemesanan.nama_lengkap, pemesanan.id_pemesanan, pemesanan.npm, pemesanan.id_produk, produk.nama_produk, berkas_keluar.*');
@@ -163,10 +158,7 @@ class M_layanan extends CI_Model{
 
 	function get_berkas_keluar()
 	{
-		$this->db->where('id_users', $this->session->userdata('id_user'));
-		$profile = $this->db->get('profile')->row();
-		$bidang_kerja = strtolower(str_replace(' ', '-', $profile->bidang_kerja));
-		// $row = $this->db->get('produk')->row();
+		$bidang_kerja = strtolower(str_replace(' ', '-', $this->session->userdata('bidang_kerja')));
 
 		if ($this->session->userdata('role') == 'admin') {
 			$this->db->select('pemesanan.id_pemesanan, pemesanan.nama_lengkap, pemesanan.id_pemesanan, pemesanan.npm, pemesanan.id_produk, produk.nama_produk, berkas_keluar.*');
