@@ -29,7 +29,8 @@ class Auth extends CI_Controller {
 					'id_user' => $auth->id_user,
 					'username' => $auth->username,
 					'role' => $auth->user_role,
-					'status' => "login"
+					'status' => "login",
+					'jabatan' => $auth->jurusan,
 				);
 				$this->session->set_userdata($data_session);
 				redirect(base_url('adminarea'));
@@ -38,7 +39,8 @@ class Auth extends CI_Controller {
 					'id_user' => $auth->id_user,
 					'username' => $auth->username,
 					'role' => $auth->user_role,
-					'status' => "login"
+					'status' => "login",
+					'jabatan' => $auth->jurusan,
 				);
 				$this->session->set_userdata($data_session);
 				redirect(base_url('userarea/profile'));
@@ -47,7 +49,8 @@ class Auth extends CI_Controller {
 					'id_user' => $auth->id_user,
 					'username' => $auth->username,
 					'role' => $auth->user_role,
-					'status' => "login"
+					'status' => "login",
+					'jabatan' => $auth->jurusan,
 				);
 				$this->session->set_userdata($data_session);
 				redirect(base_url('adminarea'));

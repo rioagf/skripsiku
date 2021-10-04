@@ -2,7 +2,7 @@
 class M_auth extends CI_Model{ 
 
 	function cek_login($username, $password){      
-		$query=$this->db->query("SELECT * FROM users WHERE username='$username' AND password='$password' OR email='$username' AND password='$password'");
+		$query=$this->db->query("SELECT * FROM users JOIN profile ON users.id_user = profile.id_users WHERE username='$username' AND password='$password' OR email='$username' AND password='$password'");
 		return $query;
 	}
 
