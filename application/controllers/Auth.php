@@ -80,15 +80,39 @@ class Auth extends CI_Controller {
 
 	function proses_register()
 	{
-		$data = array(
-			'username' => $this->input->post('username'),
-			'password' => sha1(md5($this->input->post('username'))),
-			'email' => $this->input->post('email'),
-			'date_created' => date('Y-m-d'),
-			'date_updated' => date('Y-m-d'),
-		);
+		// check ketersediaan username
+		$this->db->where('username', $this->input->post('user'));
+		$username = $this->db->get('users')->row();
 
-		$this->M_auth->register_user($data);
+		// check ketersediaan email
+		$this->db->where('email', $this->input->post('email'));
+		$email = $this->db->get('users')->row();
+
+		if ($username != NULL) {
+			$this->session->set_flashdata('error','Username sudah digunakan, silahkan gunakan username lain');
+			redirect(base_url('auth/register'));
+		} else if ($email != NULL) {
+			$this->session->set_flashdata('error','Email sudah digunakan, silahkan gunakan email lain');
+			redirect(base_url('auth/register'));
+		} else if ($username != NULL && $email != NULL) {
+			$this->session->set_flashdata('error','Email dan Username sudah digunakan, silahkan gunakan email lain');
+			redirect(base_url('auth/register'));
+		} else {
+			$data = array(
+				'username' => $this->input->post('user'),
+				'password' => sha1(md5($this->input->post('password'))),
+				'email' => $this->input->post('email'),
+				'phone' => '00000000000000',
+				'user_role' => 'user',
+				'status' => 'aktif',
+				'date_created' => date('Y-m-d'),
+				'date_updated' => date('Y-m-d'),
+			);
+
+			$this->M_auth->register_user($data);
+			$this->session->set_flashdata('success','Pendaftaran berhasil, cek email untuk aktivasi');
+			redirect(base_url('auth/register'));
+		}
 	}
 
 	public function forgot_password()

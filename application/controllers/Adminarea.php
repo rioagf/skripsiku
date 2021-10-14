@@ -13,7 +13,7 @@ class Adminarea extends CI_Controller
 		$this->load->model('M_image');
 		$this->load->model('Karir_model');
 		if ($this->session->userdata('status') != 'login') {
-			redirect(base_url('auth'));
+			redirect(base_url('auth/login'));
 			$this->session->set_flashdata('error', 'Maaf Anda Harus Login Terlebih Dahulu');
 		} else {
 			if ($this->session->userdata('role') == 'user') {
@@ -963,7 +963,7 @@ class Adminarea extends CI_Controller
 	function proses_berkas_keluar()
 	{
 		$config['upload_path']          = './upload/file/';
-		$config['allowed_types']        = 'pdf';
+		$config['allowed_types']        = '*';
 		$config['max_size']             = 5000;
 		$config['max_width']            = 1960;
 		$config['max_height']           = 1080;
@@ -1201,5 +1201,114 @@ class Adminarea extends CI_Controller
 		$this->M_layanan->delete_customer($id);
 		$this->session->set_flashdata('success', 'Customer berhasil dihapus');
 		redirect(base_url('adminarea/staff'));
+	}
+
+	public function laporan_keuangan()
+	{
+		if ($this->session->userdata('role') == 'admin') {
+			$keuangan = $this->M_layanan->get_keuangan()->result();
+			$data = array(
+				'title' => 'Laporan Keuangan - Skripsiku',
+				'content' => 'temp_admin/laporan_keuangan_dashboard',
+				'keuangan' => $keuangan,
+			);
+			$this->load->view('temp_admin/content', $data);
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
+		}
+	}
+
+	function add_keuangan()
+	{
+		$config['upload_path']          = './upload/file/';
+		$config['allowed_types']        = '*';
+		$config['max_size']             = 500000;
+
+
+		$this->load->library('upload', $config);
+		if ($this->upload->do_upload('file_laporankeuangan')) {
+			$file_laporankeuangan = $this->upload->data();
+			$file_laporankeuangan_path = '/upload/file/'.$file_laporankeuangan['file_name'];
+		} else {
+			$file_laporankeuangan_path = '';
+		}
+
+		if ($this->upload->do_upload('image_laporankeuangan')) {
+			$image_laporankeuangan = $this->upload->data();
+			$image_laporankeuangan_path = '/upload/file/'.$image_laporankeuangan['file_name'];
+		} else {
+			$image_laporankeuangan_path = '';
+		}
+
+		if ($this->session->userdata('role') == 'admin') {
+			$data = array(
+				'judul_laporankeuangan' => $this->input->post('judul_laporankeuangan'),
+				'keterangan_laporankeuangan' => $this->input->post('keterangan_laporankeuangan'),
+				'file_laporankeuangan' => $file_laporankeuangan_path,
+				'image_laporankeuangan' => $image_laporankeuangan_path,
+				'date_created' => date('Y-m-d'),
+				'date_updated' => date('Y-m-d'),
+				'id_user' => $this->session->userdata('id_user'),
+			);
+			$this->M_layanan->add_keuangan($data);
+			$this->session->set_flashdata('success', 'Laporan Keuangan berhasil ditambahkan');
+			redirect(base_url('adminarea/laporan_keuangan'));
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
+		}
+	}
+
+	function update_keuangan()
+	{
+		$config['upload_path']          = './upload/file/';
+		$config['allowed_types']        = '*';
+		$config['max_size']             = 500000;
+
+
+		$this->load->library('upload', $config);
+		if ($this->upload->do_upload('file_laporankeuangan')) {
+			$file_laporankeuangan = $this->upload->data();
+			$file_laporankeuangan_path = '/upload/file/'.$file_laporankeuangan['file_name'];
+		} else {
+			$file_laporankeuangan_path = $this->input->post('file_laporankeuangan_old');
+		}
+
+		if ($this->upload->do_upload('image_laporankeuangan')) {
+			$image_laporankeuangan = $this->upload->data();
+			$image_laporankeuangan_path = '/upload/file/'.$image_laporankeuangan['file_name'];
+		} else {
+			$image_laporankeuangan_path = $this->input->post('image_laporankeuangan_old');
+		}
+
+		if ($this->session->userdata('role') == 'admin') {
+			$data = array(
+				'judul_laporankeuangan' => $this->input->post('judul_laporankeuangan'),
+				'keterangan_laporankeuangan' => $this->input->post('keterangan_laporankeuangan'),
+				'file_laporankeuangan' => $file_laporankeuangan_path,
+				'image_laporankeuangan' => $image_laporankeuangan_path,
+				'date_updated' => date('Y-m-d'),
+				'id_user' => $this->session->userdata('id_user'),
+			);
+			$this->M_layanan->update_keuangan($data, $this->input->post('id_laporankeuangan'));
+			$this->session->set_flashdata('success', 'Laporan Keuangan berhasil diupdate');
+			redirect(base_url('adminarea/laporan_keuangan'));
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
+		}
+	}
+
+	function delete_keuangan($id)
+	{
+		if ($this->session->userdata('role') == 'admin') {
+			$this->M_layanan->delete_keuangan($id);
+			$this->session->set_flashdata('success', 'Laporan Keuangan berhasil dihapus');
+			redirect(base_url('adminarea/laporan_keuangan'));
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat menghapus data ini');
+			redirect(base_url('adminarea'));
+		}
 	}
 }

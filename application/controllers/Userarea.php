@@ -176,7 +176,7 @@ class Userarea extends CI_Controller {
 	function kirim_berkas_keluar($username)
 	{
 		$config['upload_path']          = './upload/image/';
-		$config['allowed_types']        = 'pdf';
+		$config['allowed_types']        = '*';
 		$config['max_size']             = 500000;
 
 		$this->load->library('upload', $config);
@@ -227,7 +227,7 @@ class Userarea extends CI_Controller {
 	public function proses_pembayaran($username)
 	{
 		$config['upload_path']          = './upload/image/';
-		$config['allowed_types']        = 'gif|jpg|png';
+		$config['allowed_types']        = '*';
 		$config['max_size']             = 2000;
 		$config['max_width']            = 2048;
 		$config['max_height']           = 2048;

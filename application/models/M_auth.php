@@ -6,7 +6,7 @@ class M_auth extends CI_Model{
 		return $query;
 	}
 
-	function register_user(){
+	function register_user($data){
 
 		$this->db->trans_start();
             //INSERT TO USERS
@@ -17,7 +17,7 @@ class M_auth extends CI_Model{
 
 
 		$result[] = array(
-			'id_user' => $id_user,
+			'id_users' => $id_user,
 			'nama_depan' => 'User',
 			'nama_belakang' => 'Profile',
 			'date_created' => date('Y-m-d'),

@@ -99,25 +99,42 @@
     <section class="d-lg-flex align-items-lg-center" style="min-height: 85vh;background: #f5f5f5;padding-top: 75px;padding-bottom: 75px;">
         <div class="container">
             <div class="row d-lg-flex justify-content-lg-center align-items-lg-center">
-                <div class="col-12 col-sm-12 col-lg-5 col-md-5 col-xl-5""><img src="<?= base_url() ?>assets/img/logos.png" width="100%">
-                    <form>
-                        <div class="form-group"><label>Email/Username :</label><input class="form-control" type="text" name="email_user" placeholder="Email atau Nama Pengguna"></div>
-                        <div class="form-group"><label>Password :</label><input class="form-control" type="password" name="password" placeholder="********"></div><button class="btn btn-primary" type="button" style="border-radius: 25px;padding-right: 10%;padding-left: 10%;">Daftar Sekarang</button>
-                    </form>
-                </div>
+                <div class="col-12 col-sm-12 col-lg-5 col-md-5 col-xl-5"><img src="<?= base_url() ?>assets/img/logos.png" width="100%">
+                 <?php if ($this->session->flashdata('error')) { ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?= $this->session->flashdata('error'); ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                <?php } ?>
+                <form action="<?= base_url('auth/proses_register') ?>" method="post">
+                    <div class="form-group">
+                        <label>Email :</label>
+                        <input class="form-control" type="email" name="email" placeholder="Email atau Nama Pengguna">
+                    </div>
+                    <div class="form-group">
+                        <label>Username :</label>
+                        <input class="form-control" type="text" name="user" placeholder="Email atau Nama Pengguna">
+                    </div>
+                    <div class="form-group">
+                        <label>Password :</label>
+                        <input class="form-control" type="password" name="password" placeholder="********">
+                    </div>
+                    <button class="btn btn-primary" type="submit" style="border-radius: 25px;padding-right: 10%;padding-left: 10%;">Daftar Sekarang</button>
+                </form>
             </div>
         </div>
-    </section>
-    <footer class="footer-basic">
-        <div class="social" style="padding: 7px;">
-        	<a href="#"><i class="icon ion-social-instagram"></i></a>
-        	<a href="#"><i class="icon ion-social-twitter"></i></a>
-        	<a href="#"><i class="icon ion-social-facebook"></i></a>
-        </div>
-        <p class="copyright" style="margin: 5px 0px 0px;">Copyright &copy; 2021 - Arif Abdillah. All Right Reserved</p>
-    </footer>
-    <script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
-    <script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>
+    </div>
+</section>
+<footer class="footer-basic">
+    <div class="social" style="padding: 7px;">
+       <a href="#"><i class="icon ion-social-instagram"></i></a>
+       <a href="#"><i class="icon ion-social-twitter"></i></a>
+       <a href="#"><i class="icon ion-social-facebook"></i></a>
+   </div>
+   <p class="copyright" style="margin: 5px 0px 0px;">Copyright &copy; 2021 - Arif Abdillah. All Right Reserved</p>
+</footer>
+<script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
+<script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -351,4 +351,26 @@ class M_layanan extends CI_Model{
 		$this->db->delete('profile');
 	}
 
+	function get_keuangan()
+	{
+		return $this->db->get('laporan_keuangan');
+	}
+
+	function add_keuangan($data)
+	{
+		$this->db->insert('laporan_keuangan', $data);
+	}
+
+	function update_keuangan($data, $id)
+	{
+		$this->db->where('id_laporankeuangan', $id);
+		$this->db->update('laporan_keuangan', $data);
+	}
+
+	function delete_keuangan($id)
+	{
+		$this->db->where('id_laporankeuangan', $id);
+		$this->db->delete('laporan_keuangan');
+	}
+
 }

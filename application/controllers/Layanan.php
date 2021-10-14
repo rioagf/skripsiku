@@ -133,7 +133,7 @@ class Layanan extends CI_Controller
 	function proses_pesan_layanan()
 	{
 		$config['upload_path']          = './upload/file/';
-		$config['allowed_types']        = 'pdf';
+		$config['allowed_types']        = '*';
 		$config['max_size']             = 500000;
 
 
