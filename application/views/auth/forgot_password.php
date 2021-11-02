@@ -97,10 +97,25 @@
     <section class="d-lg-flex align-items-lg-center" style="min-height: 85vh;background: #f5f5f5;padding-top: 75px;padding-bottom: 75px;">
         <div class="container">
             <div class="row d-lg-flex justify-content-lg-center align-items-lg-center">
-                <div class="col-12 col-sm-12 col-lg-5 col-md-5 col-xl-5""><img src="<?= base_url() ?>assets/img/logos.png">
-                    <form>
-                        <div class="form-group"><label>Email/Username :</label><input class="form-control" type="text" name="email_user" placeholder="Email atau Nama Pengguna"></div>
-                        <div class="form-group"><label>Password Baru :</label><input class="form-control" type="password" name="password" placeholder="********"></div><button class="btn btn-primary" type="button" style="border-radius: 25px;padding-right: 10%;padding-left: 10%;">Ganti Password</button>
+                <div class="col-12 col-sm-12 col-lg-5 col-md-5 col-xl-5">
+                    <img src="<?= base_url() ?>assets/img/logos.png">
+                    <?php 
+                    if($this->session->flashdata('error') !=''){
+                        echo '<div class="alert alert-danger" role="alert">';
+                        echo $this->session->flashdata('error');
+                        echo '</div>';
+                    } else if($this->session->flashdata('success') != '') {
+                        echo '<div class="alert alert-success" role="success">';
+                        echo $this->session->flashdata('success');
+                        echo '</div>';
+                    }
+                    ?>
+                    <form action="<?= base_url('auth/forgot_password') ?>" method="post">
+                        <div class="form-group">
+                            <label>Email :</label>
+                            <input class="form-control" type="text" name="email" placeholder="Email atau Nama Pengguna">
+                        </div>
+                        <button class="btn btn-primary" type="submit" style="border-radius: 25px;padding-right: 10%;padding-left: 10%;">Request Reset Password</button>
                     </form>
                 </div>
             </div>

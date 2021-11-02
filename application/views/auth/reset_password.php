@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Skripsiku</title>
+    <title>Skripsiku | Reset Password</title>
     <link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
@@ -112,20 +112,16 @@
                         echo '</div>';
                     }
                     ?>
-                    <form action="<?= base_url('auth/proses_register') ?>" method="post">
+                    <form action="<?= base_url('auth/reset_password/token/'.$token) ?>" method="post">
                         <div class="form-group">
-                            <label>Email :</label>
-                            <input class="form-control" type="email" name="email" placeholder="Email atau Nama Pengguna" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Username :</label>
-                            <input class="form-control" type="text" name="user" placeholder="Email atau Nama Pengguna" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Password :</label>
+                            <label>Password Baru :</label>
                             <input class="form-control" type="password" name="password" placeholder="********" required>
                         </div>
-                        <button class="btn btn-primary" type="submit" style="border-radius: 25px;padding-right: 10%;padding-left: 10%;">Daftar Sekarang</button>
+                        <div class="form-group">
+                            <label>Konfirmasi Password :</label>
+                            <input class="form-control" type="password" name="passconf" placeholder="********" required>
+                        </div>
+                        <button class="btn btn-primary" type="submit" style="border-radius: 25px;padding-right: 10%;padding-left: 10%;">Reset</button>
                     </form>
                 </div>
             </div>

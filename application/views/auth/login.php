@@ -99,7 +99,19 @@
     <section class="d-lg-flex align-items-lg-center" style="min-height: 85vh;background: #f5f5f5;padding-top: 75px;padding-bottom: 75px;">
         <div class="container">
             <div class="row d-lg-flex justify-content-lg-center align-items-lg-center">
-                <div class="col-12 col-sm-12 col-lg-5 col-md-5 col-xl-5"><img src="<?= base_url() ?>assets/img/logos.png" width="100%">
+                <div class="col-12 col-sm-12 col-lg-5 col-md-5 col-xl-5">
+                    <img src="<?= base_url() ?>assets/img/logos.png" width="100%">
+                    <?php 
+                    if($this->session->flashdata('error') !=''){
+                        echo '<div class="alert alert-danger" role="alert">';
+                        echo $this->session->flashdata('error');
+                        echo '</div>';
+                    } else if($this->session->flashdata('success') != '') {
+                        echo '<div class="alert alert-success" role="success">';
+                        echo $this->session->flashdata('success');
+                        echo '</div>';
+                    }
+                    ?>
                     <form action="<?= base_url('auth/proses_login') ?>" method="POST">
                         <div class="form-group">
                             <label>Email/Username :</label>

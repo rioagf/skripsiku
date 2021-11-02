@@ -1203,21 +1203,13 @@ class Adminarea extends CI_Controller
 		redirect(base_url('adminarea/staff'));
 	}
 
-<<<<<<< Updated upstream
 	public function laporan_keuangan()
-=======
-	public function keuangan()
->>>>>>> Stashed changes
 	{
 		if ($this->session->userdata('role') == 'admin') {
 			$keuangan = $this->M_layanan->get_keuangan()->result();
 			$data = array(
 				'title' => 'Laporan Keuangan - Skripsiku',
-<<<<<<< Updated upstream
 				'content' => 'temp_admin/laporan_keuangan_dashboard',
-=======
-				'content' => 'temp_admin/laporan_keuangan',
->>>>>>> Stashed changes
 				'keuangan' => $keuangan,
 			);
 			$this->load->view('temp_admin/content', $data);
@@ -1227,7 +1219,6 @@ class Adminarea extends CI_Controller
 		}
 	}
 
-<<<<<<< Updated upstream
 	function add_keuangan()
 	{
 		$config['upload_path']          = './upload/file/';
@@ -1319,12 +1310,5 @@ class Adminarea extends CI_Controller
 			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat menghapus data ini');
 			redirect(base_url('adminarea'));
 		}
-=======
-	function delete_keuangan($id)
-	{
-		$this->M_layanan->delete_keuangan($id);
-		$this->session->set_flashdata('success', 'Laporan keuangan berhasil dihapus');
-		redirect(base_url('adminarea/keuangan'));
->>>>>>> Stashed changes
 	}
 }
