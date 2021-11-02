@@ -351,6 +351,7 @@ class M_layanan extends CI_Model{
 		$this->db->delete('profile');
 	}
 
+<<<<<<< Updated upstream
 	function get_keuangan()
 	{
 		return $this->db->get('laporan_keuangan');
@@ -365,12 +366,25 @@ class M_layanan extends CI_Model{
 	{
 		$this->db->where('id_laporankeuangan', $id);
 		$this->db->update('laporan_keuangan', $data);
+=======
+
+
+	function get_keuangan()
+	{
+		return $this->db->get('laporan_keungan');
+>>>>>>> Stashed changes
 	}
 
 	function delete_keuangan($id)
 	{
+<<<<<<< Updated upstream
 		$this->db->where('id_laporankeuangan', $id);
 		$this->db->delete('laporan_keuangan');
+=======
+		// delete user
+		$this->db->where('id_laporankeuangan', $id);
+		$this->db->delete('laporan_keungan');
+>>>>>>> Stashed changes
 	}
 
 }
