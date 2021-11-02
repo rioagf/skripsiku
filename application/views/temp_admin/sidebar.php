@@ -75,6 +75,19 @@
         </a>
     </li>
 
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Laporan Keuangan
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item <?php if ($this->uri->segment('2') == 'keuangan'){echo 'active';} ?>">
+        <a class="nav-link" href="<?= base_url('adminarea/keuangan') ?>">
+            <i class="fas fa-fw fa-file"></i>
+            <span>Laporan Keuangan</span>
+        </a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
