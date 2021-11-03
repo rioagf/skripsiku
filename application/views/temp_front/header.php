@@ -42,7 +42,7 @@
                             <a class="dropdown-toggle nav-link <?php if($this->uri->segment(1) == 'profile') { echo 'active'; } ?>" aria-expanded="false" data-toggle="dropdown" href="#" style="font-family: Montserrat, sans-serif;font-size: 11pt;color: rgb(0,0,0);">Tentang Kami</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item <?php if($this->uri->segment(2) == 'index') { echo 'active'; } ?>" href="<?= base_url('profile/index') ?>">Profil Perusahaan</a>
-                                <a class="dropdown-item <?php if($this->uri->segment(2) == 'index-kepuasan-pengguna') { echo 'active'; } ?>" href="#">Indeks Kepuasan Pengguna</a>
+                                <a class="dropdown-item <?php if($this->uri->segment(2) == 'index_kepuasan') { echo 'active'; } ?>" href="<?= base_url('profile/index_kepuasan') ?>">Indeks Kepuasan Pengguna</a>
                                 <a class="dropdown-item <?php if($this->uri->segment(2) == 'laporan_keuangan') { echo 'active'; } ?>" href="<?= base_url('profile/laporan_keuangan') ?>">Laporan Keuangan</a>
                                 <a class="dropdown-item <?php if($this->uri->segment(2) == 'karir') { echo 'active'; } ?>" href="<?= base_url('profile/karir') ?>">Karir</a>
                             </div>

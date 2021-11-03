@@ -25,4 +25,14 @@
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/Social-Icons.css">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/styles.css">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/Team-Boxed.css">
+    <!-- Bootstrap Star Rating CSS -->
+    <style type="text/css">
+        .demo-table {width: 100%;border-spacing: initial;margin: 20px 0px;word-break: break-word;table-layout: auto;line-height:1.8em;color:#333;}
+        .demo-table th {background: #999;padding: 5px;text-align: left;color:#FFF;}
+        .demo-table td {border-bottom: #f0f0f0 1px solid;background-color: #ffffff;padding: 5px;}
+        .demo-table td div.feed_title{text-decoration: none;color:#00d4ff;font-weight:bold;}
+        .demo-table ul{margin:0;padding:0;}
+        .demo-table li{list-style-type: none;display: inline-block;color: #F0F0F0;text-shadow: 0 0 1px #666666;font-size:20px;}
+        .demo-table .highlight, .demo-table .selected {color:#F4B30A;text-shadow: 0 0 1px #F48F0A;}
+    </style>
 </head>

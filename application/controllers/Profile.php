@@ -6,6 +6,7 @@ class Profile extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('Karir_model');
+		$this->load->model('M_rating');
 
 	}
 
@@ -34,6 +35,17 @@ class Profile extends CI_Controller {
 			'title' => 'Karir - Skripsiku',
 			'content' => 'temp_front/karir',
 			'karir' => $karir,
+		);
+		$this->load->view('temp_front/content', $data);
+	}
+
+	public function index_kepuasan()
+	{
+		$rating = $this->M_rating->get_all();
+		$data = array(
+			'title' => 'Index Kepuasan Pelanggan - Skripsiku',
+			'content' => 'temp_front/rating',
+			'rating' => $rating,
 		);
 		$this->load->view('temp_front/content', $data);
 	}
