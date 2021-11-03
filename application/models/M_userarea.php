@@ -64,7 +64,9 @@ class M_userarea extends CI_Model{
 
 	function list_pemesanan()
 	{
-		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+		$this->db->select('pemesanan.*, produk.id_produk as produk_id, produk.nama_produk, produk_rating.id_produk as id_produk_rating, produk_rating.id_user, produk_rating.rating');
+		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk', 'left');
+		$this->db->join('produk_rating', 'produk_rating.id_produk = produk.id_produk', 'left');
 		$this->db->where('pemesanan.id_user', $this->session->userdata('id_user'));
 		$this->db->group_by('pemesanan.id_produk');
 		return $this->db->get('pemesanan');
