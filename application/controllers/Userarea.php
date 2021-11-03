@@ -50,10 +50,8 @@ class Userarea extends CI_Controller {
 	function proses__ubah_profile($id)
 	{
 		$config['upload_path']          = './upload/image/';
-		$config['allowed_types']        = 'gif|jpg|png';
-		$config['max_size']             = 100;
-		$config['max_width']            = 1024;
-		$config['max_height']           = 768;
+		$config['allowed_types']        = '*';
+		$config['max_size']             = 50000;
 
 		$this->load->library('upload', $config);
 
