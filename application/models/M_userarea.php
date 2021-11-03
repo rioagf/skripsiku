@@ -62,4 +62,12 @@ class M_userarea extends CI_Model{
 		$this->db->insert('berkas_keluar', $data);
 	}
 
+	function list_pemesanan()
+	{
+		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+		$this->db->where('pemesanan.id_user', $this->session->userdata('id_user'));
+		$this->db->group_by('pemesanan.id_produk');
+		return $this->db->get('pemesanan');
+	}
+
 }

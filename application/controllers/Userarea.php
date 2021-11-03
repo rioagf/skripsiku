@@ -13,6 +13,7 @@ class Userarea extends CI_Controller {
 		}
 		$this->load->model('M_userarea');
 		$this->load->model('M_layanan');
+		$this->load->model('M_rating');
 
 	}
 
@@ -263,5 +264,29 @@ class Userarea extends CI_Controller {
 			'progress' => $progress,
 		);
 		$this->load->view('temp_user/content', $data);
+	}
+
+	public function penilaian()
+	{
+		$layanan = $this->M_userarea->list_pemesanan()->result(); 
+		$data = array(
+			'title' => 'Progress Pesanan - Skripsiku',
+			'content' => 'temp_user/penilaian',
+			'layanan' => $layanan,
+		);
+		$this->load->view('temp_user/content', $data);
+	}
+
+	public function beri_penilaian($id_produk)
+	{
+		$data = array(
+			'id_produk' => $id_produk,
+			'rating' => $this->input->post('nilai_'.$id_produk),
+			'id_user' => $this->session->userdata('id_user'),
+			'tanggal_penilaian' => date('Y-m-d'),
+		);
+
+		$this->M_rating->add_rating($data);
+		redirect(base_url('userarea/penilaian/'));		
 	}
 }

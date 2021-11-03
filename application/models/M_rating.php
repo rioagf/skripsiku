@@ -5,4 +5,9 @@ class M_rating extends CI_Model{
 		$this->db->group_by('produk.id_produk');
 		return $this->db->get('produk')->result();
 	}
+
+	function add_rating($data)
+	{
+		$this->db->insert('produk_rating', $data);
+	}
 }
