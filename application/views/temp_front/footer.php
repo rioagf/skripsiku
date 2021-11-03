@@ -1,5 +1,22 @@
     <footer class="footer-basic">
+        <div style="text-align: center; margin-bottom: 15px;">
+            <h5>Visitor on This Website</h5>
+            <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
+            <!-- Histats.com  START  (aync)-->
+            <script type="text/javascript">var _Hasync= _Hasync|| [];
+            _Hasync.push(['Histats.start', '1,4600512,4,9,110,60,00011110']);
+            _Hasync.push(['Histats.fasi', '1']);
+            _Hasync.push(['Histats.track_hits', '']);
+            (function() {
+                var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+                hs.src = ('//s10.histats.com/js15_as.js');
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+            })();</script>
+        <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4600512&101" alt="best tracker" border="0"></a></noscript>
+        <!-- Histats.com  END  -->
+        </div>
         <div class="social" style="padding: 7px;">
+            <h5>Follow Us on</h5>
         	<a href="#"><i class="icon ion-social-instagram"></i></a>
         	<a href="#"><i class="icon ion-social-twitter"></i></a>
         	<a href="#"><i class="icon ion-social-facebook"></i></a>
@@ -13,15 +30,15 @@
     <script src="<?= base_url() ?>assets/js/Simple-Slider.js"></script>
 
     <script type="text/javascript">
-        function highlightStar(obj,id) {
-            removeHighlight(id);        
-            $('.demo-table #tutorial-'+id+' li').each(function(index) {
-                $(this).addClass('highlight');
-                if(index == $('.demo-table #tutorial-'+id+' li').index(obj)) {
-                    return false;   
-                }
-            });
-        }
+        // function highlightStar(obj,id) {
+        //     removeHighlight(id);        
+        //     $('.demo-table #tutorial-'+id+' li').each(function(index) {
+        //         $(this).addClass('highlight');
+        //         if(index == $('.demo-table #tutorial-'+id+' li').index(obj)) {
+        //             return false;   
+        //         }
+        //     });
+        // }
 
         function removeHighlight(id) {
             $('.demo-table #tutorial-'+id+' li').removeClass('selected');

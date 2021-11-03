@@ -23,7 +23,7 @@
                                         <td>
                                             <div id="tutorial-<?php echo $data->id_produk; ?>">
                                                 <input type="hidden" name="rating" id="rating" value="<?php echo $data->id_produk; ?>" />
-                                                <ul onMouseOut="resetRating(<?php echo $data->id_produk; ?>);">
+                                                <ul>
                                                     <?php
                                                     for($i=1;$i<=5;$i++) {
                                                         $selected = "";
