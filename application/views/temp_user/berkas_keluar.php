@@ -1,7 +1,7 @@
 <?php
-    $this->db->select('pemesanan.*, produk.id_produk, produk.nama_produk, berkas_keluar.*');
-    $this->db->join('berkas_keluar', 'berkas_keluar.id_pemesanan = pemesanan.id_pemesanan');
-    $this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+    $this->db->select('pemesanan.*, pemesanan.id_pemesanan as pesanannya, pemesanan.date_created as tanggal_pesan, produk.id_produk, produk.nama_produk');
+    $this->db->join('berkas_keluar', 'berkas_keluar.id_pemesanan = pemesanan.id_pemesanan', 'left');
+    $this->db->join('produk', 'produk.id_produk = pemesanan.id_produk', 'left');
     $this->db->where('pemesanan.id_user', $this->session->userdata('id_user'));
     $this->db->group_by('pemesanan.id_pemesanan');
     $data_pesanan = $this->db->get('pemesanan')->result();
@@ -29,7 +29,7 @@
                     <select class="form-control" name="id_pemesanan">
                         <optgroup label="Pilih Salah Satu">
                             <?php foreach ($data_pesanan as $pesanan): ?>
-                            <option value="<?= $pesanan->id_pemesanan ?>"><?= $pesanan->nama_produk.' - '.date("d F Y", strtotime($pesanan->date_created)) ?></option>
+                            <option value="<?= $pesanan->pesanannya ?>"><?= $pesanan->nama_produk.' - '.date("d F Y", strtotime($pesanan->tanggal_pesan)) ?></option>
                             <?php endforeach ?>
                         </optgroup>
                     </select>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="row d-lg-flex" style="background: #ffffff;padding: 10px 0px;">
                     <div class="col-8">
-                        <p><?= str_replace('/upload/file/', '',$databerkas_keluar->dokumen) ?><br></p>
+                        <p><?= str_replace('/upload/file/', '',$databerkas_keluar->dokumen) ?> (Pesanan : <?= $databerkas_keluar->nama_produk; ?>)<br></p>
                     </div>
                     <div class="col-4">
                         <div class="row d-flex d-lg-flex align-items-center align-items-lg-center">

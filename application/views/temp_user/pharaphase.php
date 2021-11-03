@@ -29,7 +29,7 @@
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label>Upload Dokumen</label>
-                    <input class="border rounded-0 form-control-file" type="file" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;border-width: 2px;" name="dokumen_pharaphase" accept="application/pdf">
+                    <input class="border rounded-0 form-control-file" type="file" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;border-width: 2px;" name="dokumen_pharaphase">
                 </div>
                 <div class="form-group">
                     <label>Berapa Persen Penurunan</label>

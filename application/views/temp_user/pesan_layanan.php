@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label>Dokumen</label>
-                    <input type="file" name="dokumen" required class="border rounded form-control-file" style="font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" accept="application/pdf">
+                    <input type="file" name="dokumen" required class="border rounded form-control-file" style="font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;">
                 </div>
                 <div class="form-group">
                     <label>Pesan</label>

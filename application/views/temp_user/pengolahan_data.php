@@ -37,11 +37,11 @@
                 </div>
                 <div class="form-group">
                     <label>Upload Data Penelitian</label>
-                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="datapenelitian" accept="application/pdf">
+                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="datapenelitian">
                 </div>
                 <div class="form-group">
                     <label>Upload Proposal Skripsi</label>
-                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="proposalskripsi" accept="application/pdf">
+                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="proposalskripsi">
                 </div>
                 <div class="form-group">
                     <label>Pesan Singkat</label>

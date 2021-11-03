@@ -54,6 +54,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?= base_url('userarea/progress/').$this->session->userdata('username'); ?>" style="font-family: Montserrat, sans-serif;font-size: 11pt;color: rgb(0,0,0);">Progress</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= base_url('userarea/penilaian/') ?>" style="font-family: Montserrat, sans-serif;font-size: 11pt;color: rgb(0,0,0);">Penilaian</a>
+                        </li>
                     </ul>
                     <div class="btn-group ml-auto" role="group">
                         <?php if($this->session->userdata('status') != 'login'){ ?>

@@ -41,15 +41,15 @@
                 </div>
                 <div class="form-group">
                     <label>Upload Pedoman Skripsi</label>
-                    <input class="border rounded-0 form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;border-width: 2px;" name="pedomanskripsi" accept="application/pdf">
+                    <input class="border rounded-0 form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;border-width: 2px;" name="pedomanskripsi">
                 </div>
                 <div class="form-group">
                     <label>Upload Data Penelitian</label>
-                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="datapenelitian" accept="application/pdf">
+                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="datapenelitian">
                 </div>
                 <div class="form-group">
                     <label>Upload Skripsi ACC</label>
-                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="skripsiacc" accept="application/pdf">
+                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="skripsiacc">
                 </div>
             </div>
         </div>

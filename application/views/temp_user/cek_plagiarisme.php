@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label>Upload Dokumen</label>
-                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="dokumen" accept="application/pdf">
+                    <input class="border rounded form-control-file" type="file" href="#" style="font-family: Montserrat, sans-serif;font-size: 12pt;background: rgba(51,204,255,0);padding: 5px;" name="dokumen">
                 </div>
                 <div class="form-group">
                     <label>Pesan Singkat</label>

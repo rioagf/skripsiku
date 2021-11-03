@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
                                 <?php if ($rating->num_rows() > 0 && $data->produk_id == $data->id_produk_rating): ?>
-                                    <button type="button" class="btn btn-sm btn-primary" disabled>Sudah Dinilai</button>
+                                    <button type="button" class="btn btn-sm" disabled style="background-color: #00FF00; color: #000000;">Sudah Dinilai</button>
                                     <?php else: ?>
 
                                         <button type="submit" class="btn btn-sm btn-primary">Sumbit</button>

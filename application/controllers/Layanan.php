@@ -134,7 +134,7 @@ class Layanan extends CI_Controller
 	{
 		$config['upload_path']          = './upload/file/';
 		$config['allowed_types']        = '*';
-		$config['max_size']             = 500000;
+		$config['max_size']             = 5000000;
 
 
 		$this->load->library('upload', $config);
@@ -206,8 +206,8 @@ class Layanan extends CI_Controller
 
 			'aplikasi_pengolahdata' => $this->input->post('pengolahdata'),
 			'penurunan_plagiarisme' => $this->input->post('penurunan_plagiarisme'),
-			'date_created' => date('y-m-d'),
-			'date_updated' => date('y-m-d'),
+			'date_created' => date('Y-m-d'),
+			'date_updated' => date('Y-m-d'),
 			'status' => 'Baru',
 			'progress' => $this->input->post('progress'),
 		);
