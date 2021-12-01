@@ -14,7 +14,7 @@ $setting = $this->db->get('setting')->row();
             foreach ($keuangan as $data) { ?>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
                     <div class="box">
-                        <i class="fa fa-book icon"></i>
+                        <img src="<?= base_url($data->image_laporankeuangan); ?>" width="100%">
                         <h3 class="name"><?= $data->judul_laporankeuangan ?></h3>
                         <p class="description"><?= character_limiter($data->keterangan_laporankeuangan, 150) ?></p>
                         <a class="btn btn-primary btn-block border rounded-pill" role="button" href="<?= base_url($data->file_laporankeuangan); ?>" download>Download</a>

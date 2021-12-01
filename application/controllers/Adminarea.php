@@ -1083,7 +1083,7 @@ class Adminarea extends CI_Controller
 					'desk_laporankeuangan' => $this->input->post('desk_laporankeuangan'),
 					'judulsection_karir' => $this->input->post('judulsection_karir'),
 					'desk_karir' => $this->input->post('desk_karir'),
-					'judulsection_artikel' => $$this->input->post('judulsection_artikel'),
+					'judulsection_artikel' => $this->input->post('judulsection_artikel'),
 					'desk_artikel' => $this->input->post('desk_artikel'),
 					'date_updated' => date('Y-m-d'),
 				);

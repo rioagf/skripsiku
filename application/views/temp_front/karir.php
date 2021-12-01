@@ -9,7 +9,7 @@ $setting = $this->db->get('setting')->row();
             <p class="text-center"><?= $setting->desk_karir ?></p>
         </div>
         <div class="row justify-content-center features">
-            <div class="col-10 item">
+            <div class="col-10">
                 <div role="tablist" id="accordion-1">
                     <?php $no=0; ?>
                     <?php foreach ($karir as $data) { ?>
@@ -17,12 +17,12 @@ $setting = $this->db->get('setting')->row();
                         <div class="card">
                             <div class="card-header" role="tab">
                                 <h5 class="text-left mb-0">
-                                    <a data-toggle="collapse" aria-expanded="false" aria-controls="accordion-1 .item-<?= $no ?>" href="#accordion-1 .item-<?= $no ?>" style="color: rgb(0,0,0);"><?= $data->judul_karir; ?></a>
+                                    <a data-toggle="collapse" aria-expanded="false" aria-controls="accordion-1 .career-<?= $no ?>" href="#accordion-1 .career-<?= $no ?>" style="color: rgb(0,0,0);"><?= $data->judul_karir; ?></a>
                                 </h5>
                             </div>
-                            <div class="collapse item-<?= $no ?>" role="tabpanel" data-parent="#accordion-1">
+                            <div class="collapse career-<?= $no ?>" role="tabpanel" data-parent="#accordion-1">
                                 <div class="card-body">
-                                    <p class="card-text"><?= $data->deskripsi_karir; ?></p>
+                                    <div><?= $data->deskripsi_karir; ?></div>
                                 </div>
                             </div>
                         </div>
