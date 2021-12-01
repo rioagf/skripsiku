@@ -1,3 +1,8 @@
+
+<?php 
+$data_product = $this->db->get('produk')->result();
+// return $data_product;
+?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -61,12 +66,9 @@
 										<div class="form-group">
 											<label>Bidang Pekerjaan</label>
 											<select name="bidang_kerja" class="form-control">
-												<option value="Penyusunan Proposal">Penyusunan Proposal</option>
-												<option value="Skripsi">Skripsi</option>
-												<option value="Pengolahan Data">Pengolahan Data</option>
-												<option value="Data Sekunder">Data Sekunder</option>
-												<option value="Cek Plagiarisme">Cek Plagiarisme</option>
-												<option value="Pharaphase">Pharaphase</option>
+												<?php foreach ($data_product as $product) { ?>
+													<option value="<?=$product->id_produk?>"><?=$product->nama_produk?></option>
+												<?php } ?>
 											</select>
 										</div>
 										<div class="form-group">
@@ -198,12 +200,11 @@
 																		<div class="form-group">
 																			<label>Bidang Kerja</label>
 																			<select name="bidang_kerja" class="form-control">
-																				<option value="Penyusunan Proposal" <?php if ($data->bidang_kerja == "Penyusunan Proposal") { echo "selected"; } ?>>Penyusunan Proposal</option>
-																				<option value="Skripsi" <?php if ($data->bidang_kerja == "Penyusunan Proposal") { echo "selected"; } ?>>Skripsi</option>
-																				<option value="Pengolahan Data" <?php if ($data->bidang_kerja == "Pengolahan Data") { echo "selected"; } ?>>Pengolahan Data</option>
-																				<option value="Data Sekunder" <?php if ($data->bidang_kerja == "Data Sekunder") { echo "selected"; } ?>>Data Sekunder</option>
-																				<option value="Cek Plagiarisme" <?php if ($data->bidang_kerja == "Cek Plagiarisme") { echo "selected"; } ?>>Cek Plagiarisme</option>
-																				<option value="Pharaphase" <?php if ($data->bidang_kerja == "Pharaphase") { echo "selected"; } ?>>Pharaphase</option>
+																					<?php foreach ($data_product as $product) { ?>
+																						<option value="<?=$product->id_produk; ?>"
+																							<?php if ($product->id_produk == $data->bidang_kerja ) { echo "selected"; } ?>
+																							><?=$product->nama_produk?></option>
+																					<?php } ?>
 																			</select>
 																		</div>
 																		<div class="form-group">
