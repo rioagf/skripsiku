@@ -128,7 +128,7 @@ class M_layanan extends CI_Model{
 		}else if ($this->session->userdata('role') == 'staff') {
 			$this->db->select('nama_produk, pemesanan.*');
 			$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
-			$this->db->where('produk.slug', $bidang_kerja);
+			$this->db->where('produk.id_produk', $bidang_kerja);
 			return $this->db->get('pemesanan');
 		}
 	}
