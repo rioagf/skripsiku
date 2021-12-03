@@ -165,7 +165,7 @@
 															<form action="<?= base_url('adminarea/update_progress/'.$data->id_pemesanan)?>" method="post">
 																<div class="form-group">
 																	<label>Sudah Berapa Persen Pengerjaan?</label>
-																	<input type="number" value="<?= $data->progress ?>" name="progress" class="form-control">
+																	<input type="number" value="<?= $data->progress ?>" id="progress" name="progress" class="form-control" maxlength="3" onchange="changeHandler(this)">
 																	<span class="form-text">Hanya inputkan angka</span>
 																	<input type="hidden" name="id_pemesanan" value="<?= $data->id_pemesanan ?>">
 																</div>

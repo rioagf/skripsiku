@@ -75,6 +75,26 @@
     CKEDITOR.replace('desk_artikel');
 </script>
 
+<script>
+  function changeHandler(val)
+  {
+    if (Number(val.value) > 100)
+    {
+        val.value = 100
+    } else if (Number(val.value) < 0) {
+        val.value = 0
+    }
+  }
+</script>
+
+<script>
+    document.getElementById("progress").onkeyup=function(){
+        var input=parseInt(this.value);
+        if(input<0 || input>100)
+        alert("Value should be between 0 - 100");
+    }    
+</script>
+
 </body>
 
 </html>
