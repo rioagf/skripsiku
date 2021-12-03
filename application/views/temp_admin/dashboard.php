@@ -33,15 +33,14 @@
 	$jumlah_berkas_keluar = $this->db->get('berkas_keluar');
 
 	// Jumlah Belum 100 Persen
-	$this->db->select("COUNT(*) as belum_seratus_persen");
 	if ($this->session->userdata("role") != "admin") {
-		$this->db->where(array("progress <" => 100, "id_produk" => $this->session->userdata("bidang_kerja")));
-		$this->db->or_where(array("progress" => null, "id_produk" => $this->session->userdata("bidang_kerja")));
+		$belum_seratus_persen = $this->db->query("SELECT COUNT(*) as belum_seratus_persen FROM `pemesanan` WHERE `progress` < 100 AND `id_produk` = ".$this->session->userdata('bidang_kerja')." OR `progress` = null AND `id_produk` = 6");
 	} else {
+		$this->db->select("COUNT(*) as belum_seratus_persen");
 		$this->db->where(array("progress <" => 100));
 		$this->db->or_where(array("progress" => null));
+		$belum_seratus_persen = $this->db->get('pemesanan');
 	}
-	$belum_seratus_persen = $this->db->get('pemesanan');
 
 	//Get Berkas Masuk
 	if ($this->session->userdata('role') == 'admin') {
