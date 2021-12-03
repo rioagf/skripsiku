@@ -30,15 +30,6 @@
     <script src="<?= base_url() ?>assets/js/Simple-Slider.js"></script>
 
     <script type="text/javascript">
-        // function highlightStar(obj,id) {
-        //     removeHighlight(id);        
-        //     $('.demo-table #tutorial-'+id+' li').each(function(index) {
-        //         $(this).addClass('highlight');
-        //         if(index == $('.demo-table #tutorial-'+id+' li').index(obj)) {
-        //             return false;   
-        //         }
-        //     });
-        // }
 
         function removeHighlight(id) {
             $('.demo-table #tutorial-'+id+' li').removeClass('selected');

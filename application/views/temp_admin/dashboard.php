@@ -1,10 +1,90 @@
+<?php
+	// Jumlah
+	$this->db->select("COUNT(*) as jumlah_pesanan");
+	if ($this->session->userdata("role") != "admin") {
+		$this->db->where("id_produk", $this->session->userdata("bidang_kerja"));
+	}
+	$jumlah_pesanan = $this->db->get('pemesanan');
+
+	// Jumlah Berkas Masuk
+	$this->db->select("COUNT(*) as jumlah_berkas_masuk");
+	$this->db->join('pemesanan', 'pemesanan.id_pemesanan = berkas_keluar.id_pemesanan');
+	$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+	$this->db->join('users', 'users.id_user = berkas_keluar.id_user');
+	$this->db->join('profile', 'berkas_keluar.id_user = profile.id_users');
+	if ($this->session->userdata("role") != "admin") {
+		$this->db->where(array('status_dokumen' => 'Dokumen Keluar Pemesan', 'produk.id_produk' => $this->session->userdata("bidang_kerja")));
+	} else {
+		$this->db->where(array('status_dokumen' => 'Dokumen Keluar Pemesan'));
+	}
+	$jumlah_berkas_masuk = $this->db->get('berkas_keluar');
+
+	// Jumlah Berkas Keluar
+	$this->db->select("COUNT(*) as jumlah_berkas_keluar");
+	$this->db->join('pemesanan', 'pemesanan.id_pemesanan = berkas_keluar.id_pemesanan');
+	$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+	$this->db->join('users', 'users.id_user = berkas_keluar.id_user');
+	$this->db->join('profile', 'berkas_keluar.id_user = profile.id_users');
+	if ($this->session->userdata("role") != "admin") {
+		$this->db->where(array('status_dokumen' => 'Dokumen Masuk Pemesan', 'produk.id_produk' => $this->session->userdata("bidang_kerja")));
+	} else {
+		$this->db->where(array('status_dokumen' => 'Dokumen Masuk Pemesan'));
+	}
+	$jumlah_berkas_keluar = $this->db->get('berkas_keluar');
+
+	// Jumlah Belum 100 Persen
+	$this->db->select("COUNT(*) as belum_seratus_persen");
+	if ($this->session->userdata("role") != "admin") {
+		$this->db->where(array("progress" < "100", "id_produk" => $this->session->userdata("bidang_kerja")));
+	}
+	$belum_seratus_persen = $this->db->get('pemesanan');
+
+	//Get Berkas Masuk
+	if ($this->session->userdata('role') == 'admin') {
+		$this->db->select('pemesanan.id_pemesanan, pemesanan.nama_lengkap, pemesanan.id_pemesanan, pemesanan.npm, pemesanan.id_produk, produk.nama_produk, berkas_keluar.*');
+		$this->db->join('pemesanan', 'pemesanan.id_pemesanan = berkas_keluar.id_pemesanan');
+		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+		$this->db->join('users', 'users.id_user = berkas_keluar.id_user');
+		$this->db->join('profile', 'berkas_keluar.id_user = profile.id_users');
+		$this->db->where(array('status_dokumen' => 'Dokumen Keluar Pemesan'));
+		$this->db->order_by("date_created", "desc");
+		$this->db->limit(10);
+		$data_berkas_masuk = $this->db->get('berkas_keluar')->result();
+	} else if ($this->session->userdata('role') == 'staff') {
+		$this->db->select('pemesanan.id_pemesanan, pemesanan.nama_lengkap, pemesanan.id_pemesanan, pemesanan.npm, pemesanan.id_produk, produk.nama_produk, berkas_keluar.*');
+		$this->db->join('pemesanan', 'pemesanan.id_pemesanan = berkas_keluar.id_pemesanan');
+		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+		$this->db->join('users', 'users.id_user = berkas_keluar.id_user');
+		$this->db->join('profile', 'berkas_keluar.id_user = profile.id_users');
+		$this->db->where(array('status_dokumen' => 'Dokumen Keluar Pemesan', 'produk.id_produk' => $this->session->userdata("bidang_kerja")));
+		$this->db->order_by("date_created", "desc");
+		$this->db->limit(10);
+		$data_berkas_masuk = $this->db->get('berkas_keluar')->result();
+	}
+
+	// List Pesanan Masuk
+	if ($this->session->userdata('role') == 'admin') {
+		$this->db->select('nama_produk, pemesanan.*');
+		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+		$this->db->order_by("date_created", "desc");
+		$this->db->limit(10);
+		$data_pesanan = $this->db->get('pemesanan')->result();
+	}else if ($this->session->userdata('role') == 'staff') {
+		$this->db->select('nama_produk, pemesanan.*');
+		$this->db->join('produk', 'produk.id_produk = pemesanan.id_produk');
+		$this->db->order_by("date_created", "desc");
+		$this->db->limit(10);
+		$this->db->where('produk.id_produk', $this->session->userdata("bidang_kerja"));
+		$data_pesanan = $this->db->get('pemesanan')->result();
+	}
+?>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-		<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
 	</div>
 
 	<!-- Content Row -->
@@ -16,11 +96,16 @@
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
 						<div class="col mr-2">
-							<div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Earnings (Monthly)</div>
-							<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+							<div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Jumlah Pesanan</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">
+								<?php
+									$data = $jumlah_pesanan->row();
+									echo $data->jumlah_pesanan;
+								?>
+							</div>
 						</div>
 						<div class="col-auto">
-							<i class="fas fa-calendar fa-2x text-gray-300"></i>
+							<i class="fas fa-book fa-2x text-gray-300"></i>
 						</div>
 					</div>
 				</div>
@@ -33,11 +118,16 @@
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
 						<div class="col mr-2">
-							<div class="text-xs font-weight-bold text-success text-uppercase mb-1"> Earnings (Annual)</div>
-							<div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+							<div class="text-xs font-weight-bold text-success text-uppercase mb-1"> Jumlah Berkas Masuk</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">
+								<?php
+									$data = $jumlah_berkas_masuk->row();
+									echo $data->jumlah_berkas_masuk;
+								?>
+							</div>
 						</div>
 						<div class="col-auto">
-							<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+							<i class="fas fa-file fa-2x text-gray-300"></i>
 						</div>
 					</div>
 				</div>
@@ -50,21 +140,16 @@
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
 						<div class="col mr-2">
-							<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-							</div>
-							<div class="row no-gutters align-items-center">
-								<div class="col-auto">
-									<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-								</div>
-								<div class="col">
-									<div class="progress progress-sm mr-2">
-										<div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-								</div>
+							<div class="text-xs font-weight-bold text-info text-uppercase mb-1"> Jumlah Berkas Keluar</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">
+								<?php
+									$data = $jumlah_berkas_keluar->row();
+									echo $data->jumlah_berkas_keluar;
+								?>
 							</div>
 						</div>
 						<div class="col-auto">
-							<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+							<i class="fas fa-file fa-2x text-gray-300"></i>
 						</div>
 					</div>
 				</div>
@@ -77,8 +162,13 @@
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
 						<div class="col mr-2">
-							<div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Pending Requests</div>
-							<div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+							<div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Pesanan Belum 100%</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">
+								<?php
+									$data = $belum_seratus_persen->row();
+									echo $data->belum_seratus_persen;
+								?>
+							</div>
 						</div>
 						<div class="col-auto">
 							<i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -94,67 +184,78 @@
 	<div class="row">
 
 		<!-- Area Chart -->
-		<div class="col-xl-8 col-lg-7">
+		<div class="col-xl-6 col-lg-6">
 			<div class="card shadow mb-4">
 				<!-- Card Header - Dropdown -->
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Pesanan Terbaru</h6>
 					<div class="dropdown no-arrow">
 						<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
 						</a>
-						<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-							<div class="dropdown-header">Dropdown Header:</div>
-							<a class="dropdown-item" href="#">Action</a>
-							<a class="dropdown-item" href="#">Another action</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Something else here</a>
-						</div>
 					</div>
 				</div>
 				<!-- Card Body -->
 				<div class="card-body">
-					<div class="chart-area">
-						<canvas id="myAreaChart"></canvas>
+					<div class="table-responsive">
+						<table class="table table-bordered" width="100%" cellspacing="0">
+							<thead>
+								<tr>
+									<th>NO</th>
+									<th>JENIS PESANAN</th>
+									<th>NAMA PEMESAN</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php $no=1; ?>
+								<?php foreach ($data_pesanan as $data) { ?>
+									<tr>
+										<td><?= $no++ ?></td>
+										<td><?= $data->nama_produk ?></td>
+										<td><?= $data->nama_lengkap ?></td>
+									</tr>
+								<?php } ?>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<!-- Pie Chart -->
-		<div class="col-xl-4 col-lg-5">
+		<div class="col-xl-6 col-lg-6">
 			<div class="card shadow mb-4">
 				<!-- Card Header - Dropdown -->
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Berkas Masuk Terbaru</h6>
 					<div class="dropdown no-arrow">
 						<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
 						</a>
-						<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-							<div class="dropdown-header">Dropdown Header:</div>
-							<a class="dropdown-item" href="#">Action</a>
-							<a class="dropdown-item" href="#">Another action</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Something else here</a>
-						</div>
 					</div>
 				</div>
 				<!-- Card Body -->
 				<div class="card-body">
-					<div class="chart-pie pt-4 pb-2">
-						<canvas id="myPieChart"></canvas>
-					</div>
-					<div class="mt-4 text-center small">
-						<span class="mr-2">
-							<i class="fas fa-circle text-primary"></i> Direct
-						</span>
-						<span class="mr-2">
-							<i class="fas fa-circle text-success"></i> Social
-						</span>
-						<span class="mr-2">
-							<i class="fas fa-circle text-info"></i> Referral
-						</span>
+					<div class="table-responsive">
+						<table class="table table-bordered" width="100%" cellspacing="0">
+							<thead>
+								<tr>
+									<th>NO</th>
+									<th>NAMA BERKAS</th>
+									<th>NAMA PEMESAN</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php $no=1; ?>
+								<?php foreach ($data_berkas_masuk as $data) { ?>
+									<tr>
+										<td><?= $no++ ?></td>
+										<td><?= str_replace('/upload/file/', '',$data->dokumen) ?></td>
+										<td><?= $data->nama_lengkap ?></td>
+									</tr>
+								<?php } ?>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

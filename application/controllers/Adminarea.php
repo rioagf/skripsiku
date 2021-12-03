@@ -45,6 +45,25 @@ class Adminarea extends CI_Controller
 		$this->load->view('temp_admin/content', $data);
 	}
 
+	public function delete_pemesanan($id)
+	{
+		if ($this->session->userdata('role') == 'admin') {
+			$row = $this->M_layanan->get_detail__pesanan($id);
+
+			if ($row) {
+				$this->M_layanan->delete__pemesanan($id);
+				$this->session->set_flashdata('success', 'Berhasil Menghapus Pesanan');
+				redirect(site_url('adminarea/list_pemesanan'));
+			} else {
+				$this->M_layanan->set_flashdata('error', 'Pesanan Tidak Ditemukan');
+				redirect(site_url('adminarea/list_pemesanan'));
+			}
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, hanya admin yang dapat mengakses halaman ini');
+			redirect(base_url('adminarea'));
+		}
+	}
+
 	public function slider()
 	{
 		if ($this->session->userdata('role') == 'admin') {

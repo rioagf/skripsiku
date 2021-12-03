@@ -1,6 +1,11 @@
 <?php
 $this->db->where('id_setting', '1');
 $setting = $this->db->get('setting')->row();
+
+//get produk
+$this->db->order_by('nama_produk', 'random');
+$this->db->limit(3);
+$data_produk = $this->db->get('produk')->result();
 ?>
 <div class="simple-slider" style="height: 650px;">
     <div class="swiper-container" style="height: 650px;">
@@ -20,31 +25,17 @@ $setting = $this->db->get('setting')->row();
             <h2 class="text-center"><?= $setting->judulsection_layanan ?></h2>
             <p class="text-center"><?= $setting->desk_layanan ?></p>
         </div>
-        <div class="row justify-content-center features">
-            <div class="col-sm-6 col-md-5 col-lg-4 item">
-                <div class="box"><i class="fa fa-map-marker icon"></i>
-                    <h3 class="name">Penyusunan Proposal</h3>
-                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p>
-                    <a class="btn btn-primary btn-block border rounded-pill" role="button" href="<?= base_url('layanan/detail/penyusunan-proposal') ?>">Lihat Detail</a>
+        <div class="d-flex align-items-stretch justify-content-center features">
+            <?php foreach ($data_produk as $produk): ?>
+                <div class="col-sm-6 col-md-5 col-lg-4 item" style="background: #ffffff; padding: 25px; margin: 5px;">
+                    <!-- <div class="box"> -->
+                        <img src="<?= base_url($produk->image_cover) ?>" width="100%">
+                        <h3 class="name"><?= $produk->nama_produk; ?></h3>
+                        <p class="description"><?= character_limiter($produk->deskripsi_produk, 100); ?></p>
+                        <a class="btn btn-primary btn-block border rounded-pill" role="button" href="<?= base_url('layanan/detail/'.$produk->slug) ?>">Lihat Detail</a>
+                    <!-- </div> -->
                 </div>
-            </div>
-            <div class="col-sm-6 col-md-5 col-lg-4 item">
-                <div class="box"><i class="fa fa-clock-o icon"></i>
-                    <h3 class="name">Penyusunan Skripsi</h3>
-                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p>
-                    <a class="btn btn-primary btn-block border rounded-pill" role="button" href="<?= base_url('layanan/detail/penyusunan-skripsi') ?>">Lihat Detail</a>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-5 col-lg-4 item">
-                <div class="box"><i class="fa fa-list-alt icon"></i>
-                    <h3 class="name">Pengolahan Data</h3>
-                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p>
-                    <a class="btn btn-primary btn-block border rounded-pill" role="button" href="<?= base_url('layanan/detail/pengolahan-data') ?>">Lihat Detail</a>
-                </div>
-            </div>
-            <div class="col-12" style="text-align: center;">
-                <a href="<?= base_url('layanan') ?>" class="btn btn-primary" style="border-radius: 34px;"><i class="fa fa-arrow-right"></i> Lihat Layanan Lainnya</a>
-            </div>
+            <?php endforeach ?>
         </div>
     </div>
 </section>
