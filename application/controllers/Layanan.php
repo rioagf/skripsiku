@@ -9,10 +9,6 @@ class Layanan extends CI_Controller
 		parent::__construct();
 		$this->load->model('M_layanan');
 		$this->load->model('M_userarea');
-		if ($this->session->userdata('status') != 'login') {
-			$this->session->set_flashdata('error', 'Maaf! Anda harus login terlebih dahulu');
-			redirect(base_url('auth/login'));
-		}
 	}
 
 	public function index()
@@ -39,6 +35,10 @@ class Layanan extends CI_Controller
 
 	public function pesan($slug)
 	{
+		if ($this->session->userdata('status') != 'login') {
+			$this->session->set_flashdata('error', 'Maaf! Anda harus login terlebih dahulu untuk dapat memesan');
+			redirect(base_url('auth/login'));
+		}
 		$layanan = $this->M_layanan->get_detail__slug($slug)->row();
 		// var_dump($layanan->slug);die();
 		$datauser = $this->M_userarea->data_profile__user()->row();
@@ -132,6 +132,10 @@ class Layanan extends CI_Controller
 
 	function proses_pesan_layanan()
 	{
+		if ($this->session->userdata('status') != 'login') {
+			$this->session->set_flashdata('error', 'Maaf! Anda harus login terlebih dahulu');
+			redirect(base_url('auth/login'));
+		}
 		$config['upload_path']          = './upload/file/';
 		$config['allowed_types']        = '*';
 		$config['max_size']             = 5000000;
